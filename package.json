@@ -12,8 +12,5 @@
     "@biomejs/biome": "^2.0.0",
     "turbo": "^2.5.4"
   },
-  "packageManager": "pnpm@10.12.1",
-  "dependencies": {
-    "dgram": "^1.0.1"
-  }
+  "packageManager": "pnpm@10.12.1"
 }
