@@ -1,0 +1,7 @@
+packages:
+  - apps/*
+  - packages/*
+
+catalog:
+  drizzle-orm: 0.41.0
+  pg: 8.16.1
