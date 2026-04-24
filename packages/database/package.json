@@ -21,6 +21,7 @@
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.1.0",
     "drizzle-kit": "^0.31.1",
     "drizzle-orm": "catalog:"
   },
