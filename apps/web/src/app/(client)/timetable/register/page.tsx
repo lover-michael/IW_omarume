@@ -21,16 +21,16 @@ import { Test, userSchema } from "../userSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FaUpload } from "react-icons/fa";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
-import { DayGroups } from "@/app/timetable/module/datas";
+import { DayGroups } from "@/app/(client)/timetable/module/datas";
 import { locates } from "../module/locate";
 import { CgArrowDownR, CgArrowRightR } from "react-icons/cg";
-import { SaveTimeTable } from "@/app/action";
+import { SaveTimeTable } from "@/app/(client)/action";
 import { redirect } from "next/navigation";
 import errorsToRecord from "@hookform/resolvers/io-ts/dist/errorsToRecord.js";
 import { check } from "drizzle-orm/gel-core";
 import { dataListAnatomy } from "@chakra-ui/react/anatomy";
 
-export default function Page() {
+export default function PageRegister() {
   const ref = useRef<HTMLDivElement>(null);
   const [searched, setSearched] = useState<boolean>(false);
   const { register, handleSubmit, control } = useForm<Test>({

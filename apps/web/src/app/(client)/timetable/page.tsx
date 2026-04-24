@@ -33,7 +33,7 @@ import Link from "next/link";
 import { GetElements, GetStationByID } from "../action";
 import { Card_layout, TimeTableCard } from "./print_element";
 
-export default function Page() {
+export default function PageTimeTable() {
   const ref = useRef<HTMLDivElement>(null);
   const [displaytag, setDisplaytag] = useState<string[]>(["timetable"]);
   const [mytimetables, setMytimetables] = useState<TimeTableCard[]>([]);
@@ -50,7 +50,7 @@ export default function Page() {
   }, []);
 
   return (
-    <Stack gap={2} p={"2"}>
+    <Stack h="full" w="full" gap={2} p={"2"}>
       <Flex gap={2}>
         {/* 表示項目を変更するためのセレクトコンポーネント */}
         <Select.Root
@@ -96,13 +96,16 @@ export default function Page() {
           <Stack gap="3">
             {mytimetables.map((e) => {
               return (
-                <Card_layout
-                  id={e.id}
-                  create_at={e.create_at}
-                  memo={e.memo}
-                  depart_station_id={e.depart_station_id}
-                  arrive_station_id={e.arrive_station_id}
-                />
+                <Box>
+                  <Card_layout
+                    id={e.id}
+                    create_at={e.create_at}
+                    memo={e.memo}
+                    depart_station_id={e.depart_station_id}
+                    arrive_station_id={e.arrive_station_id}
+                  />
+                  <div>{mytimetables.length}</div>
+                </Box>
               );
             })}
           </Stack>
@@ -112,7 +115,6 @@ export default function Page() {
           <div>nothing</div>
         )}
       </div>
-      <div>おはよう</div>
     </Stack>
   );
 }
