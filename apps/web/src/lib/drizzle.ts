@@ -1,12 +1,4 @@
-﻿import * as schemas from '@repo/database';
-import { drizzle } from 'drizzle-orm/node-postgres';
+﻿import { neon } from "@neondatabase/serverless";
+import { drizzle } from "drizzle-orm/neon-http";
 
-export const db = drizzle({
-  connection: {
-    connectionString: process.env.DATABASE_URL,
-    ssl: false,
-  },
-  schema: {
-    ...schemas,
-  },
-});
+export const db = drizzle(neon(process.env.DATABASE_URL!));
