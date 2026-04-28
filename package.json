@@ -11,7 +11,8 @@
   "devDependencies": {
     "@biomejs/biome": "^2.0.0",
     "@types/bcrypt": "^6.0.0",
-    "turbo": "^2.5.4"
+    "turbo": "^2.5.4",
+    "next": "15.1.8"
   },
   "packageManager": "pnpm@10.12.1",
   "dependencies": {}
