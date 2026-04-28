@@ -95,15 +95,13 @@ export default function LoginPage() {
               </Button>
 
               <Button
-                as={"a"}
-                href="/login/signup"
                 borderRadius={"xl"}
                 boxShadow={"xl"}
                 bgColor={"orange.400"}
                 color={"white"}
                 disabled={isSubmitting}
               >
-                新規登録
+                <a href="/login/signup">新規登録</a>
               </Button>
             </Stack>
           </Center>

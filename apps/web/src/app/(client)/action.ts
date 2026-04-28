@@ -1,5 +1,5 @@
 "use server";
-import { db } from "@/lib/drizzle";
+import { getDb } from "@/lib/drizzle";
 import { z } from "zod";
 import { userSchema } from "./timetable/userSchema";
 import { station, timetable } from "@repo/database";
@@ -20,7 +20,7 @@ export async function DeleteTimeTable(object: z.infer<typeof userSchema>) {
 }
 
 export const GetElements = async () => {
-  return await db.select().from(timetable).limit(4);
+  return await getDb().select().from(timetable).limit(4);
 };
 
 type ID = {
@@ -29,6 +29,6 @@ type ID = {
 
 export const GetStationByID = async ({ id }: ID) => {
   // idが合致するテーブルを選択はするが、idはユニーク制約により一意に定まる(はず...)
-  const result = await db.select().from(station).where(eq(station.id, id));
+  const result = await getDb().select().from(station).where(eq(station.id, id));
   return result[0];
 };

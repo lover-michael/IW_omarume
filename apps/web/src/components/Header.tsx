@@ -23,8 +23,6 @@ export function Header() {
         </Link>
         {isLoggedIn === true ? (
           <Button
-            as={"a"}
-            href="/"
             bgColor={"green.600"}
             position={"absolute"}
             right={"5"}
@@ -33,12 +31,14 @@ export function Header() {
             outline={"solid 2px"}
             outlineColor={"green.400"}
           >
-            <Image
-              src={"/image/botdf.jpg"}
-              alt="ユーザー"
-              width={20}
-              height={20}
-            />
+            <a href="/">
+              <Image
+                src={"/image/botdf.jpg"}
+                alt="ユーザー"
+                width={20}
+                height={20}
+              />
+            </a>
           </Button>
         ) : (
           <Button
@@ -55,7 +55,9 @@ export function Header() {
               setIsLoggedIn(!isLoggedIn);
             }}
           >
+            {/*<a href="/login">*/}
             ログイン
+            {/*</a>*/}
           </Button>
         )}
       </Center>

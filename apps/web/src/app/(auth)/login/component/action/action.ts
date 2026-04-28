@@ -1,6 +1,6 @@
 "use server";
 
-import { db } from "@/lib/drizzle";
+import { getDb } from "@/lib/drizzle";
 import { and, eq, max, or } from "drizzle-orm";
 import { AuthLoginPropsType } from "../module/type";
 import { user } from "@repo/database";
@@ -11,12 +11,14 @@ export async function USERDATA_POST(formData: AuthLoginPropsType) {
   const newUserId =
     timestamp.getTime() * 1000 + Math.floor(Math.random() * 1000);
 
-  return await db.insert(user).values({
+  await getDb().insert(user).values({
     id: newUserId,
     name: formData.userName,
     password: formData.password,
     email: formData.email,
   });
+
+  return 1;
 }
 
 type USERDATA_PULL_PROPS = {
@@ -33,7 +35,7 @@ export async function USERDATA_PULL(props: USERDATA_PULL_PROPS) {
     return null;
   }
 
-  return await db
+  return await getDb()
     .select()
     .from(user)
     .where(

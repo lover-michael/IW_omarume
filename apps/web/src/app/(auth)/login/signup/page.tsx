@@ -19,8 +19,8 @@ export default function Signup() {
           <Field.Label>パスワード</Field.Label>
           <Input placeholder="Enter your password" boxShadow={"md"} />
         </Field.Root>
-        <Button as={"a"} href={"/login"} bgColor={"green.500"} boxShadow={"md"}>
-          新規登録
+        <Button bgColor={"green.500"} boxShadow={"md"}>
+          <a href="/login">新規登録</a>
         </Button>
       </Stack>
     </Center>
