@@ -15,8 +15,9 @@ import {
   Spinner,
   Span,
   useFilter,
+  createListCollection,
 } from "@chakra-ui/react";
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { Controller, Form, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FaUpload } from "react-icons/fa";
@@ -44,6 +45,10 @@ export default function PageRegister() {
   const [day, setDay] = useState<string | null>(null);
   /// 選択された路線
   const [itenrary, setItenrary] = useState<string | null>(null);
+  ///
+  const [allStations, setAllStations] = useState<
+    { label: string; value: string }[]
+  >([]);
   /// ユーザーが選択した駅の組み合わせ
   const [userStationGroup, setUserStationGroup] = useState<UserStationGroup>(
     new UserStationGroup(null, null),
@@ -61,22 +66,24 @@ export default function PageRegister() {
     resolver: zodResolver(TimeTableSchema),
   });
 
-  /*Comboboxのフィルター及び候補の初期化*/
-  const { collection, filter, set } = useListCollection<{
-    label: string;
-    value: string;
-  }>({
-    initialItems: [],
-    filter: contains,
-  });
-
   useEffect(() => {
     const getStationName = async () => {
       const result = await GetStations();
-      set(result);
+      setAllStations(result);
     };
     getStationName();
   }, []);
+
+  // allStations もしくは inputStationName どちらかが変更されると再生成する
+  const collection = useMemo(
+    () =>
+      createListCollection({
+        items: allStations.filter((station) =>
+          contains(station.label, inputStationName ?? ""),
+        ),
+      }),
+    [allStations, inputStationName],
+  );
 
   return (
     <form
@@ -153,7 +160,7 @@ export default function PageRegister() {
             <Combobox.Root
               collection={collection}
               onInputValueChange={(e) => {
-                filter(e.inputValue);
+                setInputStationName(e.inputValue);
               }}
               onValueChange={(e) => {
                 userStationGroup.depart = e.value[0];
@@ -171,7 +178,7 @@ export default function PageRegister() {
               <Portal>
                 <Combobox.Positioner>
                   <Combobox.Content>
-                    {collection.items?.map((item) => (
+                    {collection.items.map((item) => (
                       <Combobox.Item item={item} key={item.value}>
                         {item.label}
                         <Combobox.ItemIndicator />
