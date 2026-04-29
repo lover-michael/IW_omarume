@@ -72,10 +72,13 @@ export default function PageRegister() {
     filter: contains,
   });
 
-  const state = useAsync(async () => {
-    const result = await GetStations();
-    set(result);
-  }, [inputStationName, set]);
+  useEffect(() => {
+    const getStationName = async () => {
+      const result = await GetStations();
+      set(result);
+    };
+    getStationName();
+  }, []);
 
   return (
     <form
@@ -168,22 +171,11 @@ export default function PageRegister() {
               <Portal>
                 <Combobox.Positioner>
                   <Combobox.Content>
-                    {state.loading ? (
-                      <HStack p={"5"}>
-                        <Spinner size={"xs"} borderWidth={"1px"} />
-                        <Span>読み込み中...</Span>
-                      </HStack>
-                    ) : state.error ? (
-                      <Span p={"5"} color={"fg.error"}>
-                        データの収集に失敗
-                      </Span>
-                    ) : (
-                      collection.items?.map((item) => (
-                        <Combobox.Item item={item} key={item.value}>
-                          <Combobox.ItemText>{item.label}</Combobox.ItemText>
-                        </Combobox.Item>
-                      ))
-                    )}
+                    {collection.items?.map((item) => (
+                      <Combobox.Item item={item} key={item.value}>
+                        <Combobox.ItemText>{item.label}</Combobox.ItemText>
+                      </Combobox.Item>
+                    ))}
                   </Combobox.Content>
                 </Combobox.Positioner>
               </Portal>
