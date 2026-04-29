@@ -178,7 +178,7 @@ export default function PageRegister() {
               </Portal>
             </Combobox.Root>
           </Box>
-          <Box>{stationCollections[0]}</Box>
+          <Box>{stationCollections[0].label}</Box>
         </Box>
       </FormControl>
     </form>
