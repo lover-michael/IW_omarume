@@ -173,7 +173,8 @@ export default function PageRegister() {
                   <Combobox.Content>
                     {collection.items?.map((item) => (
                       <Combobox.Item item={item} key={item.value}>
-                        <Combobox.ItemText>{item.label}</Combobox.ItemText>
+                        {item.label}
+                        <Combobox.ItemIndicator />
                       </Combobox.Item>
                     ))}
                   </Combobox.Content>
