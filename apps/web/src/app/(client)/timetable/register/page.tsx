@@ -54,7 +54,7 @@ export default function PageRegister() {
     new UserStationGroup(null, null),
   );
   /// 入力候補
-  const [inputStationName, setInputStationName] = useState<string | null>(null);
+  const [inputStationName, setInputStationName] = useState<string>("");
   const { contains } = useFilter({ sensitivity: "base" });
 
   /*Form用*/
@@ -160,7 +160,7 @@ export default function PageRegister() {
             <Combobox.Root
               collection={collection}
               onInputValueChange={(e) => {
-                setInputStationName(e.inputValue);
+                setInputStationName(e.inputValue ?? ""); // Nullガード
               }}
               onValueChange={(e) => {
                 userStationGroup.depart = e.value[0];
@@ -178,12 +178,16 @@ export default function PageRegister() {
               <Portal>
                 <Combobox.Positioner>
                   <Combobox.Content>
-                    {collection.items.map((item) => (
-                      <Combobox.Item item={item} key={item.value}>
-                        {item.label}
-                        <Combobox.ItemIndicator />
-                      </Combobox.Item>
-                    ))}
+                    {collection.items.length === 0 ? (
+                      <Combobox.Empty>候補が見つかりません</Combobox.Empty>
+                    ) : (
+                      collection.items.map((item) => (
+                        <Combobox.Item item={item} key={item.value}>
+                          {item.label}
+                          <Combobox.ItemIndicator />
+                        </Combobox.Item>
+                      ))
+                    )}
                   </Combobox.Content>
                 </Combobox.Positioner>
               </Portal>
