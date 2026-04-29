@@ -57,6 +57,7 @@ export default function PageRegister() {
     const fetchStations = async () => {
       const result = await GetStations();
       setStationCollections(result);
+      console.log(result);
     };
     fetchStations();
   }, []);
