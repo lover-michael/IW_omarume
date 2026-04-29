@@ -57,7 +57,7 @@ export default function PageRegister() {
     const fetchStations = async () => {
       const result = await GetStations();
       setStationCollections(result);
-      console.log(result);
+      console.log(stationCollections);
     };
     fetchStations();
   }, []);
@@ -178,6 +178,7 @@ export default function PageRegister() {
               </Portal>
             </Combobox.Root>
           </Box>
+          <Box>{stationCollections[0]}</Box>
         </Box>
       </FormControl>
     </form>
