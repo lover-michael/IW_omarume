@@ -67,8 +67,6 @@ export default function PageRegister() {
     value: string;
   }>({
     initialItems: [],
-    itemToString: (item) => item.label,
-    itemToValue: (item) => item.value,
     filter: contains,
   });
 
@@ -155,8 +153,10 @@ export default function PageRegister() {
             <Combobox.Root
               collection={collection}
               onInputValueChange={(e) => {
-                setInputStationName(e.inputValue);
                 filter(e.inputValue);
+              }}
+              onValueChange={(e) => {
+                userStationGroup.depart = e.value[0];
               }}
               width={"100%"}
             >
