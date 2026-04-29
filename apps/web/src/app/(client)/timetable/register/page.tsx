@@ -14,6 +14,7 @@ import {
   Portal,
   Spinner,
   Span,
+  useFilter,
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 import { Controller, Form, useForm } from "react-hook-form";
@@ -49,6 +50,7 @@ export default function PageRegister() {
   );
   /// 入力候補
   const [inputStationName, setInputStationName] = useState<string | null>(null);
+  const { contains } = useFilter({ sensitivity: "base" });
 
   /*Form用*/
   const {
@@ -60,13 +62,14 @@ export default function PageRegister() {
   });
 
   /*Comboboxのフィルター及び候補の初期化*/
-  const { collection, set } = useListCollection<{
+  const { collection, filter, set } = useListCollection<{
     label: string;
     value: string;
   }>({
     initialItems: [],
     itemToString: (item) => item.label,
     itemToValue: (item) => item.value,
+    filter: contains,
   });
 
   const state = useAsync(async () => {
@@ -148,7 +151,10 @@ export default function PageRegister() {
           <Box>
             <Combobox.Root
               collection={collection}
-              onInputValueChange={(e) => setInputStationName(e.inputValue)}
+              onInputValueChange={(e) => {
+                setInputStationName(e.inputValue);
+                filter(e.inputValue);
+              }}
               width={"100%"}
             >
               <Combobox.Label>搭乗するバス停</Combobox.Label>
