@@ -68,6 +68,7 @@ export async function GetStations() {
   const db = getDb();
   const result = await db.select().from(station);
   const stationNames = result.map((element) => ({
+    id: element.id,
     label: element.name,
     value: element.name,
   }));

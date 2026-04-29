@@ -47,7 +47,7 @@ export default function PageRegister() {
   const [itenrary, setItenrary] = useState<string | null>(null);
   ///
   const [allStations, setAllStations] = useState<
-    { label: string; value: string }[]
+    { id: number; label: string; value: string }[]
   >([]);
   /// ユーザーが選択した駅の組み合わせ
   const [userStationGroup, setUserStationGroup] = useState<UserStationGroup>(
@@ -182,7 +182,7 @@ export default function PageRegister() {
                       <Combobox.Empty>候補が見つかりません</Combobox.Empty>
                     ) : (
                       collection.items.map((item) => (
-                        <Combobox.Item item={item} key={item.value}>
+                        <Combobox.Item item={item} key={item.id}>
                           {item.label}
                           <Combobox.ItemIndicator />
                         </Combobox.Item>
