@@ -20,11 +20,10 @@ import {
 import { useMemo, useRef, useState } from "react";
 import { Controller, Form, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FaUpload } from "react-icons/fa";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
+import { FaSearch } from "react-icons/fa";
 import { DayGroups } from "@/app/(client)/timetable/module/datas";
 import { locates, RoutesList } from "../module/locate";
-import { CgArrowDownR, CgArrowRightR } from "react-icons/cg";
 import { onSubmit } from "./submit";
 import { redirect } from "next/navigation";
 import errorsToRecord from "@hookform/resolvers/io-ts/dist/errorsToRecord.js";
@@ -34,7 +33,6 @@ import { TimeTableSchema, TimeTableSchemaType } from "../module/formTypes";
 import { GetStations } from "./action";
 import { useEffect } from "react";
 import { UserStationGroup } from "../module/class";
-import { useAsync } from "react-use";
 
 export default function PageRegister() {
   const ref = useRef<HTMLDivElement>(null);
@@ -45,7 +43,7 @@ export default function PageRegister() {
   const [day, setDay] = useState<string | null>(null);
   /// 選択された路線
   const [itenrary, setItenrary] = useState<string | null>(null);
-  ///
+  /// DBから引っ張ってきたバス停の名前の格納先
   const [allStations, setAllStations] = useState<
     { id: number; label: string; value: string }[]
   >([]);
@@ -53,9 +51,13 @@ export default function PageRegister() {
   const [userStationGroup, setUserStationGroup] = useState<UserStationGroup>(
     new UserStationGroup(null, null),
   );
-  /// 入力候補
+  /// 入力候補(出発バス停用)
   const [inputStationName, setInputStationName] = useState<string>("");
   const { contains } = useFilter({ sensitivity: "base" });
+  /// 入力候補(到着バス停)
+  const [inputStationNameArrive, setInputStationNameArrive] =
+    useState<string>("");
+  const { contains: containsArrive } = useFilter({ sensitivity: "base" });
 
   /*Form用*/
   const {
@@ -83,6 +85,16 @@ export default function PageRegister() {
         ),
       }),
     [allStations, inputStationName],
+  );
+
+  const collectionArrive = useMemo(
+    () =>
+      createListCollection({
+        items: allStations.filter((station) =>
+          containsArrive(station.label, inputStationNameArrive ?? ""),
+        ),
+      }),
+    [allStations, inputStationNameArrive],
   );
 
   return (
@@ -156,7 +168,7 @@ export default function PageRegister() {
               </HStack>
             </RadioGroup.Root>
           </Box>
-          <Box>
+          <Box py={"5px"} mx={"10px"}>
             <Combobox.Root
               collection={collection}
               onInputValueChange={(e) => {
@@ -169,7 +181,10 @@ export default function PageRegister() {
             >
               <Combobox.Label>搭乗するバス停</Combobox.Label>
               <Combobox.Control>
-                <Combobox.Input placeholder="バス停の名前を入力してください" />
+                <Combobox.Input
+                  boxShadow={"md"}
+                  placeholder="バス停の名前を入力してください"
+                />
                 <Combobox.IndicatorGroup>
                   <Combobox.ClearTrigger />
                   <Combobox.Trigger />
@@ -192,6 +207,63 @@ export default function PageRegister() {
                 </Combobox.Positioner>
               </Portal>
             </Combobox.Root>
+          </Box>
+          <Box py={"5px"} mx={"10px"}>
+            <Combobox.Root
+              collection={collectionArrive}
+              onInputValueChange={(e) => {
+                setInputStationNameArrive(e.inputValue ?? ""); // Nullガード
+              }}
+              onValueChange={(e) => {
+                userStationGroup.arrive = e.value[0];
+              }}
+              width={"100%"}
+            >
+              <Combobox.Label>下車するバス停</Combobox.Label>
+              <Combobox.Control>
+                <Combobox.Input
+                  boxShadow={"md"}
+                  placeholder="バス停の名前を入力してください"
+                />
+                <Combobox.IndicatorGroup>
+                  <Combobox.ClearTrigger />
+                  <Combobox.Trigger />
+                </Combobox.IndicatorGroup>
+              </Combobox.Control>
+              <Portal>
+                <Combobox.Positioner>
+                  <Combobox.Content>
+                    {collectionArrive.items.length === 0 ? (
+                      <Combobox.Empty>候補が見つかりません</Combobox.Empty>
+                    ) : (
+                      collectionArrive.items.map((item) => (
+                        <Combobox.Item item={item} key={item.id}>
+                          {item.label}
+                          <Combobox.ItemIndicator />
+                        </Combobox.Item>
+                      ))
+                    )}
+                  </Combobox.Content>
+                </Combobox.Positioner>
+              </Portal>
+            </Combobox.Root>
+          </Box>
+          <Box py={"5px"} mx={"10px"}>
+            <Button
+              w={"100%"}
+              bgColor={"green.500"}
+              onClick={() => setIsSearched(!isSearched)}
+            >
+              <FaSearch /> 検索
+            </Button>
+            {isSearched && (
+              <div>
+                <div>{day}</div>
+                <div>{itenrary}</div>
+                <div>{userStationGroup.depart}</div>
+                <div>{userStationGroup.arrive}</div>
+              </div>
+            )}
           </Box>
         </Box>
       </FormControl>
