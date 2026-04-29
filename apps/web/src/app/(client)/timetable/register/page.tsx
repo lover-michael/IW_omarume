@@ -9,10 +9,11 @@ import {
   HStack,
   Stack,
   Center,
-  useFilter,
   useListCollection,
   Combobox,
   Portal,
+  Spinner,
+  Span,
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 import { Controller, Form, useForm } from "react-hook-form";
@@ -31,6 +32,7 @@ import { TimeTableSchema, TimeTableSchemaType } from "../module/formTypes";
 import { GetStations } from "./action";
 import { useEffect } from "react";
 import { UserStationGroup } from "../module/class";
+import { useAsync } from "react-use";
 
 export default function PageRegister() {
   const ref = useRef<HTMLDivElement>(null);
@@ -41,26 +43,12 @@ export default function PageRegister() {
   const [day, setDay] = useState<string | null>(null);
   /// 選択された路線
   const [itenrary, setItenrary] = useState<string | null>(null);
-  /// Comboboxの候補
-  const [stationCollections, setStationCollections] = useState<
-    { label: string; value: string }[]
-  >([]);
   /// ユーザーが選択した駅の組み合わせ
   const [userStationGroup, setUserStationGroup] = useState<UserStationGroup>(
     new UserStationGroup(null, null),
   );
   /// 入力候補
-  const { contains } = useFilter({ sensitivity: "base" });
-
-  /*駅名の取得*/
-  useEffect(() => {
-    const fetchStations = async () => {
-      const result = await GetStations();
-      setStationCollections(result);
-      console.log(stationCollections);
-    };
-    fetchStations();
-  }, []);
+  const [inputStationName, setInputStationName] = useState<string | null>(null);
 
   /*Form用*/
   const {
@@ -72,10 +60,19 @@ export default function PageRegister() {
   });
 
   /*Comboboxのフィルター及び候補の初期化*/
-  const { collection, filter } = useListCollection({
-    initialItems: stationCollections,
-    filter: contains,
+  const { collection, set } = useListCollection<{
+    label: string;
+    value: string;
+  }>({
+    initialItems: [],
+    itemToString: (item) => item.label,
+    itemToValue: (item) => item.value,
   });
+
+  const state = useAsync(async () => {
+    const result = await GetStations();
+    set(result);
+  }, [inputStationName, set]);
 
   return (
     <form
@@ -151,7 +148,7 @@ export default function PageRegister() {
           <Box>
             <Combobox.Root
               collection={collection}
-              onInputValueChange={(e) => filter(e.inputValue)}
+              onInputValueChange={(e) => setInputStationName(e.inputValue)}
               width={"100%"}
             >
               <Combobox.Label>搭乗するバス停</Combobox.Label>
@@ -165,20 +162,27 @@ export default function PageRegister() {
               <Portal>
                 <Combobox.Positioner>
                   <Combobox.Content>
-                    <Combobox.Empty>
-                      該当するバス停が見つかりません
-                    </Combobox.Empty>
-                    {collection.items.map((item) => (
-                      <Combobox.Item item={item} key={item.value}>
-                        <Combobox.ItemText>{item.label}</Combobox.ItemText>
-                      </Combobox.Item>
-                    ))}
+                    {state.loading ? (
+                      <HStack p={"5"}>
+                        <Spinner size={"xs"} borderWidth={"1px"} />
+                        <Span>読み込み中...</Span>
+                      </HStack>
+                    ) : state.error ? (
+                      <Span p={"5"} color={"fg.error"}>
+                        データの収集に失敗
+                      </Span>
+                    ) : (
+                      collection.items?.map((item) => (
+                        <Combobox.Item item={item} key={item.value}>
+                          <Combobox.ItemText>{item.label}</Combobox.ItemText>
+                        </Combobox.Item>
+                      ))
+                    )}
                   </Combobox.Content>
                 </Combobox.Positioner>
               </Portal>
             </Combobox.Root>
           </Box>
-          <Box>{stationCollections[0].label}</Box>
         </Box>
       </FormControl>
     </form>
