@@ -3,6 +3,8 @@
 import { getDb } from "@/lib/drizzle";
 import { station, timetable } from "@repo/database";
 import { and, eq, or } from "drizzle-orm";
+import { TimeTableSchemaType } from "../module/formTypes";
+import { revalidatePath } from "next/cache";
 
 type SEARCH_STATION_OBJECT = {
   name: string | null;
@@ -54,4 +56,20 @@ export async function GetIDfromStations(target: SEARCH_STATION_OBJECT) {
         Number(element.minute) === Number(target.minute),
     )
     .map((element) => element.id);
+}
+
+export async function SaveTimeTable(props: TimeTableSchemaType) {
+  const db = getDb();
+  await db.insert(timetable).values(props);
+  revalidatePath("/timetable");
+}
+
+export async function GetStations() {
+  const db = getDb();
+  const result = await db.select().from(station);
+  const stationNames = result.map((element) => ({
+    label: element.name,
+    value: element.name,
+  }));
+  return stationNames;
 }

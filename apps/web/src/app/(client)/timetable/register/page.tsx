@@ -1,186 +1,184 @@
 "use client";
 
 import {
+  Separator,
+  Box,
   Button,
-  Flex,
   Input,
-  Stack,
-  Checkbox,
-  Select,
-  Portal,
-  Center,
-  Field,
-  Fieldset,
-  HStack,
   RadioGroup,
-  GridItem,
+  HStack,
+  Stack,
+  Center,
+  useFilter,
+  useListCollection,
+  Combobox,
+  Portal,
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 import { Controller, Form, useForm } from "react-hook-form";
-import { Test, userSchema } from "../userSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FaUpload } from "react-icons/fa";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import { DayGroups } from "@/app/(client)/timetable/module/datas";
-import { locates } from "../module/locate";
+import { locates, RoutesList } from "../module/locate";
 import { CgArrowDownR, CgArrowRightR } from "react-icons/cg";
-import { SaveTimeTable } from "@/app/(client)/action";
+import { onSubmit } from "./submit";
 import { redirect } from "next/navigation";
 import errorsToRecord from "@hookform/resolvers/io-ts/dist/errorsToRecord.js";
 import { check } from "drizzle-orm/gel-core";
 import { dataListAnatomy } from "@chakra-ui/react/anatomy";
+import { TimeTableSchema, TimeTableSchemaType } from "../module/formTypes";
+import { GetStations } from "./action";
+import { useEffect } from "react";
+import { UserStationGroup } from "../module/class";
 
 export default function PageRegister() {
   const ref = useRef<HTMLDivElement>(null);
-  const [searched, setSearched] = useState<boolean>(false);
-  const { register, handleSubmit, control } = useForm<Test>({
-    resolver: zodResolver(userSchema),
+  const [isSearched, setIsSearched] = useState<boolean>(false);
+
+  /*搭乗バスの候補探しに使用*/
+  /// 選択された日付
+  const [day, setDay] = useState<string | null>(null);
+  /// 選択された路線
+  const [itenrary, setItenrary] = useState<string | null>(null);
+  /// Comboboxの候補
+  const [stationCollections, setStationCollections] = useState<
+    { label: string; value: string }[]
+  >([]);
+  /// ユーザーが選択した駅の組み合わせ
+  const [userStationGroup, setUserStationGroup] = useState<UserStationGroup>(
+    new UserStationGroup(null, null),
+  );
+  /// 入力候補
+  const { contains } = useFilter({ sensitivity: "base" });
+
+  /*駅名の取得*/
+  useEffect(() => {
+    const fetchStations = async () => {
+      const result = await GetStations();
+      setStationCollections(result);
+    };
+    fetchStations();
+  }, []);
+
+  /*Form用*/
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<TimeTableSchemaType>({
+    resolver: zodResolver(TimeTableSchema),
+  });
+
+  /*Comboboxのフィルター及び候補の初期化*/
+  const { collection, filter } = useListCollection({
+    initialItems: stationCollections,
+    filter: contains,
   });
 
   return (
     <form
-      onSubmit={handleSubmit(async (data: Test) => {
-        await SaveTimeTable(data, "/timetable/register");
-        console.log(data);
-        redirect("../timetable");
-      })}
+      onSubmit={handleSubmit(onSubmit)}
+      style={{ height: "100%", width: "100%" }}
     >
-      <FormControl>
-        <Stack gap={10} p={"4"}>
-          <div>
-            {/* タイムテーブルの目的決定 */}
-            <FormLabel htmlFor={"memo"}>目的</FormLabel>
-            <Input type="text" id={"memo"} {...register("memo")} />
-          </div>
-          {/* 日付決定 */}
-
-          <Field.Root>
-            <Field.Label>曜日を選択してください</Field.Label>
-            <Controller
-              name="day"
-              control={control}
-              render={({ field }) => (
-                <RadioGroup.Root
-                  name={field.name}
-                  value={field.value}
-                  onValueChange={({ value }) => {
-                    field.onChange(value);
-                  }}
-                >
-                  <HStack gap={"6"}>
-                    {DayGroups.map((day) => (
-                      <RadioGroup.Item key={day.value} value={day.value}>
-                        <RadioGroup.ItemHiddenInput onBlur={field.onBlur} />
-                        <RadioGroup.ItemIndicator />
-                        <RadioGroup.ItemText>{day.label}</RadioGroup.ItemText>
-                      </RadioGroup.Item>
-                    ))}
-                  </HStack>
-                </RadioGroup.Root>
-              )}
-            />
-          </Field.Root>
-          <Flex gap={"3"}>
-            <Field.Root>
-              <Field.Label>乗車駅</Field.Label>
-              <Controller
-                control={control}
-                name="from"
-                render={({ field }) => (
-                  <Select.Root
-                    collection={locates}
-                    width={"revert-layer"}
-                    value={field.value}
-                    onValueChange={({ value }) => field.onChange(value)}
-                    onInteractOutside={() => field.onBlur()}
-                  >
-                    <Select.HiddenSelect />
-                    <Select.Control>
-                      <Select.Trigger>
-                        <Select.ValueText placeholder="Select location" />
-                      </Select.Trigger>
-                      <Select.IndicatorGroup>
-                        <Select.Indicator />
-                      </Select.IndicatorGroup>
-                    </Select.Control>
-                    <Portal container={ref}>
-                      <Select.Positioner>
-                        <Select.Content>
-                          {locates.items.map((e) => {
-                            return (
-                              <Select.Item item={e} key={e.value}>
-                                {e.label}
-                                <Select.ItemIndicator />
-                              </Select.Item>
-                            );
-                          })}
-                        </Select.Content>
-                      </Select.Positioner>
-                    </Portal>
-                  </Select.Root>
-                )}
-              />
-            </Field.Root>
-            <Center>
-              <CgArrowRightR size={"30"} />
-            </Center>
-            <Field.Root>
-              <Field.Label>降車駅</Field.Label>
-              <Controller
-                control={control}
-                name="to"
-                render={({ field }) => (
-                  <Select.Root
-                    collection={locates}
-                    width={"revert-layer"}
-                    value={field.value}
-                    onValueChange={({ value }) => field.onChange(value)}
-                    onInteractOutside={() => field.onBlur()}
-                  >
-                    <Select.HiddenSelect />
-                    <Select.Control>
-                      <Select.Trigger>
-                        <Select.ValueText placeholder="Select location" />
-                      </Select.Trigger>
-                      <Select.IndicatorGroup>
-                        <Select.Indicator />
-                      </Select.IndicatorGroup>
-                    </Select.Control>
-                    <Portal container={ref}>
-                      <Select.Positioner>
-                        <Select.Content>
-                          {locates.items.map((e) => {
-                            return (
-                              <Select.Item item={e} key={e.value}>
-                                {e.label}
-                                <Select.ItemIndicator />
-                              </Select.Item>
-                            );
-                          })}
-                        </Select.Content>
-                      </Select.Positioner>
-                    </Portal>
-                  </Select.Root>
-                )}
-              />
-            </Field.Root>
-          </Flex>
-        </Stack>
-      </FormControl>
-      <Stack gap={"3px"}>
-        <Center>
-          <Button
-            width={"xs"}
-            colorPalette={"green"}
-            type="submit"
-            onClick={() => {
-              console.log("submit");
-            }}
+      <FormControl gap={"10px"}>
+        <Box p={"10px"} m={"auto"}>
+          <Box
+            fontSize={"3xl"}
+            fontWeight={"bold"}
+            textAlign={"center"}
+            p={"5px"}
           >
-            <FaUpload /> 新規登録
-          </Button>
-        </Center>
-      </Stack>
+            マイ時刻表登録画面
+          </Box>
+          <Separator size={"lg"} bgColor={"black"} />
+          <Box p={"10px"}>
+            <FormLabel htmlFor={"memo"}>目的</FormLabel>
+            <Input
+              id={"memo"}
+              {...register("memo")}
+              placeholder={"ご自由にお書きください"}
+              boxShadow={"md"}
+              width={"full"}
+            />
+            {errors.memo && <Box color={"red.500"}>{errors.memo.message}</Box>}
+          </Box>
+          <Box py={"5px"} mx={"10px"}>
+            <FormLabel htmlFor={"day"}>曜日</FormLabel>
+            <RadioGroup.Root
+              variant={"subtle"}
+              colorPalette={"gray"}
+              value={day}
+              onValueChange={(e) => setDay(e.value)}
+            >
+              <HStack gap={"5"}>
+                {DayGroups.map((item) => {
+                  return (
+                    <RadioGroup.Item key={item.value} value={item.value}>
+                      <RadioGroup.ItemHiddenInput />
+                      <RadioGroup.ItemIndicator />
+                      <RadioGroup.ItemText>{item.label}</RadioGroup.ItemText>
+                    </RadioGroup.Item>
+                  );
+                })}
+              </HStack>
+            </RadioGroup.Root>
+          </Box>
+          <Box py={"5px"} mx={"10px"}>
+            <FormLabel htmlFor={"itenrary"}>路線</FormLabel>
+            <RadioGroup.Root
+              variant={"subtle"}
+              colorPalette={"gray"}
+              value={itenrary}
+              onValueChange={(e) => {
+                setItenrary(e.value);
+              }}
+            >
+              <HStack gap={"5"}>
+                {RoutesList.map((item) => {
+                  return (
+                    <RadioGroup.Item key={item.value} value={item.value}>
+                      <RadioGroup.ItemHiddenInput />
+                      <RadioGroup.ItemIndicator />
+                      <RadioGroup.ItemText>{item.label}</RadioGroup.ItemText>
+                    </RadioGroup.Item>
+                  );
+                })}
+              </HStack>
+            </RadioGroup.Root>
+          </Box>
+          <Box>
+            <Combobox.Root
+              collection={collection}
+              onInputValueChange={(e) => filter(e.inputValue)}
+              width={"100%"}
+            >
+              <Combobox.Label>搭乗するバス停</Combobox.Label>
+              <Combobox.Control>
+                <Combobox.Input placeholder="バス停の名前を入力してください" />
+                <Combobox.IndicatorGroup>
+                  <Combobox.ClearTrigger />
+                  <Combobox.Trigger />
+                </Combobox.IndicatorGroup>
+              </Combobox.Control>
+              <Portal>
+                <Combobox.Positioner>
+                  <Combobox.Content>
+                    <Combobox.Empty>
+                      該当するバス停が見つかりません
+                    </Combobox.Empty>
+                    {collection.items.map((item) => (
+                      <Combobox.Item item={item} key={item.value}>
+                        <Combobox.ItemText>{item.label}</Combobox.ItemText>
+                      </Combobox.Item>
+                    ))}
+                  </Combobox.Content>
+                </Combobox.Positioner>
+              </Portal>
+            </Combobox.Root>
+          </Box>
+        </Box>
+      </FormControl>
     </form>
   );
 }

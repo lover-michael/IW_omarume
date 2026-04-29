@@ -96,16 +96,13 @@ export default function PageTimeTable() {
           <Stack gap="3">
             {mytimetables.map((e) => {
               return (
-                <Box>
-                  <Card_layout
-                    id={e.id}
-                    create_at={e.create_at}
-                    memo={e.memo}
-                    depart_station_id={e.depart_station_id}
-                    arrive_station_id={e.arrive_station_id}
-                  />
-                  <div>{mytimetables.length}</div>
-                </Box>
+                <Card_layout
+                  id={e.id}
+                  create_at={e.create_at}
+                  memo={e.memo}
+                  depart_station_id={e.depart_station_id}
+                  arrive_station_id={e.arrive_station_id}
+                />
               );
             })}
           </Stack>

@@ -8,13 +8,6 @@ import { dataListAnatomy } from "@chakra-ui/react/anatomy";
 import { timestamp } from "drizzle-orm/gel-core";
 import { and, eq, or } from "drizzle-orm";
 
-export async function SaveTimeTable(
-  formData: z.infer<typeof userSchema>,
-  path: string,
-) {
-  revalidatePath(path);
-}
-
 export async function DeleteTimeTable(object: z.infer<typeof userSchema>) {
   revalidatePath("timetable");
 }
