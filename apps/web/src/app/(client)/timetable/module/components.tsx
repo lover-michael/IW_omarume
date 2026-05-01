@@ -52,12 +52,7 @@ export default function Candidates(props: CandidatesProps) {
       {loading && <Spinner />}
       {error && <p>{error.message}</p>}
       {!loading && !error && (
-        <RadioCard.Root
-          boxShadow={"md"}
-          bgColor={"gray.600"}
-          w={"100%"}
-          px={"3"}
-        >
+        <RadioCard.Root boxShadow={"md"} w={"100%"} px={"3"}>
           <RadioCard.Label>候補1</RadioCard.Label>
           <Stack gap={"5"}>
             {candidates.map((element) => (
