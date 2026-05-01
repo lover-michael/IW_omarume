@@ -11,6 +11,6 @@ export const locates = createListCollection({
 });
 
 export const RoutesList = [
-  { label: "行き", value: "outbound" },
-  { label: "帰り", value: "inbound" },
+  { label: "行き", value: "Outbound" },
+  { label: "帰り", value: "Return" },
 ];
