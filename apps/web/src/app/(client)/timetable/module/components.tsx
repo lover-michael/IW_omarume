@@ -66,19 +66,15 @@ export default function Candidates(props: CandidatesProps) {
                     <RadioCard.ItemText>
                       <HStack gap={"2"}>
                         <Stack gapY={"3"}>
-                          <Box fontWeight={"bold"} color={"bg"}>
-                            {element.depart.name}
-                          </Box>
-                          <Box>
+                          <Box fontWeight={"bold"}>{element.depart.name}</Box>
+                          <Box fontWeight={"bold"}>
                             {element.depart.hour}:{element.depart.minute}
                           </Box>
                         </Stack>
                         <RxDoubleArrowRight />
                         <Stack gapY={"3"}>
-                          <Box fontWeight={"bold"} color={"bg"}>
-                            {element.arrive.name}
-                          </Box>
-                          <Box>
+                          <Box fontWeight={"bold"}>{element.arrive.name}</Box>
+                          <Box fontWeight={"bold"}>
                             {element.arrive.hour}:{element.arrive.minute}
                           </Box>
                         </Stack>
