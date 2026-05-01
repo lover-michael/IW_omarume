@@ -33,6 +33,7 @@ import { TimeTableSchema, TimeTableSchemaType } from "../module/formTypes";
 import { GetStations } from "./action";
 import { useEffect } from "react";
 import { UserStationGroup } from "../module/class";
+import Candidates from "../module/components";
 
 export default function PageRegister() {
   const ref = useRef<HTMLDivElement>(null);
@@ -257,12 +258,20 @@ export default function PageRegister() {
               <FaSearch /> 検索
             </Button>
             {isSearched && (
-              <div>
-                <div>{day}</div>
-                <div>{itenrary}</div>
-                <div>{userStationGroup.depart}</div>
-                <div>{userStationGroup.arrive}</div>
-              </div>
+              <Candidates
+                depart={
+                  userStationGroup.depart === null
+                    ? ""
+                    : userStationGroup.depart
+                }
+                arrive={
+                  userStationGroup.arrive === null
+                    ? ""
+                    : userStationGroup.arrive
+                }
+                day={day === null ? "" : day}
+                direction={itenrary === null ? "" : itenrary}
+              />
             )}
           </Box>
         </Box>

@@ -11,3 +11,13 @@ export const TimeTableSchema = z.object({
 });
 
 export type TimeTableSchemaType = z.infer<typeof TimeTableSchema>;
+
+export type STATION = {
+  id: number;
+  create_at: Date;
+  name: string;
+  day: string;
+  hour: string;
+  minute: string;
+  direction: string;
+};

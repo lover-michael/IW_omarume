@@ -11,18 +11,9 @@ import {
   Dialog,
   Separator,
 } from "@chakra-ui/react";
-import { Test } from "./userSchema";
-import { IoIosArrowForward } from "react-icons/io";
 import { GetElements, GetStationByID } from "../action";
-import { Center } from "chakra-ui";
-import { MdEdit, MdOutlineDelete } from "react-icons/md";
-import { BiSolidDetail } from "react-icons/bi";
-import styles from "@/app/timetable/myCSS/style.module.css";
 import { useEffect, useState } from "react";
-import { IoClose } from "react-icons/io5";
 import { FaArrowRight } from "react-icons/fa";
-import { string } from "zod/v4-mini";
-import { StringValidation } from "zod";
 
 // timetableに沿った型
 export type TimeTableCard = {
