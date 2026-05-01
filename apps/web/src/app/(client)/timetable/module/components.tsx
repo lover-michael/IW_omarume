@@ -48,11 +48,16 @@ export default function Candidates(props: CandidatesProps) {
   }, [props.depart, props.arrive, props.day, props.direction]);
 
   return (
-    <Box>
+    <Box py={"10"}>
       {loading && <Spinner />}
       {error && <p>{error.message}</p>}
       {!loading && !error && (
-        <RadioCard.Root bgColor={"teal.500"} w={"100%"} px={"3"}>
+        <RadioCard.Root
+          boxShadow={"md"}
+          bgColor={"gray.600"}
+          w={"100%"}
+          px={"3"}
+        >
           <RadioCard.Label>候補1</RadioCard.Label>
           <Stack gap={"5"}>
             {candidates.map((element) => (

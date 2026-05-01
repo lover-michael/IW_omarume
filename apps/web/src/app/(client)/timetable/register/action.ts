@@ -53,12 +53,10 @@ export async function CreateCandidates(target: SEARCH_STATION_OBJECT) {
   });
 
   /// 出発駅と到着駅の候補を比較し、時刻順にソートする
-  const candidates = new CandidatesStation(departStation, arriveStation)
-    .sort()
-    .compare().compareResult;
+  const candidates = new CandidatesStation(departStation, arriveStation);
 
   /// 比較結果を返す
-  return candidates;
+  return candidates.sort().compare().compareResult;
 }
 
 export async function SaveTimeTable(props: TimeTableSchemaType) {
