@@ -56,7 +56,7 @@ export default function Candidates(props: CandidatesProps) {
           {candidates.map((element) => (
             <RadioCard.Root boxShadow={"md"} w={"100%"} px={"3"}>
               <RadioCard.Label>
-                {"候補" + element.index.toString()}
+                {"候補" + (element.index + 1).toString()}
               </RadioCard.Label>
               <RadioCard.Item
                 key={element.index}
