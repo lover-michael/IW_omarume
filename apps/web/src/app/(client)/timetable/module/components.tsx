@@ -52,10 +52,12 @@ export default function Candidates(props: CandidatesProps) {
       {loading && <Spinner />}
       {error && <p>{error.message}</p>}
       {!loading && !error && (
-        <RadioCard.Root boxShadow={"md"} w={"100%"} px={"3"}>
-          <RadioCard.Label>候補1</RadioCard.Label>
-          <Stack gap={"5"}>
-            {candidates.map((element) => (
+        <Stack gap={"5"}>
+          {candidates.map((element) => (
+            <RadioCard.Root boxShadow={"md"} w={"100%"} px={"3"}>
+              <RadioCard.Label>
+                {"候補" + element.index.toString()}
+              </RadioCard.Label>
               <RadioCard.Item
                 key={element.index}
                 value={"候補" + element.index.toString()}
@@ -84,9 +86,9 @@ export default function Candidates(props: CandidatesProps) {
                   <RadioCard.ItemIndicator />
                 </RadioCard.ItemControl>
               </RadioCard.Item>
-            ))}
-          </Stack>
-        </RadioCard.Root>
+            </RadioCard.Root>
+          ))}
+        </Stack>
       )}
     </Box>
   );
