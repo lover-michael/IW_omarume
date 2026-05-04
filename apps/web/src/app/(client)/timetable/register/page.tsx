@@ -101,9 +101,7 @@ export default function PageRegister() {
 
   return (
     <form
-      onSubmit={handleSubmit(() => {
-        console.log("submit");
-      })}
+      onSubmit={handleSubmit(onSubmit)}
       style={{ height: "100%", width: "100%" }}
     >
       <FormControl gap={"10px"}>
@@ -286,7 +284,14 @@ export default function PageRegister() {
           </Box>
         </Box>
       </FormControl>
-      <Button type="submit" w={"100%"} py={"5"}>
+      <Button
+        type="submit"
+        w={"100%"}
+        py={"5"}
+        onClick={() => {
+          console.log("submit");
+        }}
+      >
         登録
       </Button>
     </form>
