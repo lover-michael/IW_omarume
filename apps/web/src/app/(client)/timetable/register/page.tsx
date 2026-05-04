@@ -65,6 +65,7 @@ export default function PageRegister() {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
+    control,
   } = useForm<TimeTableSchemaType>({
     resolver: zodResolver(TimeTableSchema),
   });
@@ -258,23 +259,33 @@ export default function PageRegister() {
               <FaSearch /> 検索
             </Button>
             {isSearched && (
-              <Candidates
-                depart={
-                  userStationGroup.depart === null
-                    ? ""
-                    : userStationGroup.depart
-                }
-                arrive={
-                  userStationGroup.arrive === null
-                    ? ""
-                    : userStationGroup.arrive
-                }
-                day={day === null ? "" : day}
-                direction={itenrary === null ? "" : itenrary}
+              <Controller
+                name="stations"
+                control={control}
+                render={({ field }) => (
+                  <Candidates
+                    depart={
+                      userStationGroup.depart === null
+                        ? ""
+                        : userStationGroup.depart
+                    }
+                    arrive={
+                      userStationGroup.arrive === null
+                        ? ""
+                        : userStationGroup.arrive
+                    }
+                    day={day === null ? "" : day}
+                    direction={itenrary === null ? "" : itenrary}
+                    OnSelectChanged={field.onChange}
+                  />
+                )}
               />
             )}
           </Box>
         </Box>
+        <Button type="submit" w={"100%"} py={"5"}>
+          登録
+        </Button>
       </FormControl>
     </form>
   );

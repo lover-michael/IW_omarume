@@ -61,7 +61,13 @@ export async function CreateCandidates(target: SEARCH_STATION_OBJECT) {
 
 export async function SaveTimeTable(props: TimeTableSchemaType) {
   const db = getDb();
-  await db.insert(timetable).values(props);
+  await db
+    .insert(timetable)
+    .values({
+      memo: props.memo,
+      depart_station_id: props.stations.depart_station_id,
+      arrive_station_id: props.stations.arrive_station_id,
+    });
   revalidatePath("/timetable");
 }
 

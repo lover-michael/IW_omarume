@@ -6,8 +6,10 @@ export const TimeTableSchema = z.object({
     .string()
     .max(100, { message: "最大100文字で入力してください" })
     .optional(),
-  depart_station_id: z.number(),
-  arrive_station_id: z.number(),
+  stations: z.object({
+    depart_station_id: z.number(),
+    arrive_station_id: z.number(),
+  }),
 });
 
 export type TimeTableSchemaType = z.infer<typeof TimeTableSchema>;

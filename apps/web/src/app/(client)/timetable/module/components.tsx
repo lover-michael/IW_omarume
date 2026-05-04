@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { CreateCandidates } from "../register/action";
-import { STATION, TimeTableSchemaType } from "./formTypes";
+import { STATION } from "./formTypes";
 import { Box, RadioCard, Spinner, Stack, HStack } from "@chakra-ui/react";
 import { RxDoubleArrowRight } from "react-icons/rx";
 
@@ -11,10 +11,10 @@ type CandidatesProps = {
   arrive: string;
   day: string;
   direction: string;
-  // OnSelectChanged: (timetable: {
-  //   depart_station_id: number;
-  //   arrive_station_id: number;
-  // }) => void;
+  OnSelectChanged: (stations: {
+    depart_station_id: number;
+    arrive_station_id: number;
+  }) => void;
 };
 
 type STATIONS = {
@@ -52,15 +52,19 @@ export default function Candidates(props: CandidatesProps) {
       {loading && <Spinner />}
       {error && <p>{error.message}</p>}
       {!loading && !error && (
-        <Stack gap={"5"}>
-          {candidates.map((element) => (
-            <RadioCard.Root boxShadow={"md"} w={"100%"} px={"3"}>
-              <RadioCard.Label>
-                {"候補" + (element.index + 1).toString()}
-              </RadioCard.Label>
+        <RadioCard.Root boxShadow={"md"} w={"100%"} px={"3"}>
+          <RadioCard.Label>保存したい時刻表を選択してください</RadioCard.Label>
+          <Stack gap={"5"}>
+            {candidates.map((element) => (
               <RadioCard.Item
                 key={element.index}
                 value={"候補" + element.index.toString()}
+                onClick={() => {
+                  props.OnSelectChanged({
+                    depart_station_id: element.depart.id,
+                    arrive_station_id: element.arrive.id,
+                  });
+                }}
               >
                 <RadioCard.ItemHiddenInput />
                 <RadioCard.ItemControl>
@@ -68,15 +72,19 @@ export default function Candidates(props: CandidatesProps) {
                     <RadioCard.ItemText>
                       <HStack gap={"2"}>
                         <Stack gapY={"3"}>
-                          <Box fontWeight={"bold"}>{element.depart.name}</Box>
-                          <Box fontWeight={"bold"}>
+                          <Box fontWeight={"bold"} fontSize={"2xl"}>
+                            {element.depart.name}
+                          </Box>
+                          <Box fontWeight={"bold"} fontSize={"1xl"}>
                             {element.depart.hour}:{element.depart.minute}
                           </Box>
                         </Stack>
                         <RxDoubleArrowRight />
                         <Stack gapY={"3"}>
-                          <Box fontWeight={"bold"}>{element.arrive.name}</Box>
-                          <Box fontWeight={"bold"}>
+                          <Box fontWeight={"bold"} fontSize={"2xl"}>
+                            {element.arrive.name}
+                          </Box>
+                          <Box fontWeight={"bold"} fontSize={"1xl"}>
                             {element.arrive.hour}:{element.arrive.minute}
                           </Box>
                         </Stack>
@@ -86,9 +94,9 @@ export default function Candidates(props: CandidatesProps) {
                   <RadioCard.ItemIndicator />
                 </RadioCard.ItemControl>
               </RadioCard.Item>
-            </RadioCard.Root>
-          ))}
-        </Stack>
+            ))}
+          </Stack>
+        </RadioCard.Root>
       )}
     </Box>
   );
