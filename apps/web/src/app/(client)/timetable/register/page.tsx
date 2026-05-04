@@ -101,7 +101,9 @@ export default function PageRegister() {
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(() => {
+        console.log("submit");
+      })}
       style={{ height: "100%", width: "100%" }}
     >
       <FormControl gap={"10px"}>
