@@ -283,10 +283,10 @@ export default function PageRegister() {
             )}
           </Box>
         </Box>
-        <Button type="submit" w={"100%"} py={"5"}>
-          登録
-        </Button>
       </FormControl>
+      <Button type="submit" w={"100%"} py={"5"}>
+        登録
+      </Button>
     </form>
   );
 }
