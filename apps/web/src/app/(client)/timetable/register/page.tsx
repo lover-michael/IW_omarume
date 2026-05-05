@@ -18,13 +18,12 @@ import {
   createListCollection,
 } from "@chakra-ui/react";
 import { useMemo, useRef, useState } from "react";
-import { Controller, Form, useForm } from "react-hook-form";
+import { Controller, Form, set, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import { FaSearch } from "react-icons/fa";
 import { DayGroups } from "@/app/(client)/timetable/module/datas";
-import { locates, RoutesList } from "../module/locate";
-import { onSubmit } from "./submit";
+import { RoutesList } from "../module/locate";
 import { redirect } from "next/navigation";
 import errorsToRecord from "@hookform/resolvers/io-ts/dist/errorsToRecord.js";
 import { check } from "drizzle-orm/gel-core";
@@ -34,6 +33,7 @@ import { GetStations } from "./action";
 import { useEffect } from "react";
 import { UserStationGroup } from "../module/class";
 import Candidates from "../module/components";
+import { SaveTimeTable } from "./action";
 
 export default function PageRegister() {
   const ref = useRef<HTMLDivElement>(null);
@@ -59,6 +59,8 @@ export default function PageRegister() {
   const [inputStationNameArrive, setInputStationNameArrive] =
     useState<string>("");
   const { contains: containsArrive } = useFilter({ sensitivity: "base" });
+  /// fetch待機用
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   /*Form用*/
   const {
@@ -98,6 +100,21 @@ export default function PageRegister() {
       }),
     [allStations, inputStationNameArrive],
   );
+
+  /// フォームの送信処理
+  const onSubmit = async (props: TimeTableSchemaType) => {
+    setIsLoading(true);
+    try {
+      /// DBにデータをPOST
+      await SaveTimeTable(props);
+    } catch (error) {
+      /// POSTに失敗したらログに表示
+      console.log(error);
+    } finally {
+      /// 処理が終了したらローディングを停止
+      setIsLoading(false);
+    }
+  };
 
   return (
     <form
@@ -255,6 +272,7 @@ export default function PageRegister() {
               w={"100%"}
               bgColor={"green.500"}
               onClick={() => setIsSearched(!isSearched)}
+              disabled={isLoading}
             >
               <FaSearch /> 検索
             </Button>
@@ -291,8 +309,9 @@ export default function PageRegister() {
         onClick={() => {
           console.log("submit");
         }}
+        disabled={isLoading}
       >
-        登録
+        {isLoading ? "登録中..." : "登録"}
       </Button>
     </form>
   );
