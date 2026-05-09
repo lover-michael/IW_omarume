@@ -281,28 +281,21 @@ export default function PageRegister() {
                 name="stations"
                 control={control}
                 render={({ field }) => (
-                  <Box
-                    overflowY={"scroll"}
-                    w={"100%"}
-                    h={"30"}
-                    boxShadow={"lg"}
-                  >
-                    <Candidates
-                      depart={
-                        userStationGroup.depart === null
-                          ? ""
-                          : userStationGroup.depart
-                      }
-                      arrive={
-                        userStationGroup.arrive === null
-                          ? ""
-                          : userStationGroup.arrive
-                      }
-                      day={day === null ? "" : day}
-                      direction={itenrary === null ? "" : itenrary}
-                      OnSelectChanged={field.onChange}
-                    />
-                  </Box>
+                  <Candidates
+                    depart={
+                      userStationGroup.depart === null
+                        ? ""
+                        : userStationGroup.depart
+                    }
+                    arrive={
+                      userStationGroup.arrive === null
+                        ? ""
+                        : userStationGroup.arrive
+                    }
+                    day={day === null ? "" : day}
+                    direction={itenrary === null ? "" : itenrary}
+                    OnSelectChanged={field.onChange}
+                  />
                 )}
               />
             )}
@@ -311,13 +304,13 @@ export default function PageRegister() {
       </FormControl>
       <Button
         type="submit"
-        w={"80%"}
-        py={"3"}
         mx={"auto"}
         disabled={isLoading}
         bgColor={"green.500"}
         position={"absolute"}
         bottom={"10px"}
+        left={"auto"}
+        boxShadow={"lg"}
         onClick={() => {
           console.log("submit");
         }}
