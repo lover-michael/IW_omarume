@@ -119,7 +119,7 @@ export default function PageRegister() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      style={{ height: "100%", width: "100%" }}
+      style={{ height: "100%", width: "100%", position: "relative" }}
     >
       <FormControl gap={"10px"}>
         <Box p={"10px"} m={"auto"}>
@@ -281,21 +281,28 @@ export default function PageRegister() {
                 name="stations"
                 control={control}
                 render={({ field }) => (
-                  <Candidates
-                    depart={
-                      userStationGroup.depart === null
-                        ? ""
-                        : userStationGroup.depart
-                    }
-                    arrive={
-                      userStationGroup.arrive === null
-                        ? ""
-                        : userStationGroup.arrive
-                    }
-                    day={day === null ? "" : day}
-                    direction={itenrary === null ? "" : itenrary}
-                    OnSelectChanged={field.onChange}
-                  />
+                  <Box
+                    overflowY={"scroll"}
+                    w={"100%"}
+                    h={"30"}
+                    boxShadow={"lg"}
+                  >
+                    <Candidates
+                      depart={
+                        userStationGroup.depart === null
+                          ? ""
+                          : userStationGroup.depart
+                      }
+                      arrive={
+                        userStationGroup.arrive === null
+                          ? ""
+                          : userStationGroup.arrive
+                      }
+                      day={day === null ? "" : day}
+                      direction={itenrary === null ? "" : itenrary}
+                      OnSelectChanged={field.onChange}
+                    />
+                  </Box>
                 )}
               />
             )}
@@ -306,11 +313,14 @@ export default function PageRegister() {
         type="submit"
         w={"80%"}
         py={"3"}
+        mx={"auto"}
+        disabled={isLoading}
+        bgColor={"green.500"}
+        position={"absolute"}
+        bottom={"10px"}
         onClick={() => {
           console.log("submit");
         }}
-        disabled={isLoading}
-        bgColor={"green.500"}
       >
         {isLoading ? "登録中..." : "登録"}
       </Button>
