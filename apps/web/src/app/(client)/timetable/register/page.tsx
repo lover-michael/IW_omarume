@@ -304,12 +304,13 @@ export default function PageRegister() {
       </FormControl>
       <Button
         type="submit"
-        w={"100%"}
-        py={"5"}
+        w={"80%"}
+        py={"3"}
         onClick={() => {
           console.log("submit");
         }}
         disabled={isLoading}
+        bgColor={"green.500"}
       >
         {isLoading ? "登録中..." : "登録"}
       </Button>

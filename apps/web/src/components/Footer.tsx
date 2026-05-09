@@ -10,7 +10,7 @@ export function Footer() {
   const pathname = usePathname();
 
   return (
-    <Center w="full" py={"2"} bgColor="green.500" gapX={"3"}>
+    <Center w="full" py={"2"} bgColor="green.500" gapX={"3"} boxShadow={"lg"}>
       <Link href="/timetable">
         <Button
           bgColor={pathname === "/timetable" ? "green.400" : "green.500"}

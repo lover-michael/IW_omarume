@@ -2,6 +2,8 @@
 
 import { Button, Card, Center, Flex, Box, Stack } from "@chakra-ui/react";
 import { useState } from "react";
+import Link from "next/link";
+
 import { SiChakraui, SiNextdotjs, SiReact } from "react-icons/si";
 import Image from "next/image";
 
@@ -10,15 +12,16 @@ export default function Home() {
   return (
     <Center h="full" w="full" p={"7"}>
       {loginResult === false ? (
-        <Button
-          // as={"a"}
-          // href="/login"
-          onClick={() => {
-            setLoginResult(true);
-          }}
-        >
-          ログインはこちらから
-        </Button>
+        <Link href="/login">
+          <Button
+            as={"a"}
+            onClick={() => {
+              setLoginResult(true);
+            }}
+          >
+            ログインはこちらから
+          </Button>
+        </Link>
       ) : (
         <Box boxSize={"xl"}>
           <Stack gapY={"5"}>

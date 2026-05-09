@@ -8,7 +8,7 @@ import { useState } from "react";
 export function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
-    <Box>
+    <Box boxShadow={"lg"}>
       <Center w="full" py={"3"} bgColor="green.500" position={"relative"}>
         <Link href="/map">
           <Box position={"absolute"} left={"10"} top={"2"}>
