@@ -5,11 +5,16 @@ import { USERDATA_POST, USERDATA_PULL } from "./action";
 
 export const signup = async (props: AuthPropsType): Promise<number | null> => {
   // ユーザーデータを取得し、存在しない場合は新規作成
-  const result = await USERDATA_PULL({
-    id: null,
-    name: props.userName,
-    email: props.email,
-  });
+  let result: any = null;
+  try {
+    result = await USERDATA_PULL({
+      id: null,
+      name: props.userName,
+      email: props.email,
+    });
+  } catch (error) {
+    console.error(error);
+  }
 
   if (result !== null && result.length === 0) {
     // DBに新規データをポスト
