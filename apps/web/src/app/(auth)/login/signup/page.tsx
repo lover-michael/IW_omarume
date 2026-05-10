@@ -15,6 +15,7 @@ import { useForm } from "react-hook-form";
 import { AuthPropsType, AuthProps } from "../component/module/type";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signup } from "../component/action/signup";
+import { is } from "drizzle-orm";
 
 export default function Signup() {
   // 登録結果：0...なにもなし　1...登録成功　2...登録失敗
@@ -54,7 +55,7 @@ export default function Signup() {
 
   return (
     <form
-      style={{ width: "100%", height: "100%" }}
+      style={{ width: "100%", height: "100%", position: "relative" }}
       onSubmit={handleSubmit(onSubmit)}
     >
       <FormControl>
@@ -64,7 +65,7 @@ export default function Signup() {
               新規登録
             </Box>
             <Separator size={"lg"} bgColor={"black"} />
-            <Box p={"10"}>
+            <Box px={"3"}>
               <FormLabel htmlFor="email">メールアドレス</FormLabel>
               <Input
                 id={"email"}
@@ -77,7 +78,7 @@ export default function Signup() {
                 <Box color={"red.500"}>{errors.email.message}</Box>
               )}
             </Box>
-            <Box p={"10"}>
+            <Box px={"3"}>
               <FormLabel htmlFor="userName">ユーザーネーム</FormLabel>
               <Input
                 id={"userName"}
@@ -90,7 +91,7 @@ export default function Signup() {
                 <Box color={"red.500"}>{errors.userName.message}</Box>
               )}
             </Box>
-            <Box p={"10"}>
+            <Box px={"3"}>
               <FormLabel htmlFor="password">パスワード</FormLabel>
               <Input
                 id={"password"}
@@ -114,9 +115,15 @@ export default function Signup() {
           console.log("submit");
         }}
         disabled={isSubmitting}
+        position={"absolute"}
+        bottom={"10px"}
+        left={"50%"}
+        transform={"translateX(-50%)"}
+        width={"80%"}
       >
-        新規登録
+        {isSubmitting ? "登録中..." : "新規登録"}
       </Button>
+      {}
     </form>
   );
 }
