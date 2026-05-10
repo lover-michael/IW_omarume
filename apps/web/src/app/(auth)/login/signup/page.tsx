@@ -53,7 +53,10 @@ export default function Signup() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form
+      style={{ width: "100%", height: "100%" }}
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <FormControl>
         <Center h="full" w="full" p={"3"} position={"relative"}>
           <Stack gapY={"10"} position={"absolute"} top={"30px"}>
