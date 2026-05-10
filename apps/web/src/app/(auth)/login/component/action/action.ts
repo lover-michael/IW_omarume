@@ -7,7 +7,6 @@ import { user } from "@repo/database";
 
 export async function USERDATA_POST(formData: AuthPropsType) {
   await getDb().insert(user).values({
-    id: newUserId,
     name: formData.userName,
     password: formData.password,
     email: formData.email,
