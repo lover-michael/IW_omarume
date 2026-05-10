@@ -1,11 +1,9 @@
 "use server";
 
-import { AuthLoginPropsType } from "../module/type";
+import { AuthPropsType } from "../module/type";
 import { USERDATA_POST, USERDATA_PULL } from "./action";
 
-export const signup = async (
-  props: AuthLoginPropsType,
-): Promise<number | null> => {
+export const signup = async (props: AuthPropsType): Promise<number | null> => {
   // ユーザーデータを取得し、存在しない場合は新規作成
   const result = await USERDATA_PULL({
     id: null,

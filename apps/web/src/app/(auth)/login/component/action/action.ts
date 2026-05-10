@@ -2,10 +2,10 @@
 
 import { getDb } from "@/lib/drizzle";
 import { and, eq, max, or } from "drizzle-orm";
-import { AuthLoginPropsType } from "../module/type";
+import { AuthPropsType } from "../module/type";
 import { user } from "@repo/database";
 
-export async function USERDATA_POST(formData: AuthLoginPropsType) {
+export async function USERDATA_POST(formData: AuthPropsType) {
   // 小規模アプリのためユーザーIDの生成は簡易的
   const timestamp = new Date();
   const newUserId =

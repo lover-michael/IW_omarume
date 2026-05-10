@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const AuthLoginProps = z.object({
+export const AuthProps = z.object({
   userName: z
     .string()
     .min(4, { message: "名前は4文字以上です" })
@@ -14,4 +14,4 @@ export const AuthLoginProps = z.object({
     .max(16, { message: "パスワードは16文字以下です" }),
 });
 
-export type AuthLoginPropsType = z.infer<typeof AuthLoginProps>;
+export type AuthPropsType = z.infer<typeof AuthProps>;

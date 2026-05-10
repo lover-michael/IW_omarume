@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { onSubmit } from "./component/action/login";
-import { AuthLoginPropsType, AuthLoginProps } from "./component/module/type";
+import { AuthPropsType, AuthProps } from "./component/module/type";
 import { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -23,8 +23,8 @@ export default function LoginPage() {
     register,
     handleSubmit,
     formState: { errors, isSubmitting }, // フォームの状態を取得
-  } = useForm<AuthLoginPropsType>({
-    resolver: zodResolver(AuthLoginProps),
+  } = useForm<AuthPropsType>({
+    resolver: zodResolver(AuthProps),
     defaultValues: {
       userName: "",
       email: "",

@@ -302,21 +302,20 @@ export default function PageRegister() {
           </Box>
         </Box>
       </FormControl>
-      <Button
-        type="submit"
-        mx={"auto"}
-        disabled={isLoading}
-        bgColor={"green.500"}
-        position={"absolute"}
-        bottom={"10px"}
-        left={"auto"}
-        boxShadow={"lg"}
-        onClick={() => {
-          console.log("submit");
-        }}
-      >
-        {isLoading ? "登録中..." : "登録"}
-      </Button>
+      <Center position={"absolute"} bottom={"10px"} left={"auto"}>
+        <Button
+          type="submit"
+          w={"80%"}
+          disabled={isLoading}
+          bgColor={"green.500"}
+          boxShadow={"lg"}
+          onClick={() => {
+            console.log("submit");
+          }}
+        >
+          {isLoading ? "登録中..." : "登録"}
+        </Button>
+      </Center>
     </form>
   );
 }
