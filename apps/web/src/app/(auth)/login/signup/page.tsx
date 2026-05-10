@@ -1,3 +1,5 @@
+"use client";
+
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import {
   Center,
