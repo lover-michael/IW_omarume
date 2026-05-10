@@ -32,7 +32,7 @@ export async function USERDATA_PULL(props: USERDATA_PULL_PROPS) {
   const email = props.email === null ? "" : props.email;
 
   if (id === 0 && name === "" && email === "") {
-    return null;
+    return "noValue";
   }
 
   return await getDb()
