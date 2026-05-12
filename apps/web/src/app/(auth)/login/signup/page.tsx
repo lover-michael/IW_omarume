@@ -60,12 +60,12 @@ export default function Signup() {
     >
       <FormControl>
         <Center h="full" w="full" p={"3"} position={"relative"}>
-          <Stack gapY={"10"} position={"absolute"} top={"30px"}>
+          <Stack gapY={"5"} position={"absolute"} top={"30px"}>
             <Box fontSize={"3xl"} fontWeight={"bold"} textAlign={"center"}>
               新規登録
             </Box>
             <Separator size={"lg"} bgColor={"black"} />
-            <Box px={"3"}>
+            <Box>
               <FormLabel htmlFor="email">メールアドレス</FormLabel>
               <Input
                 id={"email"}
@@ -78,7 +78,7 @@ export default function Signup() {
                 <Box color={"red.500"}>{errors.email.message}</Box>
               )}
             </Box>
-            <Box px={"3"}>
+            <Box>
               <FormLabel htmlFor="userName">ユーザーネーム</FormLabel>
               <Input
                 id={"userName"}
@@ -91,7 +91,7 @@ export default function Signup() {
                 <Box color={"red.500"}>{errors.userName.message}</Box>
               )}
             </Box>
-            <Box px={"3"}>
+            <Box>
               <FormLabel htmlFor="password">パスワード</FormLabel>
               <Input
                 id={"password"}
