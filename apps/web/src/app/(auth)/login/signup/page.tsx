@@ -116,7 +116,7 @@ export default function Signup() {
         }}
         disabled={isSubmitting}
         position={"absolute"}
-        bottom={"10px"}
+        bottom={"30px"}
         left={"50%"}
         transform={"translateX(-50%)"}
         width={"80%"}
