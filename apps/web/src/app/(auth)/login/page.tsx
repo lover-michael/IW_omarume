@@ -38,7 +38,7 @@ export default function LoginPage() {
       style={{ height: "100%", width: "100%", position: "relative" }}
     >
       <FormControl>
-        <Box position={"absolute"} top={"30px"} w={"full"}>
+        <Box position={"absolute"} top={"30px"} w={"100%"}>
           <Center>
             <Stack gapY={"5"}>
               <Box fontSize={"3xl"} fontWeight={"bold"} textAlign={"center"}>
@@ -46,7 +46,7 @@ export default function LoginPage() {
               </Box>
               <Separator size={"lg"} bgColor={"black"} />
               <Stack gapY={"3"}>
-                <Box>
+                <Box w={"100%"}>
                   <FormLabel htmlFor={"userName"}>ユーザー名</FormLabel>
                   <Input
                     id={"userName"}
@@ -59,7 +59,7 @@ export default function LoginPage() {
                     <Box color={"red.500"}>{errors.userName.message}</Box>
                   )}
                 </Box>
-                <Box>
+                <Box w={"100%"}>
                   <FormLabel htmlFor={"email"}>メールアドレス</FormLabel>
                   <Input
                     id={"email"}
@@ -71,7 +71,7 @@ export default function LoginPage() {
                     <Box color={"red.500"}>{errors.email.message}</Box>
                   )}
                 </Box>
-                <Box>
+                <Box w={"100%"}>
                   <FormLabel htmlFor={"password"}>パスワード</FormLabel>
                   <Input
                     id={"password"}

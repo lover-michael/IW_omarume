@@ -1,14 +1,17 @@
 "use server";
 
+import { hash } from "bcrypt";
 import { getDb } from "@/lib/drizzle";
 import { and, eq, max, or } from "drizzle-orm";
 import { AuthPropsType } from "../module/type";
 import { user } from "@repo/database";
 
 export async function USERDATA_POST(formData: AuthPropsType) {
+  const hashedPassword = await hash(formData.password, 10);
+
   await getDb().insert(user).values({
     name: formData.userName,
-    password: formData.password,
+    password: hashedPassword,
     email: formData.email,
   });
 
