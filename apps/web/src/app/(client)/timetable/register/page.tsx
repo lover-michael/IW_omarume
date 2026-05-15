@@ -302,7 +302,7 @@ export default function PageRegister() {
           </Box>
         </Box>
       </FormControl>
-      <Center position={"absolute"} bottom={"10px"} left={"auto"}>
+      <Center position={"absolute"} bottom={"10px"} left={"auto"} w={"full"}>
         <Button
           type="submit"
           w={"80%"}
