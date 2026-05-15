@@ -76,9 +76,9 @@ export async function SaveTimeTable(props: TimeTableSchemaType) {
 export async function GetStations() {
   const db = getDb();
   const result = await db
-    .selectDistinct({ name: station.name })
+    .selectDistinct({ id: station.id, name: station.name })
     .from(station)
-    .orderBy(station.name);
+    .orderBy(station.id, station.name);
 
   const stationNames = result.map((element) => ({
     id: element.id,
