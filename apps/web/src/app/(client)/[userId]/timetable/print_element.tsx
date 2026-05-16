@@ -11,7 +11,7 @@ import {
   Dialog,
   Separator,
 } from "@chakra-ui/react";
-import { GetElements, GetStationByID } from "../action";
+import { GetElements, GetStationByID } from "../../action";
 import { useEffect, useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 

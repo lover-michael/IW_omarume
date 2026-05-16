@@ -30,7 +30,7 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { GetElements, GetStationByID } from "../action";
+import { GetElements, GetStationByID } from "../../action";
 import { Card_layout, TimeTableCard } from "./print_element";
 
 export default function PageTimeTable() {

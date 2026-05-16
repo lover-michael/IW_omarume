@@ -75,6 +75,7 @@ export async function SaveTimeTable(props: TimeTableSchemaType) {
  */
 export async function GetStations() {
   const db = getDb();
+  // stationのnameを重複なく取得(今回の書き方はpostgre用の書き方)
   const result = await db
     .selectDistinctOn([station.name])
     .from(station)

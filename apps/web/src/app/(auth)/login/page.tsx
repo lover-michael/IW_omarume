@@ -10,14 +10,18 @@ import {
   Separator,
 } from "@chakra-ui/react";
 import Link from "next/link";
-import { onSubmit } from "./component/action/login";
 import { AuthPropsType, AuthProps } from "./component/module/type";
 import { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
+import { useRouter } from "next/navigation";
+import { signIn } from "./component/action/login";
 
 export default function LoginPage() {
+  const router = useRouter();
+  // 認証エラーの場合のエラーメッセージを格納する
+  const [authError, setAuthError] = useState<string | null>(null);
   // react-hook-formでformを一元的に管理
   const {
     register,
@@ -31,6 +35,21 @@ export default function LoginPage() {
       password: "",
     },
   });
+
+  const onSubmit = async (props: AuthPropsType) => {
+    setAuthError(null);
+    const result = await signIn("credentials", {
+      username: props.userName,
+      password: props.password,
+      redirect: false,
+    });
+    if (result?.error) {
+      setAuthError("ユーザー名またはパスワードが正しくありません");
+      return;
+    }
+    // 認証に成功したらユーザーのページに飛ぶ
+    router.push("/(client)");
+  };
 
   return (
     <form

@@ -2,7 +2,7 @@
 import { timestamp, varchar } from "drizzle-orm/pg-core";
 import { integer } from "drizzle-orm/pg-core";
 import { pgTable } from "drizzle-orm/pg-core";
-import { primaryKey, foreignKey } from "drizzle-orm/pg-core";
+import { primaryKey, foreignKey, text } from "drizzle-orm/pg-core";
 import { serial } from "drizzle-orm/pg-core";
 
 export const passengerLogs = pgTable("passenger_logs", {
@@ -55,4 +55,36 @@ export const user = pgTable("user", {
   name: varchar("name", { length: 16 }).notNull(),
   email: varchar("email").notNull(),
   password: varchar("password").notNull(),
+});
+
+export const accounts = pgTable(
+  "accounts",
+  {
+    userId: text("user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    type: text("type").notNull(), // "oauth" | "email" | "credentials"
+    provider: text("provider").notNull(), // "github" | "google" など
+    providerAccountId: text("provider_account_id").notNull(),
+    refresh_token: text("refresh_token"), // nullable
+    access_token: text("access_token"), // nullable
+    expires_at: integer("expires_at"), // nullable
+    token_type: text("token_type"), // nullable
+    scope: text("scope"), // nullable
+    id_token: text("id_token"), // nullable
+    session_state: text("session_state"), // nullable
+  },
+  (account) => ({
+    primaryKey: primaryKey({
+      columns: [account.provider, account.providerAccountId],
+    }),
+  }),
+);
+
+export const sessions = pgTable("sessions", {
+  sessionToken: text("session_token").primaryKey(),
+  userId: text("user_id")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
+  expires: timestamp("expires").notNull(),
 });

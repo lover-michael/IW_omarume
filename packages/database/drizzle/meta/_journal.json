@@ -57,6 +57,13 @@
       "when": 1776602979129,
       "tag": "0007_stormy_blue_shield",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1778918296359,
+      "tag": "0008_outgoing_karnak",
+      "breakpoints": true
     }
   ]
 }
