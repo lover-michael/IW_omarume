@@ -1,5 +1,3 @@
-"use server";
-
 import { compare, hash } from "bcrypt";
 import { AuthPropsType } from "../module/type";
 import NextAuth from "next-auth";
