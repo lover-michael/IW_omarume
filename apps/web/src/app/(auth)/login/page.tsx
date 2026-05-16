@@ -49,7 +49,7 @@ export default function LoginPage() {
       return;
     }
     // 認証に成功したらユーザーのページに飛ぶ
-    router.push("/(client)/1");
+    router.push("/(client)");
   };
 
   return (

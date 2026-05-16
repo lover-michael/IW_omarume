@@ -22,7 +22,7 @@ import { Controller, Form, set, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import { FaSearch } from "react-icons/fa";
-import { DayGroups } from "@/app/(client)/[userId]/timetable/module/datas";
+import { DayGroups } from "@/app/(client)/timetable/module/datas";
 import { RoutesList } from "../module/locate";
 import { TimeTableSchema, TimeTableSchemaType } from "../module/formTypes";
 import { GetStations } from "./action";

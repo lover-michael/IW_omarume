@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { Box } from "@chakra-ui/react";
-import { GetContent } from "@/app/(client)/[userId]/info/getContent";
+import { GetContent } from "@/app/(client)/info/getContent";
 import { useEffect } from "react";
 
 type Props = {

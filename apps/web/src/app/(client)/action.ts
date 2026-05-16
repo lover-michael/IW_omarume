@@ -1,7 +1,7 @@
 "use server";
 import { getDb } from "@/lib/drizzle";
 import { z } from "zod";
-import { userSchema } from "./[userId]/timetable/userSchema";
+import { userSchema } from "./timetable/userSchema";
 import { station, timetable } from "@repo/database";
 import { revalidatePath } from "next/cache";
 import { dataListAnatomy } from "@chakra-ui/react/anatomy";
