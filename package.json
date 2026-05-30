@@ -1,0 +1,19 @@
+{
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "db:generate": "pnpm --filter=@repo/database db:generate",
+    "db:migrate": "pnpm --filter=@repo/database db:migrate",
+    "db:studio": "pnpm --filter=@repo/database db:studio"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.0.0",
+    "@types/bcrypt": "^6.0.0",
+    "turbo": "^2.5.4",
+    "next": "15.1.8"
+  },
+  "packageManager": "pnpm@10.12.1",
+  "dependencies": {}
+}
