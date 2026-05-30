@@ -16,7 +16,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import { useRouter } from "next/navigation";
-import { getAuth } from "./component/action/login";
+import { signIn } from "./component/action/login";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -38,8 +38,7 @@ export default function LoginPage() {
 
   const onSubmit = async (props: AuthPropsType) => {
     setAuthError(null);
-    const auth = await getAuth();
-    const result = await auth.signIn("credentials", {
+    const result = await signIn("credentials", {
       username: props.userName,
       password: props.password,
       redirect: false,
