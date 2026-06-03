@@ -12,8 +12,13 @@
     "@biomejs/biome": "^2.0.0",
     "@types/bcrypt": "^6.0.0",
     "turbo": "^2.5.4",
-    "next": "15.1.11"
+    "next": "15.1.8"
   },
   "packageManager": "pnpm@10.12.1",
-  "dependencies": {}
+  "dependencies": {},
+  "pnpm": {
+    "overrides": {
+      "drizzle-orm": "0.41.0"
+    }
+  }
 }

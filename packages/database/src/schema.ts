@@ -60,7 +60,7 @@ export const user = pgTable("user", {
 export const accounts = pgTable(
   "accounts",
   {
-    userId: text("user_id")
+    userId: integer("user_id")
       .notNull()
       .references(() => user.id, { onDelete: "cascade" }),
     type: text("type").notNull(), // "oauth" | "email" | "credentials"
@@ -83,7 +83,7 @@ export const accounts = pgTable(
 
 export const sessions = pgTable("sessions", {
   sessionToken: text("session_token").primaryKey(),
-  userId: text("user_id")
+  userId: integer("user_id")
     .notNull()
     .references(() => user.id, { onDelete: "cascade" }),
   expires: timestamp("expires").notNull(),

@@ -1,5 +1,4 @@
-import { compare, hash } from "bcrypt";
-import { AuthPropsType } from "../module/type";
+import { compare } from "bcrypt";
 import NextAuth from "next-auth";
 import { getDb } from "@/lib/drizzle";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
