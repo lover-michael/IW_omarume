@@ -21,12 +21,11 @@
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.1.0",
     "drizzle-kit": "^0.31.1",
-    "drizzle-orm": "catalog:",
-    "pg": "catalog:"
+    "drizzle-orm": "catalog:"
   },
   "devDependencies": {
-    "@types/pg": "^8.20.0",
     "dotenv": "^16.5.0",
     "typescript": "^5.8.3"
   }
