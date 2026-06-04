@@ -18,7 +18,10 @@ export const metadata: Metadata = {
 export default function AuthLayout({ children }: Readonly<PropsWithChildren>) {
   return (
     <html lang="ja" suppressHydrationWarning>
-      <body className={`${notoSansJP.className} antialiased`}>
+      <body
+        className={`${notoSansJP.className} antialiased`}
+        suppressHydrationWarning
+      >
         <Provider>
           <Container
             maxWidth="sm"

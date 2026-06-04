@@ -11,7 +11,6 @@ export default function PageInfo() {
     <Container h={"full"} w={"full"} centerContent={true}>
       <Stack gap={"3"} position={"absolute"} top={"20"} w={"80%"} mx={"auto"}>
         <Box bgColor={"white"} boxShadow={"sm"} borderRadius={"4px"} py={"3"}>
-          {/*<Link to={ }></Link>*/}
           <Center gapX={"3"} fontWeight={"bold"}>
             <a href={"/info/1"}>
               <Box rounded={"2xl"} bgColor={"gray.muted"} padding={"2"}>

@@ -1,31 +1,14 @@
-"use client";
-
-import * as React from "react";
-import { Box } from "@chakra-ui/react";
-import { GetContent } from "@/app/(client)/info/getContent";
-import { useEffect } from "react";
+import { GetContent } from "@/lib/getContent";
+import DisplayInfo from "./displayInfo";
+import { Container } from "@chakra-ui/react";
 
 type Props = {
   params: Promise<{ guideId: string }>;
 };
 
-export default function PageInfoGuide({ params }: Props) {
-  const { guideId } = React.use(params);
-  const [contentHTML, setContentHTML] = React.useState("");
-  const [meta, setMeta] = React.useState();
+export default async function PageInfoGuide({ params }: Props) {
+  const { guideId } = await params;
+  const { meta, contentHTML } = await GetContent({ pathId: guideId });
 
-  useEffect(() => {
-    const getContent = async () => {
-      const { meta, contentHTML } = await GetContent({ pathId: guideId });
-
-      setContentHTML(contentHTML);
-    };
-    getContent();
-  }, []);
-
-  return (
-    <Box>
-      <article dangerouslySetInnerHTML={{ __html: contentHTML }} />
-    </Box>
-  );
+  return <DisplayInfo contentHTML={contentHTML} meta={meta} />;
 }
