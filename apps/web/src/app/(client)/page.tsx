@@ -14,7 +14,6 @@ export default function Home() {
       {loginResult === false ? (
         <Link href="/login">
           <Button
-            as={"a"}
             onClick={() => {
               setLoginResult(true);
             }}

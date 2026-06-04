@@ -16,7 +16,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import { useRouter } from "next/navigation";
-import { signIn } from "./component/action/login";
+import { loginAction } from "./component/action/loginAction";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -38,11 +38,10 @@ export default function LoginPage() {
 
   const onSubmit = async (props: AuthPropsType) => {
     setAuthError(null);
-    const result = await signIn("credentials", {
-      username: props.userName,
-      password: props.password,
-      redirect: false,
-    });
+    const formData = new FormData();
+    formData.append("username", props.userName);
+    formData.append("password", props.password);
+    const result = await loginAction(formData);
     if (result?.error) {
       setAuthError("ユーザー名またはパスワードが正しくありません");
       return;
