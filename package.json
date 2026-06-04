@@ -11,14 +11,19 @@
   "devDependencies": {
     "@biomejs/biome": "^2.0.0",
     "@types/bcrypt": "^6.0.0",
-    "turbo": "^2.5.4",
-    "next": "15.1.8"
+    "next": "^16.2.7",
+    "turbo": "^2.5.4"
   },
   "packageManager": "pnpm@10.12.1",
-  "dependencies": {},
   "pnpm": {
     "overrides": {
       "drizzle-orm": "0.41.0"
     }
+  },
+  "dependencies": {
+    "web": "^0.0.2"
+  },
+  "engines": {
+    "node": ">=24"
   }
 }
