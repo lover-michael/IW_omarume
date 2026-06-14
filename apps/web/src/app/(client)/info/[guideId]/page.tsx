@@ -1,14 +1,31 @@
-import { GetContent } from "@/lib/getContent";
-import DisplayInfo from "./displayInfo";
-import { Container } from "@chakra-ui/react";
+"use client";
 
-type Props = {
-  params: Promise<{ guideId: string }>;
-};
+import { Box, Container } from "@chakra-ui/react";
+import { Guide1 } from "@/contents/guide1";
+import { Guide2 } from "@/contents/guide2";
+import { Guide3 } from "@/contents/guide3";
+import React from "react";
 
-export default async function PageInfoGuide({ params }: Props) {
-  const { guideId } = await params;
-  const { meta, contentHTML } = await GetContent({ pathId: guideId });
-
-  return <DisplayInfo contentHTML={contentHTML} meta={meta} />;
+export default function GuidePage({ params }: { params: { guideId: string } }) {
+  const { guideId } = React.use(params);
+  return (
+    <Container h={"full"} w={"full"} centerContent={true} position={"relative"}>
+      <Box
+        w={"90%"}
+        py={"4"}
+        borderRadius={"2xl"}
+        top={"5"}
+        bgColor={"white"}
+        position={"absolute"}
+      >
+        {guideId === "1" ? (
+          <Guide1 />
+        ) : guideId === "2" ? (
+          <Guide2 />
+        ) : guideId === "3" ? (
+          <Guide3 />
+        ) : null}
+      </Box>
+    </Container>
+  );
 }
