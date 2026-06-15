@@ -6,7 +6,11 @@ import { Guide2 } from "@/contents/guide2";
 import { Guide3 } from "@/contents/guide3";
 import React from "react";
 
-export default function GuidePage({ params }: { params: { guideId: string } }) {
+export default function GuidePage({
+  params,
+}: {
+  params: Promise<{ guideId: string }>;
+}) {
   const { guideId } = React.use(params);
   return (
     <Container h={"full"} w={"full"} centerContent={true} position={"relative"}>
