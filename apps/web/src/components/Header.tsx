@@ -3,10 +3,10 @@
 import { Center, Box, Button } from "@chakra-ui/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useSession } from "next-auth/react";
 
 export function Header() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { data: session } = useSession();
   return (
     <Box boxShadow={"lg"}>
       <Center w="full" py={"3"} bgColor="green.500" position={"relative"}>
@@ -21,44 +21,40 @@ export function Header() {
           </Box>
           <Box color={"white"}>おまるめ山バス</Box>
         </Link>
-        {isLoggedIn === true ? (
-          <Button
-            bgColor={"green.600"}
-            position={"absolute"}
-            right={"5"}
-            boxShadow={"lg"}
-            borderRadius={"4xl"}
-            outline={"solid 2px"}
-            outlineColor={"green.400"}
+        {session?.user?.id !== undefined ? (
+          <Link
+            href="/(clinet)/"
+            style={{ position: "absolute", right: "10px" }}
           >
-            <a href="/">
+            <Button
+              bgColor={"green.600"}
+              position={"absolute"}
+              right={"5"}
+              boxShadow={"lg"}
+              borderRadius={"4xl"}
+              outline={"solid 2px"}
+              outlineColor={"green.400"}
+            >
               <Image
                 src={"/image/botdf.jpg"}
                 alt="ユーザー"
                 width={20}
                 height={20}
               />
-            </a>
-          </Button>
+            </Button>
+          </Link>
         ) : (
-          <Button
-            // as={"a"}
-            // href="/login"
-            bgColor={"green.600"}
-            position={"absolute"}
-            right={"5"}
-            boxShadow={"lg"}
-            borderRadius={"4xl"}
-            outline={"solid 2px"}
-            outlineColor={"green.400"}
-            onClick={() => {
-              setIsLoggedIn(!isLoggedIn);
-            }}
-          >
-            {/*<a href="/login">*/}
-            ログイン
-            {/*</a>*/}
-          </Button>
+          <Link href="/login" style={{ position: "absolute", right: "10px" }}>
+            <Button
+              bgColor={"green.600"}
+              boxShadow={"lg"}
+              borderRadius={"4xl"}
+              outline={"solid 2px"}
+              outlineColor={"green.400"}
+            >
+              ログイン
+            </Button>
+          </Link>
         )}
       </Center>
     </Box>

@@ -6,6 +6,7 @@ import { Container, Box } from "@chakra-ui/react";
 import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
 import type { PropsWithChildren } from "react";
+import { SessionProvider } from "next-auth/react";
 
 const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
@@ -35,11 +36,13 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
             flexDir="column"
             position="relative"
           >
-            <Header />
-            <Box flex="1" overflowY="auto">
-              {children}
-            </Box>
-            <Footer />
+            <SessionProvider>
+              <Header />
+              <Box flex="1" overflowY="auto">
+                {children}
+              </Box>
+              <Footer />
+            </SessionProvider>
           </Container>
         </Provider>
       </body>
