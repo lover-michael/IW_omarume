@@ -63,6 +63,10 @@ export default function Home() {
                       height={100}
                     />
                     <Box textAlign={"center"}>ユーザー情報</Box>
+                    <Box>
+                      <div>{user?.name}</div>
+                      <div>{user?.email}</div>
+                    </Box>
                   </Flex>
                 </Card.Title>
               </Card.Body>
