@@ -16,11 +16,13 @@ import { AuthPropsType, AuthProps } from "../component/module/type";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signup } from "../component/action/signup";
 import { is } from "drizzle-orm";
+import { useRouter } from "next/navigation";
 
 export default function Signup() {
   // 登録結果：0...なにもなし　1...登録成功　2...登録失敗
   const [signUpResult, setSignUpResult] = useState<number>(0);
   const [popUpStatus, setPopUpStatus] = useState<string>("");
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -50,6 +52,10 @@ export default function Signup() {
         setSignUpResult(result);
         setPopUpStatus("登録が完了しました");
       }
+    }
+
+    if (result === 1) {
+      router.push("/login");
     }
   };
 

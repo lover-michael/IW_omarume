@@ -47,7 +47,7 @@ export default function LoginPage() {
       return;
     }
     // 認証に成功したらユーザーのページに飛ぶ
-    router.push("/(client)");
+    router.push("/");
   };
 
   return (
@@ -118,6 +118,7 @@ export default function LoginPage() {
                 bgColor={"orange.400"}
                 color={"white"}
                 disabled={isSubmitting}
+                asChild
               >
                 <a href="/login/signup">新規登録</a>
               </Button>
