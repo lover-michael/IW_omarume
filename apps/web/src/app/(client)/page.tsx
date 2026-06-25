@@ -49,18 +49,10 @@ export default function Home() {
             <Card.Root size={"lg"}>
               <Card.Body>
                 <Card.Title>
-                  <Flex gap={"4"}>
-                    <Image
-                      src={"/image/botdf.jpg"}
-                      alt="ユーザー画像"
-                      width={100}
-                      height={100}
-                    />
-                    <Box textAlign={"center"}>
-                      <div>{user?.name}</div>
-                      <div>{user?.email}</div>
-                    </Box>
-                  </Flex>
+                  <Box textAlign={"center"}>
+                    <div>{user?.name}</div>
+                    <div>{user?.email}</div>
+                  </Box>
                 </Card.Title>
               </Card.Body>
             </Card.Root>
