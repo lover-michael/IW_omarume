@@ -1,15 +1,41 @@
 ﻿"use client";
 
 import { Button, Card, Center, Flex, Box, Stack } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 import { SiChakraui, SiNextdotjs, SiReact } from "react-icons/si";
 import Image from "next/image";
 import { signOut } from "next-auth/react";
+import { auth } from "../(auth)/login/component/action/login";
+
+type User = {
+  id: string | undefined;
+  name: string | undefined | null;
+  email: string | undefined | null;
+};
 
 export default function Home() {
   const [loginResult, setLoginResult] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const fetchSession = async () => {
+      // セッション情報を取得
+      const session = await auth();
+      // セッションユーザーがいないなら、return
+      if (!session) return;
+
+      setUser({
+        id: session?.user?.id,
+        name: session?.user?.name,
+        email: session?.user?.email,
+      });
+      setLoginResult(!!session);
+    };
+    fetchSession();
+  }, []);
+
   return (
     <Center h="full" w="full" p={"7"}>
       {loginResult === false ? (
