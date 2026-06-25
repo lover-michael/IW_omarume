@@ -40,15 +40,9 @@ export default function Home() {
   return (
     <Center h="full" w="full" p={"7"}>
       {loginResult === false ? (
-        <Link href="/login">
-          <Button
-            onClick={() => {
-              setLoginResult(true);
-            }}
-          >
-            ログインはこちらから
-          </Button>
-        </Link>
+        <Button asChild>
+          <a href="/login">ログインはこちらから</a>
+        </Button>
       ) : (
         <Box boxSize={"xl"}>
           <Stack gapY={"5"}>
@@ -62,8 +56,7 @@ export default function Home() {
                       width={100}
                       height={100}
                     />
-                    <Box textAlign={"center"}>ユーザー情報</Box>
-                    <Box>
+                    <Box textAlign={"center"}>
                       <div>{user?.name}</div>
                       <div>{user?.email}</div>
                     </Box>
