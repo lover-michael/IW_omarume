@@ -1,6 +1,6 @@
 "use server";
 
-import { signIn } from "./login";
+import { auth, signIn } from "./login";
 
 export async function loginAction(formData: FormData) {
   const { username, password } = Object.fromEntries(formData);
@@ -10,4 +10,9 @@ export async function loginAction(formData: FormData) {
   } catch (error) {
     return { error: "ユーザー名またはパスワードが正しくありません" };
   }
+}
+
+export async function settionAction() {
+  const session = await auth();
+  return session;
 }

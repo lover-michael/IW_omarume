@@ -1,5 +1,3 @@
-"use server";
-
 import { compare } from "bcrypt";
 import NextAuth from "next-auth";
 import { getDb } from "@/lib/drizzle";
