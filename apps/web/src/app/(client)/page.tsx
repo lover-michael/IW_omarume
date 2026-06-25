@@ -6,6 +6,7 @@ import Link from "next/link";
 
 import { SiChakraui, SiNextdotjs, SiReact } from "react-icons/si";
 import Image from "next/image";
+import { signOut } from "next-auth/react";
 
 export default function Home() {
   const [loginResult, setLoginResult] = useState(false);
@@ -39,13 +40,7 @@ export default function Home() {
                 </Card.Title>
               </Card.Body>
             </Card.Root>
-            <Button
-              onClick={() => {
-                setLoginResult(false);
-              }}
-            >
-              ログアウト
-            </Button>
+            <Button onClick={() => signOut()}>ログアウト</Button>
           </Stack>
         </Box>
       )}

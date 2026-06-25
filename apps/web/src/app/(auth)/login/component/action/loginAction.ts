@@ -1,6 +1,5 @@
 "use server";
 
-import { redirect } from "next/navigation";
 import { signIn } from "./login";
 
 export async function loginAction(formData: FormData) {
@@ -11,6 +10,4 @@ export async function loginAction(formData: FormData) {
   } catch (error) {
     return { error: "ユーザー名またはパスワードが正しくありません" };
   }
-
-  redirect("/");
 }
