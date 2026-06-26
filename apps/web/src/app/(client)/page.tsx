@@ -6,7 +6,7 @@ import Link from "next/link";
 
 import { SiChakraui, SiNextdotjs, SiReact } from "react-icons/si";
 import Image from "next/image";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { auth } from "../(auth)/login/component/action/login";
 import { settionAction } from "../(auth)/login/component/action/loginAction";
 
@@ -18,6 +18,7 @@ type User = {
 
 export default function Home() {
   const [loginResult, setLoginResult] = useState(false);
+  const userSession = useSession();
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {

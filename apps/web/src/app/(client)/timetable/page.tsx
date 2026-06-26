@@ -32,13 +32,16 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { GetElements, GetStationByID } from "../action";
 import { Card_layout, TimeTableCard } from "./print_element";
+import { useSession } from "next-auth/react";
 
 export default function PageTimeTable() {
   const ref = useRef<HTMLDivElement>(null);
   const [displaytag, setDisplaytag] = useState<string[]>(["timetable"]);
   const [mytimetables, setMytimetables] = useState<TimeTableCard[]>([]);
+  const session = useSession();
 
   useEffect(() => {
+    if (session?.data?.user === undefined) return;
     const getrecords = async () => {
       // 初回ロード時にテーブルを直に引っ張ってくる
       const responce = await GetElements();
