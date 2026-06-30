@@ -32,10 +32,9 @@ import Candidates from "../module/components";
 import { SaveTimeTable } from "./action";
 import { User } from "../../page";
 import { sessionAction } from "@/app/(auth)/login/component/action/loginAction";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 export default function PageRegister() {
-  const ref = useRef<HTMLDivElement>(null);
   const [user, setUser] = useState<User | undefined>(undefined);
   const [isSearched, setIsSearched] = useState<boolean>(false);
   const router = useRouter();
