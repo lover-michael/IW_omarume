@@ -31,6 +31,7 @@ import { UserStationGroup } from "../module/class";
 import Candidates from "../module/components";
 import { SaveTimeTable } from "./action";
 import { User } from "../../page";
+import { sessionAction } from "@/app/(auth)/login/component/action/loginAction";
 
 export default function PageRegister() {
   const ref = useRef<HTMLDivElement>(null);
@@ -71,15 +72,26 @@ export default function PageRegister() {
   });
 
   useEffect(() => {
+    const fetchSession = async () => {
+      const session = await sessionAction();
+      if (!session) return;
+      setUser({
+        id: String(session?.user?.id),
+        name: session?.user?.name,
+        email: session?.user?.email,
+      });
+    };
+    fetchSession();
+
     const getStationName = async () => {
       const result = await GetStations();
       setAllStations(result);
     };
     getStationName();
 
-    fetch("../../api/auth/[...nextauth]")
-      .then((res) => res.json())
-      .then(({ user }) => setUser(user));
+    // fetch("../../api/auth/[...nextauth]")
+    //   .then((res) => res.json())
+    //   .then(({ user }) => setUser(user));
   }, []);
 
   // allStations もしくは inputStationName どちらかが変更されると再生成する
