@@ -24,7 +24,11 @@ import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import { FaSearch } from "react-icons/fa";
 import { DayGroups } from "@/app/(client)/timetable/module/datas";
 import { RoutesList } from "../module/locate";
-import { TimeTableSchema, TimeTableFormType } from "../module/formTypes";
+import {
+  TimeTableSchema,
+  TimeTableFormType,
+  TimeTableSchemaType,
+} from "../module/formTypes";
 import { GetStations } from "./action";
 import { useEffect } from "react";
 import { UserStationGroup } from "../module/class";
@@ -100,7 +104,7 @@ export default function PageRegister() {
   );
 
   /// フォームの送信処理
-  const onSubmit = async (props: TimeTableFormType) => {
+  const onSubmit = async (props: TimeTableSchemaType) => {
     console.log(props);
     setIsLoading(true);
     try {
