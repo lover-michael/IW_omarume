@@ -1,0 +1,1 @@
+ALTER TABLE "timetable" ALTER COLUMN "user_id" SET DATA TYPE integer;

@@ -65,6 +65,7 @@ export async function SaveTimeTable(props: TimeTableSchemaType) {
     memo: props.memo,
     depart_station_id: props.stations.depart_station_id,
     arrive_station_id: props.stations.arrive_station_id,
+    userId: props.user_id,
   });
   revalidatePath("/(client)/timetable");
 }

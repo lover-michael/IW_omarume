@@ -19,8 +19,10 @@ export const timetable = pgTable(
     memo: varchar("memo"),
     depart_station_id: integer("depart_station_id").notNull(), //出発駅の情報を外部キーで取得
     arrive_station_id: integer("arrive_station_id").notNull(), //到着駅の情報を外部キーで取得
+    userId: integer("user_id").notNull(), //userId毎に所持するタイムテーブルが異なるため
   },
   (table) => ({
+    // 外部キーの設定(default)
     departStationFK: foreignKey({
       name: "depart_station",
       columns: [table.depart_station_id],
@@ -28,11 +30,19 @@ export const timetable = pgTable(
     })
       .onDelete("cascade")
       .onUpdate("restrict"),
-
+    // 外部キーの設定(default)
     arriveStationFK: foreignKey({
       name: "arrive_station",
       columns: [table.arrive_station_id],
       foreignColumns: [station.id],
+    })
+      .onDelete("cascade")
+      .onUpdate("restrict"),
+    // 外部キーの設定(default)
+    userIdFK: foreignKey({
+      name: "user_id",
+      columns: [table.userId],
+      foreignColumns: [user.id],
     })
       .onDelete("cascade")
       .onUpdate("restrict"),

@@ -24,15 +24,17 @@ import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import { FaSearch } from "react-icons/fa";
 import { DayGroups } from "@/app/(client)/timetable/module/datas";
 import { RoutesList } from "../module/locate";
-import { TimeTableSchema, TimeTableSchemaType } from "../module/formTypes";
+import { TimeTableSchema, TimeTableFormType } from "../module/formTypes";
 import { GetStations } from "./action";
 import { useEffect } from "react";
 import { UserStationGroup } from "../module/class";
 import Candidates from "../module/components";
 import { SaveTimeTable } from "./action";
+import { useSession } from "next-auth/react";
 
 export default function PageRegister() {
   const ref = useRef<HTMLDivElement>(null);
+  const session = useSession(); //セッション情報の取得
   const [isSearched, setIsSearched] = useState<boolean>(false);
 
   /*搭乗バスの候補探しに使用*/
@@ -64,7 +66,7 @@ export default function PageRegister() {
     handleSubmit,
     formState: { errors, isSubmitting },
     control,
-  } = useForm<TimeTableSchemaType>({
+  } = useForm<TimeTableFormType>({
     resolver: zodResolver(TimeTableSchema),
   });
 
@@ -98,11 +100,14 @@ export default function PageRegister() {
   );
 
   /// フォームの送信処理
-  const onSubmit = async (props: TimeTableSchemaType) => {
+  const onSubmit = async (props: TimeTableFormType) => {
     setIsLoading(true);
     try {
       /// DBにデータをPOST
-      await SaveTimeTable(props);
+      await SaveTimeTable({
+        ...props,
+        user_id: Number(session.data?.user?.id),
+      });
     } catch (error) {
       /// POSTに失敗したらログに表示
       console.log(error);

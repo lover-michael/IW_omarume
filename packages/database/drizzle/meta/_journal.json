@@ -64,6 +64,20 @@
       "when": 1778918296359,
       "tag": "0008_outgoing_karnak",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1782780307888,
+      "tag": "0009_married_annihilus",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1782780931246,
+      "tag": "0010_short_ser_duncan",
+      "breakpoints": true
     }
   ]
 }

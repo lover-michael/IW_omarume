@@ -12,7 +12,13 @@ export const TimeTableSchema = z.object({
   }),
 });
 
-export type TimeTableSchemaType = z.infer<typeof TimeTableSchema>;
+type user_id = {
+  user_id: number;
+};
+
+export type TimeTableFormType = z.infer<typeof TimeTableSchema>;
+
+export type TimeTableSchemaType = TimeTableFormType & user_id;
 
 export type STATION = {
   id: number;
