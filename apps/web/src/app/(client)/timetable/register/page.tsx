@@ -32,11 +32,13 @@ import Candidates from "../module/components";
 import { SaveTimeTable } from "./action";
 import { User } from "../../page";
 import { sessionAction } from "@/app/(auth)/login/component/action/loginAction";
+import { useRouter } from "next/router";
 
 export default function PageRegister() {
   const ref = useRef<HTMLDivElement>(null);
   const [user, setUser] = useState<User | undefined>(undefined);
   const [isSearched, setIsSearched] = useState<boolean>(false);
+  const router = useRouter();
 
   /*搭乗バスの候補探しに使用*/
   /// 選択された日付
@@ -133,6 +135,8 @@ export default function PageRegister() {
       /// 処理が終了したらローディングを停止
       setIsLoading(false);
     }
+
+    router.push("/timetable");
   };
 
   return (
