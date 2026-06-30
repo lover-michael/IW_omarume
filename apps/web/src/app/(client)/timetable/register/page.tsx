@@ -101,6 +101,7 @@ export default function PageRegister() {
 
   /// フォームの送信処理
   const onSubmit = async (props: TimeTableFormType) => {
+    console.log(props);
     setIsLoading(true);
     try {
       /// DBにデータをPOST
