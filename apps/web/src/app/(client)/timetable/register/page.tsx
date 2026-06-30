@@ -121,7 +121,9 @@ export default function PageRegister() {
   /// フォームの送信処理
   const onSubmit = async (props: TimeTableFormType) => {
     console.log({ ...props, user_id: Number(user?.id) });
+
     setIsLoading(true);
+
     try {
       /// DBにデータをPOST
       await SaveTimeTable({
@@ -134,9 +136,8 @@ export default function PageRegister() {
     } finally {
       /// 処理が終了したらローディングを停止
       setIsLoading(false);
+      router.push("/timetable");
     }
-
-    router.push("/timetable");
   };
 
   return (
