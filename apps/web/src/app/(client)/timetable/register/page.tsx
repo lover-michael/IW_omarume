@@ -77,7 +77,7 @@ export default function PageRegister() {
     };
     getStationName();
 
-    fetch("apps/web/src/app/api/auth/[...nextauth]")
+    fetch("../../api/auth/[...nextauth]")
       .then((res) => res.json())
       .then(({ user }) => setUser(user));
   }, []);
