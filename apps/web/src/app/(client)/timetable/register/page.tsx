@@ -76,17 +76,18 @@ export default function PageRegister() {
       const session = await sessionAction();
       if (!session) return;
       setUser({
-        id: String(session?.user?.id),
+        id: Number(session?.user?.id),
         name: session?.user?.name,
         email: session?.user?.email,
       });
     };
-    fetchSession();
 
     const getStationName = async () => {
       const result = await GetStations();
       setAllStations(result);
     };
+
+    fetchSession();
     getStationName();
 
     // fetch("../../api/auth/[...nextauth]")

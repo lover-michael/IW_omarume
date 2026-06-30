@@ -8,7 +8,7 @@ import { signOut } from "next-auth/react";
 import { sessionAction } from "../(auth)/login/component/action/loginAction";
 
 export type User = {
-  id: string | undefined;
+  id: number | undefined;
   name: string | undefined | null;
   email: string | undefined | null;
 };
@@ -26,7 +26,7 @@ export default function Home() {
       if (!session) return;
 
       setUser({
-        id: session?.user?.id,
+        id: Number(session?.user?.id),
         name: session?.user?.name,
         email: session?.user?.email,
       });
