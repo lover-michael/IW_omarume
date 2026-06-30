@@ -4,12 +4,10 @@ import { Button, Card, Center, Flex, Box, Stack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-import { SiChakraui, SiNextdotjs, SiReact } from "react-icons/si";
-import Image from "next/image";
 import { signOut } from "next-auth/react";
 import { sessionAction } from "../(auth)/login/component/action/loginAction";
 
-type User = {
+export type User = {
   id: string | undefined;
   name: string | undefined | null;
   email: string | undefined | null;

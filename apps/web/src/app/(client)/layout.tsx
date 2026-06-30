@@ -7,8 +7,6 @@ import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
 import type { PropsWithChildren } from "react";
 import { SessionProvider } from "next-auth/react";
-import { sessionAction } from "../(auth)/login/component/action/loginAction";
-
 const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
 });
@@ -23,8 +21,6 @@ export const metadata: Metadata = {
 export default async function RootLayout({
   children,
 }: Readonly<PropsWithChildren>) {
-  const session = await sessionAction();
-
   return (
     <html lang="ja" suppressHydrationWarning>
       <body
@@ -41,7 +37,7 @@ export default async function RootLayout({
             flexDir="column"
             position="relative"
           >
-            <SessionProvider session={session}>
+            <SessionProvider>
               <Header />
               <Box flex="1" overflowY="auto">
                 {children}

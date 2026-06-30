@@ -30,11 +30,11 @@ import { useEffect } from "react";
 import { UserStationGroup } from "../module/class";
 import Candidates from "../module/components";
 import { SaveTimeTable } from "./action";
-import { useSession } from "next-auth/react";
+import { User } from "../../page";
 
 export default function PageRegister() {
   const ref = useRef<HTMLDivElement>(null);
-  const session = useSession(); //セッション情報の取得
+  const [user, setUser] = useState<User | undefined>(undefined);
   const [isSearched, setIsSearched] = useState<boolean>(false);
 
   /*搭乗バスの候補探しに使用*/
@@ -76,6 +76,10 @@ export default function PageRegister() {
       setAllStations(result);
     };
     getStationName();
+
+    fetch("apps/web/src/app/api/auth/[...nextauth]")
+      .then((res) => res.json())
+      .then(({ user }) => setUser(user));
   }, []);
 
   // allStations もしくは inputStationName どちらかが変更されると再生成する
@@ -101,13 +105,13 @@ export default function PageRegister() {
 
   /// フォームの送信処理
   const onSubmit = async (props: TimeTableFormType) => {
-    console.log({ ...props, user_id: Number(session.data?.user?.id) });
+    console.log({ ...props, user_id: Number(user?.id) });
     setIsLoading(true);
     try {
       /// DBにデータをPOST
       await SaveTimeTable({
         ...props,
-        user_id: Number(session.data?.user?.id),
+        user_id: Number(user?.id),
       });
     } catch (error) {
       /// POSTに失敗したらログに表示
