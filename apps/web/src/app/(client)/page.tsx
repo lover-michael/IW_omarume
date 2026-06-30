@@ -8,7 +8,7 @@ import { SiChakraui, SiNextdotjs, SiReact } from "react-icons/si";
 import Image from "next/image";
 import { signOut, useSession } from "next-auth/react";
 import { auth } from "../(auth)/login/component/action/login";
-import { settionAction } from "../(auth)/login/component/action/loginAction";
+import { sessionAction } from "../(auth)/login/component/action/loginAction";
 
 type User = {
   id: string | undefined;
@@ -18,13 +18,13 @@ type User = {
 
 export default function Home() {
   const [loginResult, setLoginResult] = useState(false);
-  const userSession = useSession();
+  const session = useSession();
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const fetchSession = async () => {
       // セッション情報を取得
-      const session = await settionAction();
+      const session = await sessionAction();
       // セッションユーザーがいないなら、return
       if (!session) return;
 

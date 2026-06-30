@@ -12,7 +12,7 @@ export async function loginAction(formData: FormData) {
   }
 }
 
-export async function settionAction() {
+export async function sessionAction() {
   const session = await auth();
   return session;
 }
