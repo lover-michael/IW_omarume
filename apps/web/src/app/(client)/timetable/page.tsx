@@ -42,9 +42,10 @@ export default function PageTimeTable() {
 
   useEffect(() => {
     if (session?.data?.user === undefined) return;
+
     const getrecords = async () => {
       // 初回ロード時にテーブルを直に引っ張ってくる
-      const responce = await GetElements();
+      const responce = await GetElements(Number(session?.data?.user?.id));
       // レスポンスをmytimetablesに格納する
       setMytimetables(responce);
     };

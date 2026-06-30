@@ -15,7 +15,6 @@ export type User = {
 
 export default function Home() {
   const [loginResult, setLoginResult] = useState(false);
-
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {

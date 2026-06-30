@@ -12,8 +12,12 @@ export async function DeleteTimeTable(object: z.infer<typeof userSchema>) {
   revalidatePath("timetable");
 }
 
-export const GetElements = async () => {
-  return await getDb().select().from(timetable).limit(4);
+export const GetElements = async (user_id: number) => {
+  return await getDb()
+    .select()
+    .from(timetable)
+    .where(eq(timetable.userId, user_id))
+    .limit(4);
 };
 
 type ID = {
