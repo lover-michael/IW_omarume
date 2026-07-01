@@ -127,7 +127,7 @@ export const dialog = createOverlay<DialogProps>((props) => {
     <Dialog.Root
       placement={"center"}
       motionPreset={"slide-in-top"}
-      size={"sm"}
+      size={"xs"}
       {...rest}
     >
       <Portal>
@@ -140,10 +140,12 @@ export const dialog = createOverlay<DialogProps>((props) => {
               </Dialog.Header>
             )}
             <Dialog.Body>
-              {description && (
-                <Dialog.Description>{description}</Dialog.Description>
-              )}
-              {content}
+              <Stack>
+                {description && (
+                  <Dialog.Description>{description}</Dialog.Description>
+                )}
+                {content}
+              </Stack>
             </Dialog.Body>
           </Dialog.Content>
         </Dialog.Positioner>
@@ -178,7 +180,7 @@ export function DeleteTimeTableButton({ id }: { id: number }) {
                 <Button onClick={handleDelete} bgColor={"red"}>
                   はい
                 </Button>
-                <Button onClick={() => dialog.close("a")} bgColor={"white"}>
+                <Button onClick={() => dialog.close("a")} bgColor={"gray"}>
                   いいえ
                 </Button>
               </Flex>
