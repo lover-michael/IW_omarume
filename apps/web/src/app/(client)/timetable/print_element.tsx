@@ -35,15 +35,6 @@ type Station = {
   direction: string;
 };
 
-function HandleRow() {
-  return (
-    <Flex gap={"2.5"} w="full">
-      <Button bgColor={"red"}>削除</Button>
-      <Button bgColor={"green"}>編集</Button>
-    </Flex>
-  );
-}
-
 export function Card_layout(element: TimeTableCard) {
   const [open, setOpen] = useState(false);
   //出発駅の情報
