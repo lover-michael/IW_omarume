@@ -17,7 +17,6 @@ import {
 } from "@chakra-ui/react";
 import { RxDoubleArrowRight } from "react-icons/rx";
 import { DeleteTimeTable } from "../register/action";
-import { useRouter } from "next/router";
 import { AiFillAlert } from "react-icons/ai";
 
 type CandidatesProps = {
@@ -154,11 +153,9 @@ export const dialog = createOverlay<DialogProps>((props) => {
 });
 
 export function DeleteTimeTableButton({ id }: { id: number }) {
-  const router = useRouter();
   // Delete the timetable and redirect to the current path
   const handleDelete = async () => {
     await DeleteTimeTable(id);
-    router.push(router.asPath);
   };
 
   return (

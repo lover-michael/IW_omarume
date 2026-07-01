@@ -120,7 +120,7 @@ export function Card_layout(element: TimeTableCard) {
               }}
             >
               <Flex gap={"2.5"} w="full">
-                {/*<DeleteTimeTableButton id={element.id} />*/}
+                <DeleteTimeTableButton id={element.id} />
                 <Button bgColor={"green"}>編集</Button>
               </Flex>
             </Box>
