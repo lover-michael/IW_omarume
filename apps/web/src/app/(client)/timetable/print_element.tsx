@@ -14,6 +14,7 @@ import {
 import { GetElements, GetStationByID } from "../action";
 import { useEffect, useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
+import { DeleteTimeTableButton } from "./module/components";
 
 // timetableに沿った型
 export type TimeTableCard = {
@@ -118,7 +119,10 @@ export function Card_layout(element: TimeTableCard) {
                 left: "160px",
               }}
             >
-              <HandleRow />
+              <Flex gap={"2.5"} w="full">
+                <DeleteTimeTableButton id={element.id} />
+                <Button bgColor={"green"}>編集</Button>
+              </Flex>
             </Box>
           </Collapsible.Content>
         </Collapsible.Root>

@@ -3,8 +3,22 @@
 import { useEffect, useState } from "react";
 import { CreateCandidates } from "../register/action";
 import { STATION } from "./formTypes";
-import { Box, RadioCard, Spinner, Stack, HStack } from "@chakra-ui/react";
+import {
+  Box,
+  RadioCard,
+  Spinner,
+  Stack,
+  HStack,
+  Button,
+  createOverlay,
+  Dialog,
+  Portal,
+  Flex,
+} from "@chakra-ui/react";
 import { RxDoubleArrowRight } from "react-icons/rx";
+import { DeleteTimeTable } from "../register/action";
+import { useRouter } from "next/router";
+import { AiFillAlert } from "react-icons/ai";
 
 type CandidatesProps = {
   depart: string;
@@ -99,5 +113,82 @@ export default function Candidates(props: CandidatesProps) {
         </RadioCard.Root>
       )}
     </Box>
+  );
+}
+
+interface DialogProps {
+  title?: React.ReactNode;
+  description?: string;
+  content?: React.ReactNode;
+}
+
+export const dialog = createOverlay<DialogProps>((props) => {
+  const { title, description, content, ...rest } = props;
+  return (
+    <Dialog.Root
+      placement={"center"}
+      motionPreset={"slide-in-top"}
+      size={"sm"}
+      {...rest}
+    >
+      <Portal>
+        <Dialog.Backdrop />
+        <Dialog.Positioner>
+          <Dialog.Content>
+            {title && (
+              <Dialog.Header>
+                <Dialog.Title>{title}</Dialog.Title>
+              </Dialog.Header>
+            )}
+            <Dialog.Body>
+              {description && (
+                <Dialog.Description>{description}</Dialog.Description>
+              )}
+              {content}
+            </Dialog.Body>
+          </Dialog.Content>
+        </Dialog.Positioner>
+      </Portal>
+    </Dialog.Root>
+  );
+});
+
+export function DeleteTimeTableButton({ id }: { id: number }) {
+  const router = useRouter();
+  // Delete the timetable and redirect to the current path
+  const handleDelete = async () => {
+    await DeleteTimeTable(id);
+    router.push(router.asPath);
+  };
+
+  return (
+    <Button
+      bgColor={"red"}
+      onClick={() => {
+        dialog.open("a", {
+          title: (
+            <Box>
+              <HStack>
+                <AiFillAlert />
+                <div>ATTENTION</div>
+              </HStack>
+            </Box>
+          ),
+          description: "本当に削除しますか？",
+          content: (
+            <Flex>
+              <Button onClick={handleDelete} bgColor={"red"}>
+                はい
+              </Button>
+              <Button onClick={() => dialog.close("a")} bgColor={"white"}>
+                いいえ
+              </Button>
+            </Flex>
+          ),
+        });
+      }}
+    >
+      削除
+    </Button>
   );
 }

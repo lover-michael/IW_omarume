@@ -88,3 +88,8 @@ export async function GetStations() {
   }));
   return stationNames;
 }
+
+export async function DeleteTimeTable(id: number) {
+  const db = getDb();
+  await db.delete(timetable).where(eq(timetable.id, id));
+}
