@@ -159,33 +159,36 @@ export function DeleteTimeTableButton({ id }: { id: number }) {
   };
 
   return (
-    <Button
-      bgColor={"red"}
-      onClick={() => {
-        dialog.open("a", {
-          title: (
-            <Box>
-              <HStack>
-                <AiFillAlert />
-                <div>ATTENTION</div>
-              </HStack>
-            </Box>
-          ),
-          description: "本当に削除しますか？",
-          content: (
-            <Flex>
-              <Button onClick={handleDelete} bgColor={"red"}>
-                はい
-              </Button>
-              <Button onClick={() => dialog.close("a")} bgColor={"white"}>
-                いいえ
-              </Button>
-            </Flex>
-          ),
-        });
-      }}
-    >
-      削除
-    </Button>
+    <>
+      <Button
+        bgColor={"red"}
+        onClick={() => {
+          dialog.open("a", {
+            title: (
+              <Box>
+                <HStack>
+                  <AiFillAlert />
+                  <div>ATTENTION</div>
+                </HStack>
+              </Box>
+            ),
+            description: "本当に削除しますか？",
+            content: (
+              <Flex>
+                <Button onClick={handleDelete} bgColor={"red"}>
+                  はい
+                </Button>
+                <Button onClick={() => dialog.close("a")} bgColor={"white"}>
+                  いいえ
+                </Button>
+              </Flex>
+            ),
+          });
+        }}
+      >
+        削除
+      </Button>
+      <dialog.Viewport />
+    </>
   );
 }
