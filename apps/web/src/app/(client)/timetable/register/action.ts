@@ -3,7 +3,7 @@
 import { getDb } from "@/lib/drizzle";
 import { station, timetable } from "@repo/database";
 import { and, eq, or } from "drizzle-orm";
-import { TimeTableSchemaType } from "../module/formTypes";
+import { TimeTableFormType, TimeTableSchemaType } from "../module/formTypes";
 import { revalidatePath } from "next/cache";
 import { CandidatesStation } from "../module/class";
 
@@ -92,4 +92,8 @@ export async function GetStations() {
 export async function DeleteTimeTable(id: number) {
   const db = getDb();
   await db.delete(timetable).where(eq(timetable.id, id));
+}
+
+export async function UpdateTimeTable(props: TimeTableFormType) {
+  const db = getDb();
 }
