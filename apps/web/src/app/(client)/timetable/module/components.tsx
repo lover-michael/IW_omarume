@@ -157,7 +157,12 @@ export const dialog = createOverlay<DialogProps>((props) => {
 export function DeleteTimeTableButton({ id }: { id: number }) {
   // Delete the timetable and redirect to the current path
   const handleDelete = async () => {
-    await DeleteTimeTable(id);
+    try {
+      await DeleteTimeTable(id);
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
