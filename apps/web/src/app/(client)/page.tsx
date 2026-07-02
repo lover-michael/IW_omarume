@@ -22,7 +22,7 @@ export default function Home() {
       // セッション情報を取得
       const session = await sessionAction();
       // セッションユーザーがいないなら、return
-      if (!session) {
+      if (session === null) {
         setLoginResult(false);
         return;
       }
