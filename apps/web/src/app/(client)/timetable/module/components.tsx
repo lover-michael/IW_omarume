@@ -181,7 +181,7 @@ export function DeleteTimeTableButton({ id }: { id: number }) {
             ),
             description: "本当に削除しますか？",
             content: (
-              <Flex>
+              <Flex gap={"2"}>
                 <Button onClick={handleDelete} bgColor={"red"}>
                   はい
                 </Button>

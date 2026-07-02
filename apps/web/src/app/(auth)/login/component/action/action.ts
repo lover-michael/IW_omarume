@@ -23,6 +23,7 @@ type USERDATA_PULL_PROPS = {
   name: string | null;
   email: string | null;
 };
+
 export async function USERDATA_PULL(props: USERDATA_PULL_PROPS) {
   const id = props.id === null ? 0 : props.id;
   const name = props.name === null ? "" : props.name;
