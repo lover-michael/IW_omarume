@@ -115,7 +115,8 @@ export function Card_layout(element: TimeTableCard) {
             >
               <Flex gap={"2.5"} w="full">
                 <DeleteTimeTableButton id={element.id} />
-                <UpdateTimeTableButton id={element.id} />
+                {/*<UpdateTimeTableButton id={element.id} />*/}
+                <Button colorPalette={"green"}>更新</Button>
               </Flex>
             </Box>
           </Collapsible.Content>
