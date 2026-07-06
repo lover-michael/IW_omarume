@@ -92,7 +92,9 @@ export default function PageTimeTable() {
         </Select.Root>
         {/* ここまで */}
         <Link href="/timetable/register">
-          <Button colorPalette={"green"}>新規登録</Button>
+          <Button colorPalette={"green"} disabled={mytimetables.length >= 10}>
+            新規登録
+          </Button>
         </Link>
       </Flex>
       <div>

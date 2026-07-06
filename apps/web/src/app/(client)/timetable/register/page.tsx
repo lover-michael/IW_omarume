@@ -32,6 +32,7 @@ import { SaveTimeTable } from "./action";
 import { User } from "../../page";
 import { sessionAction } from "@/app/(auth)/login/component/action/loginAction";
 import { useRouter } from "next/navigation";
+import { GetElements } from "../../action";
 
 export default function PageRegister() {
   const [user, setUser] = useState<User | undefined>(undefined);
@@ -87,6 +88,14 @@ export default function PageRegister() {
       setAllStations(result);
     };
 
+    const checkElements = async () => {
+      const result = await GetElements(Number(user?.id));
+      if (result.length >= 10) {
+        router.push("/timetable");
+      }
+    };
+
+    checkElements();
     fetchSession();
     getStationName();
   }, []);
@@ -115,7 +124,6 @@ export default function PageRegister() {
   /// フォームの送信処理
   const onSubmit = async (props: TimeTableFormType) => {
     console.log({ ...props, user_id: Number(user?.id) });
-
     setIsLoading(true);
 
     try {
