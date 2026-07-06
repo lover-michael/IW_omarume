@@ -19,6 +19,7 @@ export default function Home() {
 
   useEffect(() => {
     const fetchSession = async () => {
+      setUser({ id: undefined, name: undefined, email: undefined });
       // セッション情報を取得
       const session = await sessionAction();
       // セッションユーザーがいないなら、return
