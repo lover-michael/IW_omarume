@@ -306,192 +306,193 @@ export function UpdateTimeTableButton({ id }: { id: number }) {
             title: "updateTimeTable",
             content: (
               <form onSubmit={handleSubmit(handleUpdate)}>
-                <Stack gap={"2"}>
-                  <Box>
-                    <FormLabel htmlFor="memo">目的</FormLabel>
-                    <Input
-                      id="memo"
-                      {...register("memo")}
-                      placeholder="ご自由にお書きください"
-                      boxShadow={"md"}
-                      width={"full"}
-                    />
-                    {errors.memo && (
-                      <Box color={"red.500"}>{errors.memo.message}</Box>
-                    )}
-                  </Box>
-                  <Box py={"5px"} mx={"10px"}>
-                    <FormLabel htmlFor="day">曜日</FormLabel>
-                    <RadioGroup.Root
-                      variant={"subtle"}
-                      colorPalette={"gray"}
-                      value={day}
-                      onValueChange={(e) => setDay(e.value)}
-                    >
-                      <HStack gap={"5"}>
-                        {DayGroups.map((item) => {
-                          return (
-                            <RadioGroup.Item
-                              key={item.value}
-                              value={item.value}
-                            >
-                              <RadioGroup.ItemHiddenInput />
-                              <RadioGroup.ItemIndicator />
-                              <RadioGroup.ItemText>
-                                {item.label}
-                              </RadioGroup.ItemText>
-                            </RadioGroup.Item>
-                          );
-                        })}
-                      </HStack>
-                    </RadioGroup.Root>
-                  </Box>
-                  <Box py={"5px"} mx={"10px"}>
-                    <FormLabel htmlFor={"itenrary"}>路線</FormLabel>
-                    <RadioGroup.Root
-                      variant={"subtle"}
-                      colorPalette={"gray"}
-                      value={itenrary}
-                      onValueChange={(e) => {
-                        setItenrary(e.value);
-                      }}
-                    >
-                      <HStack gap={"5"}>
-                        {RoutesList.map((item) => {
-                          return (
-                            <RadioGroup.Item
-                              key={item.value}
-                              value={item.value}
-                            >
-                              <RadioGroup.ItemHiddenInput />
-                              <RadioGroup.ItemIndicator />
-                              <RadioGroup.ItemText>
-                                {item.label}
-                              </RadioGroup.ItemText>
-                            </RadioGroup.Item>
-                          );
-                        })}
-                      </HStack>
-                    </RadioGroup.Root>
-                  </Box>
-                  <Box py={"5px"} mx={"10px"}>
-                    <Combobox.Root
-                      collection={collection}
-                      onInputValueChange={(e) => {
-                        setInputStationName(e.inputValue ?? ""); // Nullガード
-                      }}
-                      onValueChange={(e) => {
-                        userStationGroup.depart = e.value[0];
-                      }}
-                      width={"100%"}
-                    >
-                      <Combobox.Label>搭乗するバス停</Combobox.Label>
-                      <Combobox.Control>
-                        <Combobox.Input
-                          boxShadow={"md"}
-                          placeholder="バス停の名前を入力してください"
-                        />
-                        <Combobox.IndicatorGroup>
-                          <Combobox.ClearTrigger />
-                          <Combobox.Trigger />
-                        </Combobox.IndicatorGroup>
-                      </Combobox.Control>
-                      <Portal>
-                        <Combobox.Positioner>
-                          <Combobox.Content>
-                            {collection.items.length === 0 ? (
-                              <Combobox.Empty>
-                                候補が見つかりません
-                              </Combobox.Empty>
-                            ) : (
-                              collection.items.map((item) => (
-                                <Combobox.Item item={item} key={item.id}>
-                                  {item.label}
-                                  <Combobox.ItemIndicator />
-                                </Combobox.Item>
-                              ))
-                            )}
-                          </Combobox.Content>
-                        </Combobox.Positioner>
-                      </Portal>
-                    </Combobox.Root>
-                  </Box>
-                  <Box py={"5px"} mx={"10px"}>
-                    <Combobox.Root
-                      collection={collectionArrive}
-                      onInputValueChange={(e) => {
-                        setInputStationNameArrive(e.inputValue ?? ""); // Nullガード
-                      }}
-                      onValueChange={(e) => {
-                        userStationGroup.arrive = e.value[0];
-                      }}
-                      width={"100%"}
-                    >
-                      <Combobox.Label>下車するバス停</Combobox.Label>
-                      <Combobox.Control>
-                        <Combobox.Input
-                          boxShadow={"md"}
-                          placeholder="バス停の名前を入力してください"
-                        />
-                        <Combobox.IndicatorGroup>
-                          <Combobox.ClearTrigger />
-                          <Combobox.Trigger />
-                        </Combobox.IndicatorGroup>
-                      </Combobox.Control>
-                      <Portal>
-                        <Combobox.Positioner>
-                          <Combobox.Content>
-                            {collectionArrive.items.length === 0 ? (
-                              <Combobox.Empty>
-                                候補が見つかりません
-                              </Combobox.Empty>
-                            ) : (
-                              collectionArrive.items.map((item) => (
-                                <Combobox.Item item={item} key={item.id}>
-                                  {item.label}
-                                  <Combobox.ItemIndicator />
-                                </Combobox.Item>
-                              ))
-                            )}
-                          </Combobox.Content>
-                        </Combobox.Positioner>
-                      </Portal>
-                    </Combobox.Root>
-                  </Box>
-                  <Box py={"5px"} mx={"10px"}>
-                    <Button
-                      w={"100%"}
-                      bgColor={"green.500"}
-                      onClick={() => setIsSearched(!isSearched)}
-                      disabled={isLoading}
-                    >
-                      <FaSearch /> 検索
-                    </Button>
-                    {isSearched && (
-                      <Controller
-                        name="stations"
-                        control={control}
-                        render={({ field }) => (
-                          <Candidates
-                            depart={
-                              userStationGroup.depart === null
-                                ? ""
-                                : userStationGroup.depart
-                            }
-                            arrive={
-                              userStationGroup.arrive === null
-                                ? ""
-                                : userStationGroup.arrive
-                            }
-                            day={day === null ? "" : day}
-                            direction={itenrary === null ? "" : itenrary}
-                            OnSelectChanged={field.onChange}
-                          />
-                        )}
+                <FormControl>
+                  <Stack gap={"2"}>
+                    <Box>
+                      <FormLabel>目的</FormLabel>
+                      <Input
+                        {...register("memo")}
+                        placeholder="ご自由にお書きください"
+                        boxShadow={"md"}
+                        width={"full"}
                       />
-                    )}
-                  </Box>
-                </Stack>
+                      {errors.memo && (
+                        <Box color={"red.500"}>{errors.memo.message}</Box>
+                      )}
+                    </Box>
+                    <Box py={"5px"} mx={"10px"}>
+                      <FormLabel>曜日</FormLabel>
+                      <RadioGroup.Root
+                        variant={"subtle"}
+                        colorPalette={"gray"}
+                        value={day}
+                        onValueChange={(e) => setDay(e.value)}
+                      >
+                        <HStack gap={"5"}>
+                          {DayGroups.map((item) => {
+                            return (
+                              <RadioGroup.Item
+                                key={item.value}
+                                value={item.value}
+                              >
+                                <RadioGroup.ItemHiddenInput />
+                                <RadioGroup.ItemIndicator />
+                                <RadioGroup.ItemText>
+                                  {item.label}
+                                </RadioGroup.ItemText>
+                              </RadioGroup.Item>
+                            );
+                          })}
+                        </HStack>
+                      </RadioGroup.Root>
+                    </Box>
+                    <Box py={"5px"} mx={"10px"}>
+                      <FormLabel>路線</FormLabel>
+                      <RadioGroup.Root
+                        variant={"subtle"}
+                        colorPalette={"gray"}
+                        value={itenrary}
+                        onValueChange={(e) => {
+                          setItenrary(e.value);
+                        }}
+                      >
+                        <HStack gap={"5"}>
+                          {RoutesList.map((item) => {
+                            return (
+                              <RadioGroup.Item
+                                key={item.value}
+                                value={item.value}
+                              >
+                                <RadioGroup.ItemHiddenInput />
+                                <RadioGroup.ItemIndicator />
+                                <RadioGroup.ItemText>
+                                  {item.label}
+                                </RadioGroup.ItemText>
+                              </RadioGroup.Item>
+                            );
+                          })}
+                        </HStack>
+                      </RadioGroup.Root>
+                    </Box>
+                    <Box py={"5px"} mx={"10px"}>
+                      <Combobox.Root
+                        collection={collection}
+                        onInputValueChange={(e) => {
+                          setInputStationName(e.inputValue ?? ""); // Nullガード
+                        }}
+                        onValueChange={(e) => {
+                          userStationGroup.depart = e.value[0];
+                        }}
+                        width={"100%"}
+                      >
+                        <Combobox.Label>搭乗するバス停</Combobox.Label>
+                        <Combobox.Control>
+                          <Combobox.Input
+                            boxShadow={"md"}
+                            placeholder="バス停の名前を入力してください"
+                          />
+                          <Combobox.IndicatorGroup>
+                            <Combobox.ClearTrigger />
+                            <Combobox.Trigger />
+                          </Combobox.IndicatorGroup>
+                        </Combobox.Control>
+                        <Portal>
+                          <Combobox.Positioner>
+                            <Combobox.Content>
+                              {collection.items.length === 0 ? (
+                                <Combobox.Empty>
+                                  候補が見つかりません
+                                </Combobox.Empty>
+                              ) : (
+                                collection.items.map((item) => (
+                                  <Combobox.Item item={item} key={item.id}>
+                                    {item.label}
+                                    <Combobox.ItemIndicator />
+                                  </Combobox.Item>
+                                ))
+                              )}
+                            </Combobox.Content>
+                          </Combobox.Positioner>
+                        </Portal>
+                      </Combobox.Root>
+                    </Box>
+                    <Box py={"5px"} mx={"10px"}>
+                      <Combobox.Root
+                        collection={collectionArrive}
+                        onInputValueChange={(e) => {
+                          setInputStationNameArrive(e.inputValue ?? ""); // Nullガード
+                        }}
+                        onValueChange={(e) => {
+                          userStationGroup.arrive = e.value[0];
+                        }}
+                        width={"100%"}
+                      >
+                        <Combobox.Label>下車するバス停</Combobox.Label>
+                        <Combobox.Control>
+                          <Combobox.Input
+                            boxShadow={"md"}
+                            placeholder="バス停の名前を入力してください"
+                          />
+                          <Combobox.IndicatorGroup>
+                            <Combobox.ClearTrigger />
+                            <Combobox.Trigger />
+                          </Combobox.IndicatorGroup>
+                        </Combobox.Control>
+                        <Portal>
+                          <Combobox.Positioner>
+                            <Combobox.Content>
+                              {collectionArrive.items.length === 0 ? (
+                                <Combobox.Empty>
+                                  候補が見つかりません
+                                </Combobox.Empty>
+                              ) : (
+                                collectionArrive.items.map((item) => (
+                                  <Combobox.Item item={item} key={item.id}>
+                                    {item.label}
+                                    <Combobox.ItemIndicator />
+                                  </Combobox.Item>
+                                ))
+                              )}
+                            </Combobox.Content>
+                          </Combobox.Positioner>
+                        </Portal>
+                      </Combobox.Root>
+                    </Box>
+                    <Box py={"5px"} mx={"10px"}>
+                      <Button
+                        w={"100%"}
+                        bgColor={"green.500"}
+                        onClick={() => setIsSearched(!isSearched)}
+                        disabled={isLoading}
+                      >
+                        <FaSearch /> 検索
+                      </Button>
+                      {isSearched && (
+                        <Controller
+                          name="stations"
+                          control={control}
+                          render={({ field }) => (
+                            <Candidates
+                              depart={
+                                userStationGroup.depart === null
+                                  ? ""
+                                  : userStationGroup.depart
+                              }
+                              arrive={
+                                userStationGroup.arrive === null
+                                  ? ""
+                                  : userStationGroup.arrive
+                              }
+                              day={day === null ? "" : day}
+                              direction={itenrary === null ? "" : itenrary}
+                              OnSelectChanged={field.onChange}
+                            />
+                          )}
+                        />
+                      )}
+                    </Box>
+                  </Stack>
+                </FormControl>
                 <Center padding={"5"} w={"full"}>
                   <Button
                     type="submit"
