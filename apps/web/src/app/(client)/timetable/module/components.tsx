@@ -302,7 +302,7 @@ export function UpdateTimeTableButton({ id }: { id: number }) {
       <Button
         bgColor={"green"}
         onClick={() => {
-          dialog.open("a", {
+          dialog.open("form", {
             title: "updateTimeTable",
             content: (
               <form onSubmit={handleSubmit(handleUpdate)}>
