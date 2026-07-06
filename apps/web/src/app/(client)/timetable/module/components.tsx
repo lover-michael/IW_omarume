@@ -281,7 +281,6 @@ export function UpdateTimeTableButton({ id }: { id: number }) {
         console.log(error);
       } finally {
         setIsLoading(false);
-        window.location.reload();
       }
     };
 
@@ -293,6 +292,8 @@ export function UpdateTimeTableButton({ id }: { id: number }) {
       await UpdateTimeTable({ ...props, id: id });
     } catch (error) {
       console.log(error);
+    } finally {
+      window.location.reload();
     }
   };
 
