@@ -94,6 +94,9 @@ export async function DeleteTimeTable(id: number) {
   await db.delete(timetable).where(eq(timetable.id, id));
 }
 
-export async function UpdateTimeTable(props: TimeTableFormType) {
+type UpdateTimeTableProps = TimeTableFormType & { id: number };
+
+export async function UpdateTimeTable(props: UpdateTimeTableProps) {
   const db = getDb();
+  await db.update(timetable).set(props).where(eq(timetable.id, props.id));
 }

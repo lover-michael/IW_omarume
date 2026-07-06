@@ -89,10 +89,6 @@ export default function PageRegister() {
 
     fetchSession();
     getStationName();
-
-    // fetch("../../api/auth/[...nextauth]")
-    //   .then((res) => res.json())
-    //   .then(({ user }) => setUser(user));
   }, []);
 
   // allStations もしくは inputStationName どちらかが変更されると再生成する
