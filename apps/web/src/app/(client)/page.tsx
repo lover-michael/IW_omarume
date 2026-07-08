@@ -50,7 +50,7 @@ export default function Home() {
             <Card.Root size={"lg"}>
               <Card.Body>
                 <Card.Title>
-                  <Box textAlign={"center"}>
+                  <Box textAlign={"left"}>
                     <div>{user?.id}</div>
                     <div>{user?.name}</div>
                     <div>{user?.email}</div>

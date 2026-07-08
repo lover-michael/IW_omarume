@@ -23,22 +23,52 @@ export default function GuidePage({
         position={"absolute"}
       >
         {guideId === "1" ? (
-          <Stack>
-            <Button asChild={true} fontWeight={"bold"} outline={"none"}>
+          <Stack gap={"2"}>
+            <Button
+              asChild={true}
+              fontWeight={"bold"}
+              outline={"none"}
+              position={"absolute"}
+              left={"10"}
+              top={"2"}
+              bgColor={"transparent"}
+              boxShadow={"xl"}
+              size={"xs"}
+            >
               <a href="/info">{"<<"}</a>
             </Button>
             <Guide1 />
           </Stack>
         ) : guideId === "2" ? (
-          <Stack>
-            <Button asChild={true} fontWeight={"bold"} outline={"none"}>
+          <Stack gap={"2"}>
+            <Button
+              asChild={true}
+              fontWeight={"bold"}
+              outline={"none"}
+              position={"absolute"}
+              left={"10"}
+              top={"2"}
+              bgColor={"transparent"}
+              boxShadow={"xl"}
+              size={"xs"}
+            >
               <a href="/info">{"<<"}</a>
             </Button>
             <Guide2 />
           </Stack>
         ) : guideId === "3" ? (
-          <Stack>
-            <Button asChild={true} fontWeight={"bold"} outline={"none"}>
+          <Stack gap={"2"}>
+            <Button
+              asChild={true}
+              fontWeight={"bold"}
+              outline={"none"}
+              position={"absolute"}
+              left={"10"}
+              top={"2"}
+              bgColor={"transparent"}
+              boxShadow={"xl"}
+              size={"xs"}
+            >
               <a href="/info">{"<<"}</a>
             </Button>
             <Guide3 />
