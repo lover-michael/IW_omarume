@@ -27,8 +27,10 @@ export default function GuidePage({
             asChild={true}
             fontWeight={"bold"}
             bgColor={"transparent"}
+            color={"black"}
             boxShadow={"xl"}
             size={"xs"}
+            px={"2"}
             left={"10px"}
           >
             <a href="/info">{"<<"}</a>

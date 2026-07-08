@@ -55,6 +55,7 @@ export default function LoginPage() {
     }
     // 認証に成功したらユーザーのページに飛ぶ
     setLoginResult(1);
+    setAuthError(null);
     setTimeout(() => {
       router.push("/");
     }, 2000);
@@ -142,7 +143,9 @@ export default function LoginPage() {
           fontWeight={"bold"}
           boxShadow={"xl"}
           bottom={"20px"}
-          padding={"10"}
+          left={"20%"}
+          mx={"auto"}
+          padding={"2"}
           textAlign={"center"}
           maxWidth={"sm"}
           color={loginResult === 1 ? "green.500" : "red.500"}
