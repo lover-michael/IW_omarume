@@ -55,7 +55,9 @@ export default function Signup() {
     }
 
     if (result === 1) {
-      router.push("/login");
+      setTimeout(() => {
+        router.push("/login");
+      }, 3000);
     }
   };
 
@@ -129,7 +131,18 @@ export default function Signup() {
       >
         {isSubmitting ? "登録中..." : "新規登録"}
       </Button>
-      {}
+      {(signUpResult === 1 || signUpResult === 2) && (
+        <Box
+          fontWeight={"bold"}
+          boxShadow={"xl"}
+          position="absolute"
+          bottom={"10px"}
+          left={"50%"}
+          width={"full"}
+        >
+          {popUpStatus}
+        </Box>
+      )}
     </form>
   );
 }
