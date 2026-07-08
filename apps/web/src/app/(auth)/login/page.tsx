@@ -143,8 +143,10 @@ export default function LoginPage() {
           fontWeight={"bold"}
           boxShadow={"xl"}
           bottom={"20px"}
+          left={"50%"}
+          transform={"translateX(-50%)"}
           width={"80%"}
-          mx={"auto"}
+          mx={"2"}
           textAlign={"center"}
           color={loginResult === 1 ? "green.500" : "red.500"}
         >

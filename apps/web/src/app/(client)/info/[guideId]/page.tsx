@@ -25,12 +25,13 @@ export default function GuidePage({
         <Stack gap={"2"}>
           <Button
             asChild={true}
+            position={"absolute"}
             fontWeight={"bold"}
             bgColor={"transparent"}
             color={"black"}
             boxShadow={"xl"}
             size={"xs"}
-            px={"2"}
+            top={"20px"}
             left={"10px"}
           >
             <a href="/info">{"<<"}</a>

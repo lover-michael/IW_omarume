@@ -70,7 +70,7 @@ export default function Signup() {
       onSubmit={handleSubmit(onSubmit)}
     >
       <FormControl>
-        <Center h="full" w="full" p={"3"} position={"relative"}>
+        <Center h="100%" w="100%" p={"3"} position={"relative"}>
           <Stack gapY={"5"} position={"absolute"} top={"30px"}>
             <Box fontSize={"3xl"} fontWeight={"bold"} textAlign={"center"}>
               新規登録画面
@@ -123,7 +123,7 @@ export default function Signup() {
                 console.log("submit");
               }}
               disabled={isSubmitting}
-              width={"80%"}
+              width={"100%"}
             >
               {isSubmitting ? "登録中..." : "新規登録"}
             </Button>
@@ -137,8 +137,10 @@ export default function Signup() {
           fontWeight={"bold"}
           boxShadow={"xl"}
           bottom={"20px"}
+          left={"50%"}
+          transform={"translateX(-50%)"}
           width={"80%"}
-          mx={"auto"}
+          mx={"2"}
           textAlign={"center"}
           bgColor={signUpResult === 1 ? "green.500" : "red.500"}
         >
