@@ -9,6 +9,7 @@ import {
   Field,
   Box,
   Separator,
+  HStack,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -17,6 +18,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { signup } from "../component/action/signup";
 import { is } from "drizzle-orm";
 import { useRouter } from "next/navigation";
+import { FaCheck } from "react-icons/fa";
+import { MdErrorOutline } from "react-icons/md";
 
 export default function Signup() {
   // 登録結果：0...なにもなし　1...登録成功　2...登録失敗
@@ -133,14 +136,19 @@ export default function Signup() {
       </Button>
       {(signUpResult === 1 || signUpResult === 2) && (
         <Box
+          position="absolute"
           fontWeight={"bold"}
           boxShadow={"xl"}
-          position="absolute"
-          bottom={"10px"}
+          bottom={"100px"}
           left={"50%"}
-          width={"full"}
+          padding={"10"}
+          textAlign={"center"}
+          maxWidth={"sm"}
         >
-          {popUpStatus}
+          <HStack gap={"5"}>
+            {signUpResult === 1 ? <FaCheck /> : <MdErrorOutline />}
+            {popUpStatus}
+          </HStack>
         </Box>
       )}
     </form>
