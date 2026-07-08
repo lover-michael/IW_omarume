@@ -146,11 +146,10 @@ export default function LoginPage() {
           left={"50%"}
           transform={"translateX(-50%)"}
           width={"80%"}
-          mx={"2"}
-          textAlign={"center"}
+          padding={"3"}
           color={loginResult === 1 ? "green.500" : "red.500"}
         >
-          <HStack gap={"5"}>
+          <HStack gap={"5"} textAlign={"center"}>
             {loginResult === 1 ? <FaCheck /> : <MdErrorOutline />}
             {authError === null ? "ログイン成功" : authError}
           </HStack>

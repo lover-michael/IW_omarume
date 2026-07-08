@@ -140,11 +140,10 @@ export default function Signup() {
           left={"50%"}
           transform={"translateX(-50%)"}
           width={"80%"}
-          mx={"2"}
-          textAlign={"center"}
+          padding={"3"}
           bgColor={signUpResult === 1 ? "green.500" : "red.500"}
         >
-          <HStack gap={"5"}>
+          <HStack gap={"5"} textAlign={"center"}>
             {signUpResult === 1 ? <FaCheck /> : <MdErrorOutline />}
             {popUpStatus}
           </HStack>
