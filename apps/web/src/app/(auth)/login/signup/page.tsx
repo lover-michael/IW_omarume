@@ -135,7 +135,7 @@ export default function Signup() {
         {isSubmitting ? "登録中..." : "新規登録"}
       </Button>
       {(signUpResult === 1 || signUpResult === 2) && (
-        <Center position="absolute" bottom={"100px"}>
+        <Center position="absolute" bottom={"20px"}>
           <Box
             fontWeight={"bold"}
             boxShadow={"xl"}

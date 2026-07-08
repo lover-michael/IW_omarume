@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Container } from "@chakra-ui/react";
+import { Box, Button, Container, Stack } from "@chakra-ui/react";
 import { Guide1 } from "@/contents/guide1";
 import { Guide2 } from "@/contents/guide2";
 import { Guide3 } from "@/contents/guide3";
@@ -23,11 +23,26 @@ export default function GuidePage({
         position={"absolute"}
       >
         {guideId === "1" ? (
-          <Guide1 />
+          <Stack>
+            <Button asChild={true} fontWeight={"bold"} outline={"none"}>
+              <a href="/info">{"<<"}</a>
+            </Button>
+            <Guide1 />
+          </Stack>
         ) : guideId === "2" ? (
-          <Guide2 />
+          <Stack>
+            <Button asChild={true} fontWeight={"bold"} outline={"none"}>
+              <a href="/info">{"<<"}</a>
+            </Button>
+            <Guide2 />
+          </Stack>
         ) : guideId === "3" ? (
-          <Guide3 />
+          <Stack>
+            <Button asChild={true} fontWeight={"bold"} outline={"none"}>
+              <a href="/info">{"<<"}</a>
+            </Button>
+            <Guide3 />
+          </Stack>
         ) : null}
       </Box>
     </Container>

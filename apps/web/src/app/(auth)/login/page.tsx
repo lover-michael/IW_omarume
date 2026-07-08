@@ -138,7 +138,7 @@ export default function LoginPage() {
                 position="absolute"
                 fontWeight={"bold"}
                 boxShadow={"xl"}
-                bottom={"100px"}
+                bottom={"20px"}
                 padding={"10"}
                 textAlign={"center"}
                 maxWidth={"sm"}
