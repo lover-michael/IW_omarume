@@ -8,6 +8,7 @@ import {
   Button,
   Field,
   Separator,
+  HStack,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { AuthPropsType, AuthProps } from "./component/module/type";
@@ -17,11 +18,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import { useRouter } from "next/navigation";
 import { loginAction } from "./component/action/loginAction";
+import { FaCheck } from "react-icons/fa";
+import { MdErrorOutline } from "react-icons/md";
 
 export default function LoginPage() {
   const router = useRouter();
   // 認証エラーの場合のエラーメッセージを格納する
   const [authError, setAuthError] = useState<string | null>(null);
+  const [loginResult, setLoginResult] = useState<number | null>(null);
   // react-hook-formでformを一元的に管理
   const {
     register,
@@ -37,16 +41,23 @@ export default function LoginPage() {
   });
 
   const onSubmit = async (props: AuthPropsType) => {
-    setAuthError(null);
     const formData = new FormData();
+
     formData.append("username", props.userName);
     formData.append("password", props.password);
+
     const result = await loginAction(formData);
+
     if (result?.error) {
+      setLoginResult(0);
       setAuthError("ユーザー名またはパスワードが正しくありません");
       return;
     }
     // 認証に成功したらユーザーのページに飛ぶ
+    setLoginResult(1);
+    setTimeout(() => {
+      router.push("/");
+    }, 2000);
   };
 
   return (
@@ -122,6 +133,23 @@ export default function LoginPage() {
                 <a href="/login/signup">新規登録</a>
               </Button>
             </Stack>
+            {(loginResult === 1 || loginResult === 0) && (
+              <Box
+                position="absolute"
+                fontWeight={"bold"}
+                boxShadow={"xl"}
+                bottom={"100px"}
+                padding={"10"}
+                textAlign={"center"}
+                maxWidth={"sm"}
+                color={loginResult === 1 ? "green.500" : "red.500"}
+              >
+                <HStack gap={"5"}>
+                  {loginResult === 1 ? <FaCheck /> : <MdErrorOutline />}
+                  {authError === null ? "ログイン成功" : authError}
+                </HStack>
+              </Box>
+            )}
           </Center>
         </Box>
       </FormControl>

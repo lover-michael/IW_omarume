@@ -135,21 +135,21 @@ export default function Signup() {
         {isSubmitting ? "登録中..." : "新規登録"}
       </Button>
       {(signUpResult === 1 || signUpResult === 2) && (
-        <Box
-          position="absolute"
-          fontWeight={"bold"}
-          boxShadow={"xl"}
-          bottom={"100px"}
-          left={"50%"}
-          padding={"10"}
-          textAlign={"center"}
-          maxWidth={"sm"}
-        >
-          <HStack gap={"5"}>
-            {signUpResult === 1 ? <FaCheck /> : <MdErrorOutline />}
-            {popUpStatus}
-          </HStack>
-        </Box>
+        <Center position="absolute" bottom={"100px"}>
+          <Box
+            fontWeight={"bold"}
+            boxShadow={"xl"}
+            padding={"10"}
+            textAlign={"center"}
+            maxWidth={"sm"}
+            bgColor={signUpResult === 1 ? "green.500" : "red.500"}
+          >
+            <HStack gap={"5"}>
+              {signUpResult === 1 ? <FaCheck /> : <MdErrorOutline />}
+              {popUpStatus}
+            </HStack>
+          </Box>
+        </Center>
       )}
     </form>
   );
