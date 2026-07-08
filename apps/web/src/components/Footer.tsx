@@ -13,7 +13,7 @@ export function Footer() {
     <Center w="full" py={"2"} bgColor="green.500" gapX={"3"} boxShadow={"lg"}>
       <Link href="/timetable">
         <Button
-          bgColor={pathname === "/timetable" ? "green.400" : "green.500"}
+          bgColor={pathname.includes("/timetable") ? "green.400" : "green.500"}
           boxShadow={"md"}
           rounded={"2xl"}
         >
@@ -23,7 +23,7 @@ export function Footer() {
       </Link>
       <Link href="/map">
         <Button
-          bgColor={pathname === "/map" ? "green.400" : "green.500"}
+          bgColor={pathname.includes("/map") ? "green.400" : "green.500"}
           boxShadow={"md"}
           rounded={"2xl"}
         >
@@ -33,7 +33,7 @@ export function Footer() {
       </Link>
       <Link href="/info">
         <Button
-          bgColor={pathname === "/info" ? "green.400" : "green.500"}
+          bgColor={pathname.includes("/info") ? "green.400" : "green.500"}
           boxShadow={"md"}
           rounded={"2xl"}
         >

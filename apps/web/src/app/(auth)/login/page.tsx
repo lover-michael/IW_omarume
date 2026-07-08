@@ -143,11 +143,9 @@ export default function LoginPage() {
           fontWeight={"bold"}
           boxShadow={"xl"}
           bottom={"20px"}
-          left={"20%"}
+          width={"80%"}
           mx={"auto"}
-          padding={"2"}
           textAlign={"center"}
-          maxWidth={"sm"}
           color={loginResult === 1 ? "green.500" : "red.500"}
         >
           <HStack gap={"5"}>

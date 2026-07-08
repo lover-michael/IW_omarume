@@ -134,14 +134,12 @@ export default function Signup() {
       {(signUpResult === 1 || signUpResult === 2) && (
         <Box
           position="absolute"
-          bottom={"20px"}
           fontWeight={"bold"}
           boxShadow={"xl"}
-          left={"20%"}
+          bottom={"20px"}
+          width={"80%"}
           mx={"auto"}
-          padding={"2"}
           textAlign={"center"}
-          maxWidth={"sm"}
           bgColor={signUpResult === 1 ? "green.500" : "red.500"}
         >
           <HStack gap={"5"}>
