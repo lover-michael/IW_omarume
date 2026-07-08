@@ -73,7 +73,7 @@ export default function Signup() {
         <Center h="full" w="full" p={"3"} position={"relative"}>
           <Stack gapY={"5"} position={"absolute"} top={"30px"}>
             <Box fontSize={"3xl"} fontWeight={"bold"} textAlign={"center"}>
-              新規登録
+              新規登録画面
             </Box>
             <Separator size={"lg"} bgColor={"black"} />
             <Box>
@@ -115,25 +115,22 @@ export default function Signup() {
                 <Box color={"red.500"}>{errors.password.message}</Box>
               )}
             </Box>
+            <Button
+              type="submit"
+              bgColor={"green.500"}
+              boxShadow={"md"}
+              onClick={() => {
+                console.log("submit");
+              }}
+              disabled={isSubmitting}
+              width={"80%"}
+            >
+              {isSubmitting ? "登録中..." : "新規登録"}
+            </Button>
           </Stack>
         </Center>
       </FormControl>
-      <Button
-        type="submit"
-        bgColor={"green.500"}
-        boxShadow={"md"}
-        onClick={() => {
-          console.log("submit");
-        }}
-        disabled={isSubmitting}
-        position={"absolute"}
-        bottom={"30px"}
-        left={"50%"}
-        transform={"translateX(-50%)"}
-        width={"80%"}
-      >
-        {isSubmitting ? "登録中..." : "新規登録"}
-      </Button>
+
       {(signUpResult === 1 || signUpResult === 2) && (
         <Center position="absolute" bottom={"20px"}>
           <Box

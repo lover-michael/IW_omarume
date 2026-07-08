@@ -133,26 +133,26 @@ export default function LoginPage() {
                 <a href="/login/signup">新規登録</a>
               </Button>
             </Stack>
-            {(loginResult === 1 || loginResult === 0) && (
-              <Box
-                position="absolute"
-                fontWeight={"bold"}
-                boxShadow={"xl"}
-                bottom={"20px"}
-                padding={"10"}
-                textAlign={"center"}
-                maxWidth={"sm"}
-                color={loginResult === 1 ? "green.500" : "red.500"}
-              >
-                <HStack gap={"5"}>
-                  {loginResult === 1 ? <FaCheck /> : <MdErrorOutline />}
-                  {authError === null ? "ログイン成功" : authError}
-                </HStack>
-              </Box>
-            )}
           </Center>
         </Box>
       </FormControl>
+      {(loginResult === 1 || loginResult === 0) && (
+        <Box
+          position="absolute"
+          fontWeight={"bold"}
+          boxShadow={"xl"}
+          bottom={"20px"}
+          padding={"10"}
+          textAlign={"center"}
+          maxWidth={"sm"}
+          color={loginResult === 1 ? "green.500" : "red.500"}
+        >
+          <HStack gap={"5"}>
+            {loginResult === 1 ? <FaCheck /> : <MdErrorOutline />}
+            {authError === null ? "ログイン成功" : authError}
+          </HStack>
+        </Box>
+      )}
     </form>
   );
 }

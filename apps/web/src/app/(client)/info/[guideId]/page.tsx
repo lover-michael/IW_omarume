@@ -22,58 +22,25 @@ export default function GuidePage({
         bgColor={"white"}
         position={"absolute"}
       >
-        {guideId === "1" ? (
-          <Stack gap={"2"}>
-            <Button
-              asChild={true}
-              fontWeight={"bold"}
-              outline={"none"}
-              position={"absolute"}
-              left={"10"}
-              top={"2"}
-              bgColor={"transparent"}
-              boxShadow={"xl"}
-              size={"xs"}
-            >
-              <a href="/info">{"<<"}</a>
-            </Button>
+        <Stack gap={"2"}>
+          <Button
+            asChild={true}
+            fontWeight={"bold"}
+            bgColor={"transparent"}
+            boxShadow={"xl"}
+            size={"xs"}
+            left={"10px"}
+          >
+            <a href="/info">{"<<"}</a>
+          </Button>
+          {guideId === "1" ? (
             <Guide1 />
-          </Stack>
-        ) : guideId === "2" ? (
-          <Stack gap={"2"}>
-            <Button
-              asChild={true}
-              fontWeight={"bold"}
-              outline={"none"}
-              position={"absolute"}
-              left={"10"}
-              top={"2"}
-              bgColor={"transparent"}
-              boxShadow={"xl"}
-              size={"xs"}
-            >
-              <a href="/info">{"<<"}</a>
-            </Button>
+          ) : guideId === "2" ? (
             <Guide2 />
-          </Stack>
-        ) : guideId === "3" ? (
-          <Stack gap={"2"}>
-            <Button
-              asChild={true}
-              fontWeight={"bold"}
-              outline={"none"}
-              position={"absolute"}
-              left={"10"}
-              top={"2"}
-              bgColor={"transparent"}
-              boxShadow={"xl"}
-              size={"xs"}
-            >
-              <a href="/info">{"<<"}</a>
-            </Button>
+          ) : guideId === "3" ? (
             <Guide3 />
-          </Stack>
-        ) : null}
+          ) : null}
+        </Stack>
       </Box>
     </Container>
   );
