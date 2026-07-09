@@ -135,6 +135,7 @@ export default function Signup() {
         <Box
           position="absolute"
           fontWeight={"bold"}
+          fontSize={"md"}
           boxShadow={"xl"}
           bottom={"20px"}
           left={"50%"}

@@ -141,13 +141,14 @@ export default function LoginPage() {
         <Box
           position="absolute"
           fontWeight={"bold"}
+          fontSize={"md"}
           boxShadow={"xl"}
           bottom={"20px"}
           left={"50%"}
           transform={"translateX(-50%)"}
           width={"80%"}
           padding={"3"}
-          color={loginResult === 1 ? "green.500" : "red.500"}
+          bgColor={loginResult === 1 ? "green.500" : "red.500"}
         >
           <HStack gap={"5"} textAlign={"center"}>
             {loginResult === 1 ? <FaCheck /> : <MdErrorOutline />}

@@ -3,9 +3,7 @@ import { auth } from "./app/(auth)/login/component/action/login";
 
 export const config = {
   // login以外のルートではセッションが確認されていない場合loginページにリダイレクトされる
-  matcher: [
-    "/((?!api|_next/static|_next/image|favicon.ico|login|appicon.png).*)",
-  ],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|login|puclic).*)"],
 };
 
 export const proxy = auth((req) => {

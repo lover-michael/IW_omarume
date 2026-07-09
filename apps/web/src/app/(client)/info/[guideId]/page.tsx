@@ -31,8 +31,8 @@ export default function GuidePage({
             color={"black"}
             boxShadow={"xl"}
             size={"xs"}
-            top={"-10px"}
-            left={"0px"}
+            top={"-20px"}
+            left={"-20px"}
           >
             <a href="/info">{"<<"}</a>
           </Button>
