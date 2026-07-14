@@ -1,11 +1,6 @@
 "use server";
 import { getDb } from "@/lib/drizzle";
-import { z } from "zod";
-import { userSchema } from "./timetable/userSchema";
 import { station, timetable } from "@repo/database";
-import { revalidatePath } from "next/cache";
-import { dataListAnatomy } from "@chakra-ui/react/anatomy";
-import { timestamp } from "drizzle-orm/gel-core";
 import { and, eq, or } from "drizzle-orm";
 
 export const GetElements = async (user_id: number) => {

@@ -3,21 +3,18 @@
 import {
   Stack,
   Card,
-  Heading,
   Flex,
   Button,
   Collapsible,
   Box,
-  Dialog,
   Separator,
 } from "@chakra-ui/react";
-import { GetElements, GetStationByID } from "../action";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import {
   DeleteTimeTableButton,
   UpdateTimeTableButton,
-} from "./module/components";
+} from "../module/components";
 
 // timetableに沿った型
 export type TimeTableCard = {
@@ -29,8 +26,6 @@ export type TimeTableCard = {
 };
 //
 type Station = {
-  id: number;
-  create_at: Date;
   name: string;
   day: string;
   hour: string;
@@ -38,27 +33,14 @@ type Station = {
   direction: string;
 };
 
-export function Card_layout(element: TimeTableCard) {
+export function Card_layout(element: { timetable_id: number; depart_station: Station; arrive_station: Station; memo: string | null; }) {
   const [open, setOpen] = useState(false);
   //出発駅の情報
-  const [depart_station, setDepart_station] = useState<Station>({} as Station);
+  const depart_station = element.depart_station;
   //下車駅の情報
-  const [arrive_station, setArrive_station] = useState<Station>({} as Station);
-
-  useEffect(() => {
-    const getStation = async () => {
-      const res_depart = await GetStationByID({
-        id: element.depart_station_id,
-      });
-      const res_arrive = await GetStationByID({
-        id: element.arrive_station_id,
-      });
-
-      setDepart_station(res_depart);
-      setArrive_station(res_arrive);
-    };
-    getStation();
-  }, []);
+  const arrive_station = element.arrive_station;
+  //マイ時刻表の利用目的
+  const memo = element.memo;
 
   return (
     <Card.Root size={"md"}>
@@ -71,7 +53,7 @@ export function Card_layout(element: TimeTableCard) {
           paddingLeft: "20px",
         }}
       >
-        {element.memo}
+        {memo}
       </Card.Header>
       <Card.Body boxSize={"xm"}>
         <Collapsible.Root open={open} onOpenChange={(e) => setOpen(e.open)}>
@@ -114,7 +96,7 @@ export function Card_layout(element: TimeTableCard) {
               }}
             >
               <Flex gap={"2.5"} w="full">
-                <DeleteTimeTableButton id={element.id} />
+                <DeleteTimeTableButton id={element.timetable_id} />
                 {/*<UpdateTimeTableButton id={element.id} />*/}
                 <Button colorPalette={"green"}>更新</Button>
               </Flex>
