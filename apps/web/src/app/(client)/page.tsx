@@ -1,11 +1,8 @@
 ﻿"use client";
 
-import { Button, Card, Center, Flex, Box, Stack } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import Link from "next/link";
-
-import { signOut } from "next-auth/react";
 import { sessionAction } from "../(auth)/login/component/action/loginAction";
+import UserInfo from "./ui/userInfo";
+import GuideLogin from "./ui/guideLogin";
 
 export type User = {
   id: number | undefined;
@@ -13,55 +10,12 @@ export type User = {
   email: string | undefined | null;
 };
 
-export default function Home() {
-  const [loginResult, setLoginResult] = useState(false);
-  const [user, setUser] = useState<User | null>(null);
-
-  useEffect(() => {
-    const fetchSession = async () => {
-      setUser({ id: undefined, name: undefined, email: undefined });
-      // セッション情報を取得
-      const session = await sessionAction();
-      // セッションユーザーがいないなら、return
-      if (session === null || session.user?.id === undefined) {
-        setLoginResult(false);
-        return;
-      }
-
-      setUser({
-        id: Number(session?.user?.id),
-        name: session?.user?.name,
-        email: session?.user?.email,
-      });
-      setLoginResult(!!session);
-    };
-    fetchSession();
-  }, []);
-
+export default async function Page() {
+  const user = await sessionAction();
+  const userName = user?.user?.name;
   return (
-    <Center h="full" w="full" p={"7"}>
-      {loginResult === false ? (
-        <Button asChild>
-          <a href="/login">ログインはこちらから</a>
-        </Button>
-      ) : (
-        <Box boxSize={"xl"}>
-          <Stack gapY={"5"}>
-            <Card.Root size={"lg"}>
-              <Card.Body>
-                <Card.Title>
-                  <Box textAlign={"left"}>
-                    <div>{user?.id}</div>
-                    <div>{user?.name}</div>
-                    <div>{user?.email}</div>
-                  </Box>
-                </Card.Title>
-              </Card.Body>
-            </Card.Root>
-            <Button onClick={() => signOut()}>ログアウト</Button>
-          </Stack>
-        </Box>
-      )}
-    </Center>
+    <div>
+      {user ? <UserInfo user={userName ? { name: userName } : { name: "" }} /> : <GuideLogin />}
+    </div>
   );
 }
