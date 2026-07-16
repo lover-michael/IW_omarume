@@ -1,7 +1,6 @@
 import { Center, Box, Button, Flex, Stack } from "@chakra-ui/react";
-import FileUpload from "./ui/fileUpload";
 
-export default function Home() {
+export default function Loading() {
   return (
     <Stack h={'full'} w={'full'} gap={'3'} bgColor={'gray.100'}>
       <Box
@@ -23,9 +22,9 @@ export default function Home() {
         fontWeight={'bold'}
         fontSize={'2xl'}
       >
-        Clip Board
+
       </Box>
-      <Flex gap={'2'}>
+      <Flex gap={'5'}>
         <Box
           height={'2xs'}
           width={'sm'}
@@ -38,7 +37,7 @@ export default function Home() {
           fontSize={'2xl'}
           bgColor={'gray.100'}
         >
-          Master Account
+
         </Box>
         <Box
           height={'2xs'}
@@ -50,9 +49,9 @@ export default function Home() {
           py={'2'}
           fontWeight={'bold'}
           bgColor={'gray.100'}
+          fontSize={'2xl'}
         >
-          <Box fontSize={'2xl'}>File Upload</Box>
-          <FileUpload />
+
         </Box>
       </Flex>
     </Stack>

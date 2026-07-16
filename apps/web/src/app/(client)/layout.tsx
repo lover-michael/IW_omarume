@@ -39,7 +39,7 @@ export default async function RootLayout({
           >
             <SessionProvider>
               <Header />
-              <Box flex="1" overflowY="auto">
+              <Box flex="1" overflowY="auto" >
                 {children}
               </Box>
               <Footer />
