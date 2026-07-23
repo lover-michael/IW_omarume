@@ -9,7 +9,8 @@ export default function PageMap() {
       <Image
         src={"/image/KotaniArea_Overall.png"}
         alt={"map"}
-        fill={true}
+        width={'200'}
+        height={'200'}
       />
     </Box>
   );
