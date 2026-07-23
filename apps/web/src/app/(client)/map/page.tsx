@@ -5,12 +5,12 @@ import Image from "next/image";
 
 export default function PageMap() {
   return (
-    <Box h={"full"} w={"full"} bgColor={"gray.500"}>
+    <Box h={"100%"} w={"100%"} bgColor={"gray.500"}>
       <Image
         src={"/image/KotaniArea_Overall.png"}
         alt={"map"}
-        width={'200'}
-        height={'200'}
+        style={{ width: '80%', height: '80%' }}
+        fill={true}
       />
     </Box>
   );
