@@ -9,10 +9,10 @@ export default function PageMap() {
       <Image
         src={"/image/KotaniArea_Overall.png"}
         alt={"map"}
-        style={{ width: '100%', height: '90%', position: 'absolute', top: "50%", left: "50%", transform: 'translate(-50%, -50%)' }}
+        style={{ width: '100%', height: '80%', position: 'absolute', top: "50%", left: "50%", transform: 'translate(-50%, -50%)' }}
         fill={true}
       />
-      <Center my={'5'} mx={'5'} py={'5'}>
+      <Center my={'2'} mx={'5'}>
         <HStack gap={'5'}>
           <Button boxShadow={'xl'} bgColor={'green.500'}>
             バスの現在値
