@@ -18,7 +18,7 @@ export default function GuidePage({
         w={"90%"}
         py={"4"}
         borderRadius={"2xl"}
-        top={"5"}
+        top={"10"}
         bgColor={"white"}
         position={"absolute"}
       >
@@ -32,7 +32,7 @@ export default function GuidePage({
             boxShadow={"xl"}
             size={"xs"}
             top={"-20px"}
-            left={"-20px"}
+            left={"0px"}
           >
             <a href="/info">{"<<"}</a>
           </Button>

@@ -143,6 +143,7 @@ export default function LoginPage() {
           fontWeight={"bold"}
           fontSize={"md"}
           boxShadow={"xl"}
+          borderRadius={"xl"}
           bottom={"20px"}
           left={"50%"}
           transform={"translateX(-50%)"}
