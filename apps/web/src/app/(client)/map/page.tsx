@@ -10,7 +10,6 @@ export default function PageMap() {
         src={"/image/KotaniArea_Overall.png"}
         alt={"map"}
         style={{ width: '100%', height: '80%', position: 'absolute', top: "50%", left: "50%", transform: 'translate(-50%, -50%)' }}
-        fill={true}
       />
       <Center my={'2'} mx={'5'}>
         <HStack gap={'5'}>
