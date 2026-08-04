@@ -1,4 +1,5 @@
 "use client"
+import { handleFileChange } from "@/actions/timetable/upload";
 import { Flex } from "@chakra-ui/react";
 import { FaFileCsv } from "react-icons/fa";
 
@@ -29,6 +30,8 @@ export default function FileUpload() {
         <input
           type="file"
           id="csv_upload"
+          accept=".csv"
+          onChange={handleFileChange}
           hidden
         />
       </div>

@@ -20,7 +20,7 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
     <html lang='ja' suppressHydrationWarning>
       <body className={`${notoSansJP.className} antialiased`}>
         <Provider>
-          <Container maxWidth='xl' h='dvh' px={0} bgColor={'gray.100'}>
+          <Container maxWidth='xl' h='dvh' px={0}>
             {children}
           </Container>
         </Provider>
