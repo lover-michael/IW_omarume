@@ -11,13 +11,13 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import Link from "next/link";
-import { AuthPropsType, AuthProps } from "./component/module/type";
+import { AuthPropsType, AuthProps } from "./types/authTypes";
 import { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import { useRouter } from "next/navigation";
-import { loginAction } from "./component/action/loginAction";
+import { loginAction } from "./action/loginAction";
 import { FaCheck } from "react-icons/fa";
 import { MdErrorOutline } from "react-icons/md";
 

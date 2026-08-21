@@ -14,7 +14,7 @@ import { FaArrowRight } from "react-icons/fa";
 import {
   DeleteTimeTableButton,
   UpdateTimeTableButton,
-} from "../module/components";
+} from "./timetableCandidates";
 
 // timetableに沿った型
 export type TimeTableCard = {

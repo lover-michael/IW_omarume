@@ -1,4 +1,4 @@
-import { auth, handlers } from "@/app/(auth)/login/component/action/login";
+import { auth, handlers } from "@/app/(auth)/login/action/login";
 import { NextRequest, NextResponse } from "next/server";
 export const { POST } = handlers;
 

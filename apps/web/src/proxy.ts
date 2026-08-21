@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { auth } from "./app/(auth)/login/component/action/login";
+import { auth } from "./app/(auth)/login/action/login";
 
 export const config = {
   // login以外のルートではセッションが確認されていない場合loginページにリダイレクトされる

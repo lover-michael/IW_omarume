@@ -3,9 +3,9 @@
 import { getDb } from "@/lib/drizzle";
 import { station, timetable } from "@repo/database";
 import { and, eq, or } from "drizzle-orm";
-import { TimeTableFormType, TimeTableSchemaType } from "../module/formTypes";
+import { TimeTableFormType, TimeTableSchemaType } from "../types/formTypes";
 import { revalidatePath } from "next/cache";
-import { CandidatesStation } from "../module/class";
+import { CandidatesStation } from "../types/userStationGroupClass";
 
 /**
  * @param station [0]: depart [1]: arrive

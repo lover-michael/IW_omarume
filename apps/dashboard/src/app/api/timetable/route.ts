@@ -13,15 +13,6 @@ export async function POST(request: NextRequest, response: NextResponse) {
     return NextResponse.json({ error: `${error}` }, { status: 400 });
   }
 
-  // // リクエストボディの型チェック
-  // const checkType = (body: unknown): body is Station[] => {
-  //   return typeof body === "object" && body !== null && "name" in body;
-  // };
-  // // リクエストボディの型がStationでない場合はエラーを返す
-  // if(!checkType(body)) {
-  //   return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
-  // }
-
   const data: Station[] = body;
   /*以下にDB操作用の処理を記述(APIとして利用できるかのテストのために一旦保留)*/
 

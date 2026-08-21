@@ -13,9 +13,9 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { AuthPropsType, AuthProps } from "../component/module/type";
+import { AuthPropsType, AuthProps } from "../types/authTypes";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signup } from "../component/action/signup";
+import { signup } from "../action/signup";
 import { is } from "drizzle-orm";
 import { useRouter } from "next/navigation";
 import { FaCheck } from "react-icons/fa";

@@ -1,6 +1,6 @@
 "use server";
 
-import { AuthPropsType } from "../module/type";
+import { AuthPropsType } from "../types/authTypes";
 import { USERDATA_POST, USERDATA_PULL } from "./action";
 
 export const signup = async (props: AuthPropsType): Promise<number | null> => {

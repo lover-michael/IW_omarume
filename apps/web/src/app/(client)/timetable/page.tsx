@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { GetElements, GetStationByID } from "../action";
 import TimeTable from "./ui/timetable";
-import { sessionAction } from "@/app/(auth)/login/component/action/loginAction";
+import { sessionAction } from "@/app/(auth)/login/action/loginAction";
 
 export default async function Page() {
   // ユーザーのセッション情報

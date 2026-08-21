@@ -3,7 +3,7 @@
 import { hash } from "bcrypt";
 import { getDb } from "@/lib/drizzle";
 import { and, eq, max, or } from "drizzle-orm";
-import { AuthPropsType } from "../module/type";
+import { AuthPropsType } from "../types/authTypes";
 import { user } from "@repo/database";
 
 export async function USERDATA_POST(formData: AuthPropsType) {

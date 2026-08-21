@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 import Link from "next/link";
-import { Card_layout } from "./print_element";
+import { Card_layout } from "./components/timetableCard";
 
 type Station = {
   name: string;

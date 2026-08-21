@@ -1,4 +1,4 @@
-﻿import { sessionAction } from "../(auth)/login/component/action/loginAction";
+﻿import { sessionAction } from "../(auth)/login/action/loginAction";
 import UserInfo from "./ui/userInfo";
 import GuideLogin from "./ui/guideLogin";
 

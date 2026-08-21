@@ -5,8 +5,8 @@ import {
   CreateCandidates,
   GetStations,
   UpdateTimeTable,
-} from "../register/action";
-import { STATION, TimeTableFormType, TimeTableSchema } from "./formTypes";
+} from "../../register/action";
+import { STATION, TimeTableFormType, TimeTableSchema } from "../../types/formTypes";
 import {
   Box,
   RadioCard,
@@ -26,14 +26,14 @@ import {
   Center,
 } from "@chakra-ui/react";
 import { RxDoubleArrowRight } from "react-icons/rx";
-import { DeleteTimeTable } from "../register/action";
+import { DeleteTimeTable } from "../../register/action";
 import { AiFillAlert } from "react-icons/ai";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { title } from "process";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
-import { DayGroups, RoutesList } from "./datas";
-import { UserStationGroup } from "./class";
+import { DayGroups, RoutesList } from "../../types/datas";
+import { UserStationGroup } from "../../types/userStationGroupClass";
 import { FaSearch } from "react-icons/fa";
 
 type CandidatesProps = {

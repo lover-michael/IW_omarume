@@ -1,11 +1,9 @@
 import { Station } from "@/types/timetableTypes";
 
 // input要素にファイルがアップロードされた場合に発火するイベント
-export const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-  // 選択されたファイル
-  const file = event.target.files?.[0];
-  // ファイルが選択されていない場合は処理を終了する
+export const handleFileUpload = async (file: File | null) => {
   if (!file) return;
+
   // ファイル読み込み用オブジェクト
   const reader = new FileReader();
   // ファイルの読み込みに成功したときにおこるイベント処理
