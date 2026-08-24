@@ -9,21 +9,20 @@ export default function ClipBoard() {
   const dispatch = useLogDispatch();
 
   return (
-    <Stack fontSize={'xs'} position={'relative'}>
-      {
-        logs.map((log) => {
-          return <ClipBoardItem message={log.message} level={log.level} timestamp={log.timestamp} />
-        })
-      }
+    <Stack fontSize={'xs'}>
+      <Box flex={'1'} overflowY={'auto'} maxH={'svh'}>
+        {
+          logs.length > 0 ? logs.map((log) => {
+            return <ClipBoardItem message={log.message} level={log.level} timestamp={log.timestamp} />
+          }) : <Box>No logs</Box>
+        }
+      </Box>
       <Separator size={'lg'} />
       <Button
         bgColor={'red.500'}
         color={'white'}
-        position={'absolute'}
-        bottom={'-320px'}
         size={'sm'}
         width={'50%'}
-        right={130}
         onClick={() => dispatch({ type: "clear" })}
       >
         clear
