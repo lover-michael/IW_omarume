@@ -1,7 +1,7 @@
 export type Station = {
   name: string;
-  hour: number;
-  minute: number;
+  hour: string;
+  minute: string;
   day: string;
   direction: string;
 }

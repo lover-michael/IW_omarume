@@ -1,5 +1,6 @@
 import { Center, Box, Button, Flex, Stack } from "@chakra-ui/react";
 import FileUpload from "./ui/fileUpload";
+import ClipBoard from "./ui/clipBoard";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <Box
         p={'3'}
         mx={'5'}
+        my={'3'}
         height={'sm'}
         boxShadow={'xl'}
         borderRadius={'xl'}
@@ -24,6 +26,7 @@ export default function Home() {
         fontSize={'2xl'}
       >
         Clip Board
+        <ClipBoard />
       </Box>
       <Flex gap={'2'}>
         <Box

@@ -1,20 +1,34 @@
 "use client"
-import { handleFileUpload } from "@/actions/timetable/upload";
+import { handleFileUpload } from "@/actions/timetable/csvFileUpload";
 import { Flex, Button } from "@chakra-ui/react";
 import { FaFileCsv } from "react-icons/fa";
 import { useState } from "react";
-import { File_, FileSchema } from "../types/timetable_types";
+import { fileSchema } from "../types/validationTypes";
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import type { File_ } from "../types/validationTypes";
+import type { z } from "zod";
+import { useLog, useLogDispatch } from "@/contexts/logContext";
 
 export default function FileUpload() {
   const [file, setFile] = useState<File | null>(null);
-  const { resolver, handleSubmit } = useForm<File_>({
-    resolver: zodResolver(FileSchema),
+  const logs = useLog();
+  const dispatch = useLogDispatch(); // ログ操作用
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<  // transformにより入出力型が異なるため明示的に型指定
+    z.input<typeof fileSchema>,
+    unknown,
+    z.output<typeof fileSchema>
+  >({
+    resolver: zodResolver(fileSchema)
   })
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const target = event.target.files?.[0];
     if (target) {
       setFile(target);
@@ -30,7 +44,19 @@ export default function FileUpload() {
         borderRadius: 'xl',
         boxShadow: 'xl',
         fontSize: 'xs'
-    }}>
+      }}
+      onSubmit={handleSubmit((data: File_) => {
+        handleFileUpload(data.file)
+        dispatch({
+          type: "add",
+          log: {
+            message: "CSVファイルをアップロードしました。",
+            level: "info",
+            timestamp: new Date().toISOString()
+          }
+        });
+      })}
+    >
       <div>
         <label
           htmlFor="csv_upload"
@@ -50,7 +76,7 @@ export default function FileUpload() {
           type="file"
           id="csv_upload"
           accept=".csv"
-          onChange={handleFileChange}
+          {...register('file', {onChange: (e) => onFileChange(e)})}
           hidden
         />
       </div>
@@ -59,6 +85,7 @@ export default function FileUpload() {
           <p>{file.name}</p>
         </div>
       }
+      { errors.file && <p>{errors.file.message}</p>}
       <Button
         width={'80%'}
         bgColor={'green.400'}

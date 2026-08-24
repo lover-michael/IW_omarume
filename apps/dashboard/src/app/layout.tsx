@@ -3,6 +3,7 @@ import { Container } from '@chakra-ui/react';
 import type { Metadata } from 'next';
 import { Noto_Sans_JP } from 'next/font/google';
 import type { PropsWithChildren } from 'react';
+import { LogProvider } from '@/contexts/logContext';
 
 const notoSansJP = Noto_Sans_JP({
   subsets: ['latin'],
@@ -21,7 +22,9 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
       <body className={`${notoSansJP.className} antialiased`}>
         <Provider>
           <Container maxWidth='xl' h='dvh' px={0}>
-            {children}
+            <LogProvider>
+              {children}
+            </LogProvider>
           </Container>
         </Provider>
       </body>
