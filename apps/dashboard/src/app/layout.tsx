@@ -1,5 +1,5 @@
 import { Provider } from '@/components/provider';
-import { Container } from '@chakra-ui/react';
+import { Container, Box } from '@chakra-ui/react';
 import type { Metadata } from 'next';
 import { Noto_Sans_JP } from 'next/font/google';
 import type { PropsWithChildren } from 'react';
@@ -21,9 +21,11 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
     <html lang='ja' suppressHydrationWarning>
       <body className={`${notoSansJP.className} antialiased`}>
         <Provider>
-          <Container maxWidth='xl' h='dvh' px={0}>
+          <Container maxWidth='xl' h='dvh' px={0} display={'flex'} flexDir={'column'}>
             <LogProvider>
-              {children}
+              <Box flex={'1'} overflowY={'auto'}>
+                {children}
+              </Box>
             </LogProvider>
           </Container>
         </Provider>
