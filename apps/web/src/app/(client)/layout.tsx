@@ -10,6 +10,8 @@ import { SessionProvider } from "next-auth/react";
 const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
 });
+import '@/app/globals.css';
+
 
 export const metadata: Metadata = {
   title: {
