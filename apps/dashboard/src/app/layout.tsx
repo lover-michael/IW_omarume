@@ -1,9 +1,12 @@
 import { Provider } from '@/components/provider';
-import { Container, Box } from '@chakra-ui/react';
+import { Container, Box, Flex } from '@chakra-ui/react';
 import type { Metadata } from 'next';
 import { Noto_Sans_JP } from 'next/font/google';
 import type { PropsWithChildren } from 'react';
 import { LogProvider } from '@/contexts/logContext';
+import Sidebar from '@/components/Sidebar';
+import './globals.css';
+
 
 const notoSansJP = Noto_Sans_JP({
   subsets: ['latin'],
@@ -21,11 +24,14 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
     <html lang='ja' suppressHydrationWarning>
       <body className={`${notoSansJP.className} antialiased`}>
         <Provider>
-          <Container maxWidth='xl' h='dvh' px={0} display={'flex'} flexDir={'column'}>
+          <Container maxWidth='full' h='dvh' px={0} display={'flex'} flexDir={'column'}>
             <LogProvider>
+              <Flex>
+              <Sidebar />
               <Box flex={'1'} overflowY={'auto'}>
                 {children}
-              </Box>
+                </Box>
+              </Flex>
             </LogProvider>
           </Container>
         </Provider>
