@@ -10,7 +10,7 @@ export default function ClipBoard() {
 
   return (
     <Stack fontSize={'xs'}>
-      <Box flex={'1'} overflowY={'auto'} maxH={'svh'}>
+      <Box flex={'1'} overflowY={'auto'} maxH={'60%'}>
         {
           logs.length > 0 ? logs.map((log) => {
             return <ClipBoardItem message={log.message} level={log.level} timestamp={log.timestamp} />
