@@ -1,0 +1,19 @@
+/* instead of @import "tailwindcss" */
+@import "tailwindcss/theme.css"; /* without layer(theme) */
+@import "tailwindcss/preflight.css"; /* without layer(base) */
+@import "tailwindcss/utilities.css"; /* without layer(utilities) */
+
+:root {
+    --background: #FFFFFF;
+    --foreground: #020618;
+}
+
+@theme inline {
+    --color-upload-button: #77ED00;
+    --color-fg: #020618;
+}
+
+body {
+    background: var(--background);
+    color: var(--foreground);
+}
