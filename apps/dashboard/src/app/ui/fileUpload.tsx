@@ -1,6 +1,5 @@
 "use client"
 import { handleFileUpload } from "@/actions/timetable/csvFileUpload";
-import { Flex, Button } from "@chakra-ui/react";
 import { FaFileCsv } from "react-icons/fa";
 import { useState } from "react";
 import { fileSchema } from "../types/validationTypes";
@@ -37,14 +36,7 @@ export default function FileUpload() {
 
   return (
     <form
-      style={{
-        height: 'full',
-        margin: 'auto',
-        padding: '10px',
-        borderRadius: 'xl',
-        boxShadow: 'xl',
-        fontSize: 'xs'
-      }}
+      className="w-full mt-5 flex flex-col gap-5 items-center"
       onSubmit={handleSubmit((data: File_) => {
         handleFileUpload(data.file)
         dispatch({
@@ -60,17 +52,9 @@ export default function FileUpload() {
       <div>
         <label
           htmlFor="csv_upload"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '5px',
-            gap: '5px',
-            boxShadow: '5px 5px 5px 5px rgba(0, 0, 0, 0.1)',
-            borderRadius: '5px',
-          }}
+          className="flex items-center gap-2 text-lg text-black border-3 border-gray-500 p-3 rounded-2xl shadow-2xl"
         >
-          <FaFileCsv style={{color: 'green'}}/>Upload CSV
+          <FaFileCsv className="text-4xl text-green-400"/>Upload CSV
         </label>
         <input
           type="file"
@@ -86,17 +70,12 @@ export default function FileUpload() {
         </div>
       }
       { errors.file && <p>{errors.file.message}</p>}
-      <Button
-        width={'80%'}
-        bgColor={'green.400'}
-        fontWeight={'bold'}
-        justifyContent={'center'}
-        margin={'5'}
-        boxShadow={'md'}
+      <button
+        className="w-40 h-10 bg-green-500 text-white justify-center items-center flex"
         type="submit"
       >
         Upload
-      </Button>
+      </button>
     </form>
   )
 }
