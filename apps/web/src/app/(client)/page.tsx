@@ -12,7 +12,7 @@ export default async function Page() {
   const user = await sessionAction();
   const userName = user?.user?.name;
   return (
-    <div>
+    <div >
       {user ? <UserInfo user={userName ? { name: userName } : { name: "" }} /> : <GuideLogin />}
     </div>
   );
