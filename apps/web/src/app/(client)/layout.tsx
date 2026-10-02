@@ -26,12 +26,13 @@ export default async function RootLayout({
   return (
     <html lang="ja" suppressHydrationWarning>
       <body
-        className={`${notoSansJP.className} antialiased`}
+        className={`${notoSansJP.className} antialiased items-center w-full min-h-screen flex flex-col`}
         suppressHydrationWarning
       >
         <Provider>
           <Container
             maxWidth="sm"
+            minWidth="sm"
             h="dvh"
             px={0}
             bgColor={"gray.100"}
@@ -41,7 +42,7 @@ export default async function RootLayout({
           >
             <SessionProvider>
               <Header />
-              <Box flex="1" overflowY="auto" >
+              <Box flex="1" overflowY="auto" alignSelf={'center'} w={'full'} >
                 {children}
               </Box>
               <Footer />
