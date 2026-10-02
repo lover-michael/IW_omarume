@@ -6,7 +6,7 @@ export default function GuideLogin() {
   return (
     <Center h="full" w="full" p={"7"}>
       <Button asChild>
-        <a href="/login">ログインはこちらから</a>
+        <a href="/(auth)/login">ログインはこちらから</a>
       </Button>
     </Center>
   )
