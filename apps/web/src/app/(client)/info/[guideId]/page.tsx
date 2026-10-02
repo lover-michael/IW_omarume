@@ -1,10 +1,11 @@
 "use client";
 
-import { Box, Button, Container, Stack } from "@chakra-ui/react";
+import { FaAnglesLeft } from "react-icons/fa6";
 import { Guide1 } from "@/contents/guide1";
 import { Guide2 } from "@/contents/guide2";
 import { Guide3 } from "@/contents/guide3";
 import React from "react";
+import { ButtonLink } from "@/components/button/Button.Link";
 
 export default function GuidePage({
   params,
@@ -13,38 +14,17 @@ export default function GuidePage({
 }) {
   const { guideId } = React.use(params);
   return (
-    <Container h={"full"} w={"full"} centerContent={true} position={"relative"}>
-      <Box
-        w={"90%"}
-        py={"4"}
-        borderRadius={"2xl"}
-        top={"10"}
-        bgColor={"white"}
-        position={"absolute"}
-      >
-        <Stack gap={"2"}>
-          <Button
-            asChild={true}
-            position={"absolute"}
-            fontWeight={"bold"}
-            bgColor={"white"}
-            color={"black"}
-            boxShadow={"xl"}
-            size={"xs"}
-            top={"-20px"}
-            left={"0px"}
-          >
-            <a href="/info">{"<<"}</a>
-          </Button>
-          {guideId === "1" ? (
-            <Guide1 />
-          ) : guideId === "2" ? (
-            <Guide2 />
-          ) : guideId === "3" ? (
-            <Guide3 />
-          ) : null}
-        </Stack>
-      </Box>
-    </Container>
+    <div className="w-full min-h-fit flex flex-col p-4 gap-2">
+      <ButtonLink href="/info">
+        <FaAnglesLeft className="text-3xl w-full" />
+      </ButtonLink>
+      <div className="w-full bg-white rounded-2xl">
+        {
+          guideId === '1' ? <Guide1 /> :
+          guideId === '2' ? <Guide2 /> :
+          guideId === '3' ? <Guide3 /> : <></>
+        }
+      </div>
+    </div>
   );
 }
