@@ -52,9 +52,10 @@ export default function FileUpload() {
       <div>
         <label
           htmlFor="csv_upload"
-          className="flex items-center gap-2 text-lg text-black border-3 border-gray-500 p-3 rounded-2xl shadow-2xl"
+          className="flex items-center gap-2 text-lg text-black px-3 py-1 bg-gray-200"
         >
-          <FaFileCsv className="text-4xl text-green-400"/>Upload CSV
+          <FaFileCsv className="text-4xl text-green-400" />
+          <div className="text-sm">Upload CSV</div>
         </label>
         <input
           type="file"
@@ -71,7 +72,7 @@ export default function FileUpload() {
       }
       { errors.file && <p>{errors.file.message}</p>}
       <button
-        className="w-40 h-10 bg-green-500 text-white justify-center items-center flex"
+        className="w-40 h-6 bg-green-500 text-gray-100 justify-center items-center flex"
         type="submit"
       >
         Upload
