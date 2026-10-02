@@ -12,7 +12,7 @@ export default async function Page() {
   const user = await sessionAction();
   const userName = user?.user?.name;
   return (
-    <div >
+    <div className="w-full flex flex-col items-center justify-center">
       {user ? <UserInfo user={userName ? { name: userName } : { name: "" }} /> : <GuideLogin />}
     </div>
   );
