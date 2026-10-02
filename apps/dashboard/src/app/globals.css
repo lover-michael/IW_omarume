@@ -11,6 +11,10 @@
 @theme inline {
     --color-upload-button: #77ED00;
     --color-fg: #020618;
+    --color-sidebar-bg: #1a2b2e;
+    --color-sidebar-fg: #94adb1;
+    --color-sidebar-accent: #273f43;
+    --color-sidebar-accent-fg: #ced4d7;
 }
 
 body {
