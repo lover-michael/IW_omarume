@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { AiFillIdcard } from "react-icons/ai";
+import { ButtonLink } from "./button/Button.Link";
 
 export function Header() {
   const { data: session } = useSession();
@@ -23,32 +24,18 @@ export function Header() {
           <Box color={"white"}>おまるめ山バス</Box>
         </Link>
         {session?.user?.id !== undefined ? (
-          <Button
-            bgColor={"green.600"}
-            position={"absolute"}
-            right={"5"}
-            boxShadow={"lg"}
-            borderRadius={"4xl"}
-            outline={"solid 2px"}
-            outlineColor={"green.400"}
-            asChild
-          >
-            <a href="/">
-              <AiFillIdcard />
-            </a>
-          </Button>
+          <div className="absolute right-2.5 h-full">
+            <ButtonLink href="/">
+              <AiFillIdcard className="text-2xl" />
+              TOP
+            </ButtonLink>
+          </div>
         ) : (
-          <Link href="/login" style={{ position: "absolute", right: "10px" }}>
-            <Button
-              bgColor={"green.600"}
-              boxShadow={"lg"}
-              borderRadius={"4xl"}
-              outline={"solid 2px"}
-              outlineColor={"green.400"}
-            >
+          <div className="absolute right-2.5">
+            <ButtonLink href="/login">
               ログイン
-            </Button>
-          </Link>
+            </ButtonLink>
+          </div>
         )}
       </Center>
     </Box>
