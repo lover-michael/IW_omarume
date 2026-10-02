@@ -13,7 +13,6 @@ import { useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import {
   DeleteTimeTableButton,
-  UpdateTimeTableButton,
 } from "./timetableCandidates";
 
 // timetableに沿った型
