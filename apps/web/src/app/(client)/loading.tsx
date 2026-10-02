@@ -1,10 +1,7 @@
-import { Center, Box, Stack, Card } from "@chakra-ui/react";
-
 export default function Loading() {
   return (
-    <Center h="full" w="90%" p={"7"}>
-      <Box height={'xl'} w={"100%"} bgColor={'gray.100'}>
-      </Box>
-    </Center>
+    <div className="flex items-center justify-center min-h-screen">
+      <svg className="w-10 h-10 border-4 border-gray-400 border-t-transparent rounded-full animate-spin"></svg>
+    </div>
   );
 }
