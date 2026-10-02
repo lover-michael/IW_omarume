@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  Button,
   Flex,
   Portal,
   Select,
@@ -10,8 +9,9 @@ import {
   createListCollection,
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
-import Link from "next/link";
-import { Card_layout } from "./components/timetableCard";
+import { CardTimetable } from "@/components/Card.Timetable";
+import { ButtonLink } from "@/components/button/Button.Link";
+import { FaArrowUpRightFromSquare } from "react-icons/fa6";
 
 type Station = {
   name: string;
@@ -67,22 +67,22 @@ export default function TimeTable({ stations }: TimeTableProps) {
           </Portal>
         </Select.Root>
         {/* ここまで */}
-        <Link href="/timetable/register">
-          <Button colorPalette={"green"} disabled={stations.length >= 10}>
-            新規登録
-          </Button>
-        </Link>
+        <ButtonLink href="/timetable/register">
+          <FaArrowUpRightFromSquare className="text-xl"/>
+          <div className="text-sm">新規登録</div>
+        </ButtonLink>
       </Flex>
       <div>
         {displaytag[0] === "mytimetable" ? (
           <Stack gap="3">
             {stations.map((e) => {
               return (
-                <Card_layout
-                  timetable_id={e.id}
-                  depart_station={e.depart_station}
-                  arrive_station={e.arrive_station}
-                  memo={e.memo}
+                <CardTimetable
+                  title={e.memo}
+                  a_time={{ hour: e.arrive_station.hour, minute: e.arrive_station.minute }}
+                  d_time={{ hour: e.depart_station.hour, minute: e.depart_station.minute }}
+                  a_place={e.arrive_station.name}
+                  d_place={e.depart_station.name}
                 />
               );
             })}
