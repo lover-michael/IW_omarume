@@ -26,7 +26,7 @@ export default async function RootLayout({
   return (
     <html lang="ja" suppressHydrationWarning>
       <body
-        className={`${notoSansJP.className} antialiased items-center w-full min-h-screen flex flex-col`}
+        className={`${notoSansJP.className} antialiased items-center w-full flex flex-col`}
         suppressHydrationWarning
       >
         <Provider>
