@@ -4,6 +4,7 @@ import { FaArrowRight } from "react-icons/fa6";
 import { useState } from "react";
 
 type CardTimetableProps = {
+  key: number;
   title: string | null;        // 時刻表の目的
   a_time: { hour: string; minute: string }; // 到着時刻
   d_time: { hour: string; minute: string }; // 出発時刻
