@@ -1,6 +1,5 @@
 /* instead of @import "tailwindcss" */
 @import "tailwindcss/theme.css"; /* without layer(theme) */
-@import "tailwindcss/preflight.css"; /* without layer(base) */
 @import "tailwindcss/utilities.css"; /* without layer(utilities) */
 
 :root {
