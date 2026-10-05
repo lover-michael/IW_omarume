@@ -4,6 +4,8 @@ import { station, timetable } from "@repo/database";
 import { and, eq, or } from "drizzle-orm";
 
 export const GetElements = async (user_id: number) => {
+  if(!user_id) return [];
+
   return await getDb()
     .select()
     .from(timetable)
