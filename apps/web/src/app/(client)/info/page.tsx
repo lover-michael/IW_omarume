@@ -10,13 +10,13 @@ export default function PageInfo() {
   return (
     <Container h={"full"} w={"full"} centerContent={true}>
       <Stack gap={"3"} position={"absolute"} top={"20"} w={"80%"} mx={"auto"}>
-        <Box bgColor={"white"} boxShadow={"sm"} borderRadius={"4px"} py={"3"}>
+        <Box bgColor={"white"} boxShadow={"sm"} borderRadius={"4px"} py={"3"} _hover={{ scale: 1.05}} transitionDuration={'slow'}>
           <Center gapX={"3"} fontWeight={"bold"}>
             <a href={"/info/1"}>
-              <Box rounded={"2xl"} bgColor={"gray.muted"} padding={"2"}>
+              <Box rounded={"2xl"} bgColor={"gray.muted"} padding={"2"} >
                 <Stack>
                   <HStack>
-                    <FaBusSimple size={"30px"} />
+                    <FaBusSimple size={"30px"}/>
                     <Box>バスの乗り方を確認する</Box>
                   </HStack>
                   <HStack>
@@ -36,7 +36,7 @@ export default function PageInfo() {
             </a>
           </Center>
         </Box>
-        <Box bgColor={"white"} boxShadow={"sm"} borderRadius={"4px"} py={"3"}>
+        <Box bgColor={"white"} boxShadow={"sm"} borderRadius={"4px"} py={"3"} _hover={{ scale: 1.05}} transitionDuration={'slow'}>
           {/*<Link to={ }></Link>*/}
           <Center gapX={"3"} fontWeight={"bold"}>
             <a href={"/info/2"}>
@@ -63,7 +63,7 @@ export default function PageInfo() {
             </a>
           </Center>
         </Box>
-        <Box bgColor={"white"} boxShadow={"sm"} borderRadius={"4px"} py={"3"}>
+        <Box bgColor={"white"} boxShadow={"sm"} borderRadius={"4px"} py={"3"} _hover={{ scale: 1.05}} transitionDuration={'slow'}>
           <Center gapX={"3"} fontWeight={"bold"}>
             <a href={"/info/3"}>
               <Box
