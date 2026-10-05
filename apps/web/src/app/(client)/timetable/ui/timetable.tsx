@@ -78,6 +78,7 @@ export default function TimeTable({ stations }: TimeTableProps) {
             {stations.map((e) => {
               return (
                 <CardTimetable
+                  key={e.id}
                   title={e.memo}
                   a_time={{ hour: e.arrive_station.hour, minute: e.arrive_station.minute }}
                   d_time={{ hour: e.depart_station.hour, minute: e.depart_station.minute }}
