@@ -22,6 +22,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
   return (
     <html lang='ja' suppressHydrationWarning>
+      <head>
+        <meta name="emotion-insertion-point" content="" />
+      </head>
       <body className={`${notoSansJP.className} antialiased`}>
         <Provider>
           <LogProvider>
