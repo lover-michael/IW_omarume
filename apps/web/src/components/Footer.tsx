@@ -3,7 +3,6 @@ import { Button, Center } from "@chakra-ui/react";
 import { AiOutlineSchedule } from "react-icons/ai";
 import { IoInformationCircleOutline } from "react-icons/io5";
 import { FaMapMarkerAlt } from "react-icons/fa";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ButtonLink } from "./button/Button.Link";
 
