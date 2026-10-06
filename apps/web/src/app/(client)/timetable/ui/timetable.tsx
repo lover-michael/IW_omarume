@@ -2,16 +2,13 @@
 
 import {
   Flex,
-  Portal,
-  Select,
   Stack,
-  Text,
-  createListCollection,
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 import { CardTimetable } from "@/components/Card.Timetable";
 import { ButtonLink } from "@/components/button/Button.Link";
 import { FaArrowUpRightFromSquare } from "react-icons/fa6";
+import { DropdownMenu } from "@/components/DropdownMenu";
 
 type Station = {
   name: string;
@@ -31,42 +28,16 @@ export default function TimeTable({ stations }: TimeTableProps) {
 
   return (
     <Stack h="full" w="full" gap={2} p={"2"}>
-      <Flex gap={2}>
-        {/* 表示項目を変更するためのセレクトコンポーネント */}
-        <Select.Root
-          collection={displaySwitch}
-          defaultValue={["timetable"]}
+      <Flex gap={2} height={'1/20'}>
+        <DropdownMenu
+          items={[
+            { label: "マイ時刻表", value: "mytimetable" },
+            { label: "標準時刻表", value: "timetable" }]}
+          size={{ width: '100%', height: '100%' }}
           value={displaytag}
-          onValueChange={(e) => setDisplaytag(e.value)}
-        >
-          <Select.HiddenSelect />
-          <Select.Control>
-            <Select.Trigger>
-              <Select.ValueText
-                color={"blackAlpha.700"}
-                placeholder="表示したいものを選択"
-              />
-            </Select.Trigger>
-            <Select.IndicatorGroup>
-              <Select.Indicator color={"blackAlpha.700"} />
-            </Select.IndicatorGroup>
-          </Select.Control>
-          <Portal container={ref}>
-            <Select.Positioner>
-              <Select.Content>
-                {displaySwitch.items.map((e) => {
-                  return (
-                    <Select.Item item={e} key={e.value}>
-                      <Text color={"black"}>{e.label}</Text>
-                      <Select.ItemIndicator />
-                    </Select.Item>
-                  );
-                })}
-              </Select.Content>
-            </Select.Positioner>
-          </Portal>
-        </Select.Root>
-        {/* ここまで */}
+          onValueChange={setDisplaytag}
+          placeholder="表示したい項目を選んでください"
+        />
         <ButtonLink href="/timetable/register">
           <FaArrowUpRightFromSquare className="text-xl"/>
           <div className="text-sm">新規登録</div>
@@ -97,10 +68,3 @@ export default function TimeTable({ stations }: TimeTableProps) {
     </Stack>
   );
 }
-
-const displaySwitch = createListCollection({
-  items: [
-    { label: "マイ時刻表", value: "mytimetable" },
-    { label: "標準時刻表", value: "timetable" },
-  ],
-});
