@@ -16,7 +16,7 @@ export default function GuidePage({
   return (
     <div className="w-full min-h-fit flex flex-col p-4 gap-2">
       <ButtonLink href="/info">
-        <FaAnglesLeft className="text-3xl w-full" />
+        <FaAnglesLeft className="text-2xl w-full" />
       </ButtonLink>
       <div className="w-full bg-white rounded-2xl">
         {
