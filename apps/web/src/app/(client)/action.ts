@@ -16,7 +16,7 @@ export const GetElements = async (user_id: number) => {
       headers: {
         "Content-Type": "application/json"
       },
-      cache: "no-store" //App Routerではデフォルトでキャッシュされるため、最新データを確実に取得するために追加
+      cache: "no-store" //App Routerではデフォルトでキャッシュされるため最新データを確実に取得するために追加
     }
   );
 
