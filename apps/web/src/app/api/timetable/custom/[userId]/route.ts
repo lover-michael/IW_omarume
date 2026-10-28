@@ -10,29 +10,29 @@ type RequestType = {
   arriveStationId: number,
 }
 
-export async function POST(
-  request: NextRequest,
-  { param }: { param: Promise<{ userId: string }> }
-) {
-  // ポストするデータをリクエストボディから受け取る
-  const postData: RequestType = await request.json();
-  // 動的セグメントからユーザーidを受け取る
-  const userId = Number((await param).userId);
-
-  // ユーザーのリクエストデータをDBに追加する
-  try {
-    await postUserTimetable({
-      userId: userId,
-      ...postData
-    })
-  } catch (error) {
-    // データ登録のトランザクションに失敗した場合、エラーコードを返す
-    return NextResponse.json({ error: `${error}` }, { status: 500 });
-  }
-
-  // リクエスト成功レスポンスを返す
-  return NextResponse.json({ message: "success" }, { status: 200 });
-}
+// export async function POST(
+//   request: NextRequest,
+//   { param }: { param: Promise<{ userId: string }> }
+// ) {
+//   // ポストするデータをリクエストボディから受け取る
+//   const postData: RequestType = await request.json();
+//   // 動的セグメントからユーザーidを受け取る
+//   const userId = Number((await param).userId);
+//
+//   // ユーザーのリクエストデータをDBに追加する
+//   try {
+//     await postUserTimetable({
+//       userId: userId,
+//       ...postData
+//     })
+//   } catch (error) {
+//     // データ登録のトランザクションに失敗した場合、エラーコードを返す
+//     return NextResponse.json({ error: `${error}` }, { status: 500 });
+//   }
+//
+//   // リクエスト成功レスポンスを返す
+//   return NextResponse.json({ message: "success" }, { status: 200 });
+// }
 
 export async function GET(
   request: NextRequest,
