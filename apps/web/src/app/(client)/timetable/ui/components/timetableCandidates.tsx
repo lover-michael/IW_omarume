@@ -6,7 +6,7 @@ import {
   GetStations,
   UpdateTimeTable,
 } from "../../register/action";
-import { STATION, TimeTableFormType, TimeTableSchema } from "../../types/formTypes";
+import { STATION, TimeTableFormType, TimeTableSchema } from "../../../../../types/formTypes";
 import {
   Box,
   RadioCard,
@@ -32,8 +32,8 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { title } from "process";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
-import { DayGroups, RoutesList } from "../../types/datas";
-import { UserStationGroup } from "../../types/userStationGroupClass";
+import { DayGroups, RoutesList } from "../../../../../types/datas";
+import { UserStationGroup } from "../../../../../types/userStationGroupClass";
 import { FaSearch } from "react-icons/fa";
 
 type CandidatesProps = {

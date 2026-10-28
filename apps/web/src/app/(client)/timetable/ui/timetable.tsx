@@ -5,7 +5,7 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
-import { CardTimetable } from "@/components/Card.Timetable";
+import { CardTimetable } from "@/components/features/timetable/Card.Timetable";
 import { ButtonLink } from "@/components/button/Button.Link";
 import { FaArrowUpRightFromSquare } from "react-icons/fa6";
 import { DropdownMenu } from "@/components/DropdownMenu";
