@@ -1,6 +1,6 @@
 ﻿import { sessionAction } from "../(auth)/login/action/loginAction";
-import UserInfo from "./ui/userInfo";
-import GuideLogin from "./ui/guideLogin";
+import UserInfo from "../../components/features/top/userInfo";
+import GuideLogin from "../../components/features/top/guideLogin";
 
 export type User = {
   id: number | undefined;
