@@ -10,6 +10,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: DrizzleAdapter(getDb()),
   session: {
     strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60,  // JWTの最大有効期間...1カ月
+    updateAge: 24 * 60 * 60     // セッションの更新頻度(秒)...1日
   },
   providers: [
     Credentials({
