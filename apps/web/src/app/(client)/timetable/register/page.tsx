@@ -12,8 +12,6 @@ import {
   useListCollection,
   Combobox,
   Portal,
-  Spinner,
-  Span,
   useFilter,
   createListCollection,
 } from "@chakra-ui/react";
@@ -22,17 +20,18 @@ import { Controller, Form, set, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import { FaSearch } from "react-icons/fa";
-import { DayGroups, RoutesList } from "@/app/(client)/timetable/types/datas";
-import { TimeTableSchema, TimeTableFormType } from "../types/formTypes";
+import { DayGroups, RoutesList } from "@/types/datas";
+import { TimeTableSchema, TimeTableFormType } from "../../../../types/formTypes";
 import { GetStations } from "./action";
 import { useEffect } from "react";
-import { UserStationGroup } from "../types/userStationGroupClass";
+import { UserStationGroup } from "../../../../types/userStationGroupClass";
 import Candidates from "../ui/components/timetableCandidates";
 import { SaveTimeTable } from "./action";
 import { User } from "../../page";
 import { sessionAction } from "@/app/(auth)/login/action/loginAction";
 import { useRouter } from "next/navigation";
 import { GetElements } from "../../action";
+import { ComboboxComponent } from "@/components/Combobox";
 
 export default function PageRegister() {
   const [user, setUser] = useState<User | undefined>(undefined);
@@ -101,25 +100,8 @@ export default function PageRegister() {
   }, []);
 
   // allStations もしくは inputStationName どちらかが変更されると再生成する
-  const collection = useMemo(
-    () =>
-      createListCollection({
-        items: allStations.filter((station) =>
-          contains(station.label, inputStationName ?? ""),
-        ),
-      }),
-    [allStations, inputStationName],
-  );
-
-  const collectionArrive = useMemo(
-    () =>
-      createListCollection({
-        items: allStations.filter((station) =>
-          containsArrive(station.label, inputStationNameArrive ?? ""),
-        ),
-      }),
-    [allStations, inputStationNameArrive],
-  );
+  const [departStation, setDepartStation] = useState<string[]>(['']);
+  const [arriveStation, setArriveStation] = useState<string[]>(['']);
 
   /// フォームの送信処理
   const onSubmit = async (props: TimeTableFormType) => {
@@ -145,20 +127,19 @@ export default function PageRegister() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      style={{ height: "100%", width: "100%", position: "relative" }}
+      className="w-full h-full flex flex-col gap-4 p-5"
     >
-      <FormControl gap={"10px"}>
-        <Box p={"10px"} m={"auto"}>
+      <FormControl>
+        <Stack gapY={'4'}>
           <Box
             fontSize={"3xl"}
             fontWeight={"bold"}
             textAlign={"center"}
-            p={"5px"}
           >
-            マイ時刻表登録画面
+            <div> マイ時刻表登録画面</div>
+            <Separator size={"lg"} bgColor={"black"} />
           </Box>
-          <Separator size={"lg"} bgColor={"black"} />
-          <Box p={"10px"}>
+          <Box>
             <FormLabel htmlFor={"memo"}>目的</FormLabel>
             <Input
               id={"memo"}
@@ -169,7 +150,7 @@ export default function PageRegister() {
             />
             {errors.memo && <Box color={"red.500"}>{errors.memo.message}</Box>}
           </Box>
-          <Box py={"5px"} mx={"10px"}>
+          <Box>
             <FormLabel htmlFor={"day"}>曜日</FormLabel>
             <RadioGroup.Root
               variant={"subtle"}
@@ -190,7 +171,7 @@ export default function PageRegister() {
               </HStack>
             </RadioGroup.Root>
           </Box>
-          <Box py={"5px"} mx={"10px"}>
+          <Box>
             <FormLabel htmlFor={"itenrary"}>路線</FormLabel>
             <RadioGroup.Root
               variant={"subtle"}
@@ -213,87 +194,21 @@ export default function PageRegister() {
               </HStack>
             </RadioGroup.Root>
           </Box>
-          <Box py={"5px"} mx={"10px"}>
-            <Combobox.Root
-              collection={collection}
-              onInputValueChange={(e) => {
-                setInputStationName(e.inputValue ?? ""); // Nullガード
-              }}
-              onValueChange={(e) => {
-                userStationGroup.depart = e.value[0];
-              }}
-              width={"100%"}
-            >
-              <Combobox.Label>搭乗するバス停</Combobox.Label>
-              <Combobox.Control>
-                <Combobox.Input
-                  boxShadow={"md"}
-                  placeholder="バス停の名前を入力してください"
-                />
-                <Combobox.IndicatorGroup>
-                  <Combobox.ClearTrigger />
-                  <Combobox.Trigger />
-                </Combobox.IndicatorGroup>
-              </Combobox.Control>
-              <Portal>
-                <Combobox.Positioner>
-                  <Combobox.Content>
-                    {collection.items.length === 0 ? (
-                      <Combobox.Empty>候補が見つかりません</Combobox.Empty>
-                    ) : (
-                      collection.items.map((item) => (
-                        <Combobox.Item item={item} key={item.id}>
-                          {item.label}
-                          <Combobox.ItemIndicator />
-                        </Combobox.Item>
-                      ))
-                    )}
-                  </Combobox.Content>
-                </Combobox.Positioner>
-              </Portal>
-            </Combobox.Root>
-          </Box>
-          <Box py={"5px"} mx={"10px"}>
-            <Combobox.Root
-              collection={collectionArrive}
-              onInputValueChange={(e) => {
-                setInputStationNameArrive(e.inputValue ?? ""); // Nullガード
-              }}
-              onValueChange={(e) => {
-                userStationGroup.arrive = e.value[0];
-              }}
-              width={"100%"}
-            >
-              <Combobox.Label>下車するバス停</Combobox.Label>
-              <Combobox.Control>
-                <Combobox.Input
-                  boxShadow={"md"}
-                  placeholder="バス停の名前を入力してください"
-                />
-                <Combobox.IndicatorGroup>
-                  <Combobox.ClearTrigger />
-                  <Combobox.Trigger />
-                </Combobox.IndicatorGroup>
-              </Combobox.Control>
-              <Portal>
-                <Combobox.Positioner>
-                  <Combobox.Content>
-                    {collectionArrive.items.length === 0 ? (
-                      <Combobox.Empty>候補が見つかりません</Combobox.Empty>
-                    ) : (
-                      collectionArrive.items.map((item) => (
-                        <Combobox.Item item={item} key={item.id}>
-                          {item.label}
-                          <Combobox.ItemIndicator />
-                        </Combobox.Item>
-                      ))
-                    )}
-                  </Combobox.Content>
-                </Combobox.Positioner>
-              </Portal>
-            </Combobox.Root>
-          </Box>
-          <Box py={"5px"} mx={"10px"}>
+          <ComboboxComponent
+            items={allStations}
+            placeholder="乗車するバス停を選択してください"
+            value={departStation}
+            onValueChange={setDepartStation}
+            title="乗車駅"
+          />
+          <ComboboxComponent
+            items={allStations}
+            placeholder="降車するバス停を選択してください"
+            value={arriveStation}
+            onValueChange={setArriveStation}
+            title="降車駅"
+          />
+          <Box>
             <Button
               w={"100%"}
               bgColor={"green.500"}
@@ -308,16 +223,8 @@ export default function PageRegister() {
                 control={control}
                 render={({ field }) => (
                   <Candidates
-                    depart={
-                      userStationGroup.depart === null
-                        ? ""
-                        : userStationGroup.depart
-                    }
-                    arrive={
-                      userStationGroup.arrive === null
-                        ? ""
-                        : userStationGroup.arrive
-                    }
+                    depart={departStation[0]}
+                    arrive={arriveStation[0]}
                     day={day === null ? "" : day}
                     direction={itenrary === null ? "" : itenrary}
                     OnSelectChanged={field.onChange}
@@ -326,12 +233,12 @@ export default function PageRegister() {
               />
             )}
           </Box>
-        </Box>
+        </Stack>
       </FormControl>
-      <Center position={"absolute"} bottom={"10px"} left={"auto"} w={"full"}>
+      <Center left={"auto"} w={"full"}>
         <Button
           type="submit"
-          w={"80%"}
+          w={"full"}
           disabled={isLoading}
           bgColor={"green.500"}
           boxShadow={"lg"}
