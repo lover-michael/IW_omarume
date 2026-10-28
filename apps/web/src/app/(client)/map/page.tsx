@@ -1,29 +1,21 @@
 "use client";
 
-import { Box, Button, Center, HStack } from "@chakra-ui/react";
-import Image from "next/image";
-import map from "@/../public/image/KotaniArea_Overall.png";
+import dynamic from "next/dynamic";
+import { useMemo } from "react";
 
-export default function PageMap() {
+export default function Page() {
+  const Map = useMemo(() => dynamic(
+    () => import('@/components/features/map/RouteMap'),
+    {
+      loading: () => <p>マップを読み込み中です</p>,
+      ssr: false
+    }
+  ), [])
+
+
   return (
-    <Box h={"100%"} w={"100%"} position={"relative"}>
-      <Image
-        src={map}
-        alt={"map"}
-        width={400}
-        height={400}
-        style={{ position: 'absolute', top: "50%", left: "50%", transform: 'translate(-50%, -50%)' }}
-      />
-      <Center my={'2'} mx={'5'}>
-        <HStack gap={'5'}>
-          <Button boxShadow={'xl'} bgColor={'green.500'}>
-            バスの現在値
-          </Button>
-          <Button boxShadow={'xl'} bgColor={'green.500'}>
-            ルート確認
-          </Button>
-        </HStack>
-      </Center>
-    </Box>
+    <div className="w-full h-full">
+      <Map position={[ 34.6271377, 133.1025034 ]} zoom={13} />
+    </div>
   );
 }
