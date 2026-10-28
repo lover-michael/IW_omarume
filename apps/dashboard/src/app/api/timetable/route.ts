@@ -15,7 +15,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
   }
 
   const data: Station[] = body;
-  /*以下にDB操作用の処理を記述(APIとして利用できるかのテストのために一旦保留)*/
+  /*以下にDB操作用の処理を記述*/
   try {
     // 時刻表データをDBに登録
     await registerTimetable(data);
