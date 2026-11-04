@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Station } from "@/types/timetableTypes";
-import { registerTimetable } from "@/server/registerTimetable.action";
+import { deleteTimetable, registerTimetable } from "@/server/registerTimetable.action";
 
 // バス全体の時刻表をアップロードするときなどに利用するAPIエンドポイント
 export async function POST(request: NextRequest, response: NextResponse) {
@@ -17,6 +17,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
   const data: Station[] = body;
   /*以下にDB操作用の処理を記述*/
   try {
+    await deleteTimetable({id: null});
     // 時刻表データをDBに登録
     await registerTimetable(data);
   } catch (error) {
@@ -26,4 +27,10 @@ export async function POST(request: NextRequest, response: NextResponse) {
 
   // リクエスト成功のレスポンスを返す
   return NextResponse.json({ message: "success" }, { status: 200 });
+}
+
+export async function GET() {
+  try {
+
+  }
 }

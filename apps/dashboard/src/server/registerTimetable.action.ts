@@ -14,17 +14,15 @@ type deleteProps = {
 };
 
 export const deleteTimetable = async (props: deleteProps) => {
-  await db.transaction(async (tx) => {
-    const timetableList = await tx.select().from(station);
-    // If the timetable list is empty, do nothing
-    if (timetableList.length === 0) return;
+  const timetableList = await db.select().from(station);
+  // If the timetable list is empty, do nothing
+  if (timetableList.length === 0) return;
 
-    // If id is null, delete all timetable entries
-    if (props.id === null) {
-      await tx.delete(station);
-      return;
-    }
+  // If id is null, delete all timetable entries
+  if (props.id === null) {
+    await db.delete(station);
+    return;
+  }
 
-    await tx.delete(station).where(eq(station.id, props.id));
-  })
+  await db.delete(station).where(eq(station.id, props.id));
 };

@@ -36,7 +36,7 @@ export default function FileUpload() {
 
   return (
     <form
-      className="w-full mt-5 flex flex-col gap-5 items-center"
+      className="h-full w-full mt-5 flex flex-col gap-5 items-center"
       onSubmit={handleSubmit((data: File_) => {
         handleFileUpload(data.file)
         dispatch({
@@ -49,13 +49,13 @@ export default function FileUpload() {
         });
       })}
     >
-      <div>
+      <div className="h-full w-2/3">
         <label
           htmlFor="csv_upload"
-          className="flex items-center gap-2 text-lg text-black px-3 py-1 bg-gray-200"
+          className="flex items-center gap-2 text-gray-100 p-2 mx-5 bg-green-400 rounded-2xl"
         >
-          <FaFileCsv className="text-4xl text-green-400" />
-          <div className="text-sm">Upload CSV</div>
+          <FaFileCsv className="text-4xl" />
+          <div className="text-base">Upload CSV</div>
         </label>
         <input
           type="file"
@@ -72,7 +72,7 @@ export default function FileUpload() {
       }
       { errors.file && <p>{errors.file.message}</p>}
       <button
-        className="w-40 h-6 bg-green-500 text-gray-100 justify-center items-center flex"
+        className="w-2/3 bg-green-500 text-gray-100 flex justify-center items-end "
         type="submit"
       >
         Upload

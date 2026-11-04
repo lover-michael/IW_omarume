@@ -3,7 +3,7 @@
 import { SectionSidebar } from "./Section.Sidebar";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { FaBars } from "react-icons/fa6";
+import { FaBars, FaX } from "react-icons/fa6";
 
 
 export default function Sidebar() {
@@ -11,15 +11,20 @@ export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <aside className="min-h-screen w-45 bg-(--color-sidebar-bg) border-e-2 transition-all duration-300 ease-in-out transform translate-x-0">
-      <div className="flex p-2 text-3xl my-2 font-bold text-(--color-sidebar-fg)">
-        MENU
-        <button className="p-2 ml-auto duration-300 hover:text-(--color-sidebar-accent-fg)"><FaBars className="text-xl" /></button>
+    <aside className={`p-2 flex min-h-full text-(--color-sidebar-fg) bg-(--color-sidebar-bg) border-e-2 transition-all duration-300 ${isOpen ? 'w-62' : 'w-10'}`}>
+      <div className={`w-9/10 ${isOpen ? "" : "hidden"}`}>
+        <span className="font-bold text-3xl text-(--color-sidebar-fg)">MENU</span>
+        <div className="my-2 flex flex-col gap-1">
+          <SectionSidebar name={'管理画面'} path={'/'} nowPath={pathName} />
+          <SectionSidebar name={'時刻表情報'} path={'/stationInfo'} nowPath={pathName} />
+        </div>
       </div>
-      <div className="my-2 flex flex-col items-center gap-1">
-        <SectionSidebar name={'管理画面'} path={'/'} nowPath={pathName} />
-        <SectionSidebar name={'時刻表情報'} path={'/stationInfo'} nowPath={pathName} />
-      </div>
+      <button
+        className="h-fit py-2 flex items-baseline hover:text-(--color-sidebar-accent-fg)"
+        onClick={() => { setIsOpen(!isOpen) }}
+      >
+        { isOpen ? <FaX className="text-xl" /> : <FaBars className="text-xl" />}
+      </button>
     </aside>
   )
 }

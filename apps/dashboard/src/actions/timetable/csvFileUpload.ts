@@ -16,13 +16,13 @@ export const handleFileUpload = async (file: File | null) => {
 
     const parsedData: Station[] = data.map((line) => {
       // 行をカンマで分割し、各列を解析する
-      const [name, hour, minute, day, direction] = line.split(",");
+      const [name, day, hour, minute, direction] = line.split(",");
       return {
         name: name,
-        hour: hour,
-        minute: minute,
         day: day,
         direction: direction,
+        hour: hour,
+        minute: minute,
       };
     });
 

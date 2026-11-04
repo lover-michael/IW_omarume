@@ -17,7 +17,6 @@ export default function ClipBoard() {
           }) : <Box>No logs</Box>
         }
       </div>
-      <Separator size={'lg'} />
       <button className="bg-red-500 text-center text-white w-1/3 h-8 rounded-xl" onClick={() => dispatch({ type: "clear" })}>
         clear
       </button>

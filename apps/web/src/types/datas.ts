@@ -17,6 +17,6 @@ export const SearchResult = [
 ];
 
 export const RoutesList = [
-  { label: "行き", value: "Outbound" },
-  { label: "帰り", value: "Return" },
+  { label: "行き", value: "ob" },
+  { label: "帰り", value: "ib" },
 ];

@@ -28,12 +28,12 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
       <body className={`${notoSansJP.className} antialiased`}>
         <Provider>
           <LogProvider>
-            <Flex>
+            <div className="min-h-screen flex">
               <Sidebar />
-              <Box flex={'1'} overflowY={'auto'}>
+              <Box flex={'1'}>
                 {children}
               </Box>
-            </Flex>
+            </div>
           </LogProvider>
         </Provider>
       </body>
