@@ -22,7 +22,7 @@ function formatTime({ which, time, place }: { which: string; time: { hour: strin
   )
 }
 
-export const CardTimetable = ({ title = "", a_time, d_time, a_place, d_place }: CardTimetableProps) => {
+export const CardMyTimetable = ({ title = "", a_time, d_time, a_place, d_place }: CardTimetableProps) => {
   const [expanded, setExpanded] = useState(false);
 
   return (

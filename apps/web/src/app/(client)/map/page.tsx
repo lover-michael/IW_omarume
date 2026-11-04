@@ -14,8 +14,8 @@ export default function Page() {
 
 
   return (
-    <div className="w-full h-full">
-      <Map position={[ 34.6271377, 133.1025034 ]} zoom={13} />
+    <div className="flex items-center justify-center w-11/12 h-11/12 mx-auto my-5 p-3 rounded-2xl bg-gray-50">
+      <Map position={[ 34.6271377, 133.1025034 ]} zoom={14} />
     </div>
   );
 }

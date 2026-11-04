@@ -5,7 +5,7 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
-import { CardTimetable } from "@/components/features/timetable/Card.Timetable";
+import { CardMyTimetable } from "@/components/features/timetable/Card.Timetable";
 import { ButtonLink } from "@/components/button/Button.Link";
 import { FaArrowUpRightFromSquare } from "react-icons/fa6";
 import { DropdownMenu } from "@/components/DropdownMenu";
@@ -48,7 +48,7 @@ export default function TimeTable({ stations }: TimeTableProps) {
           <Stack gap="3">
             {stations.map((e) => {
               return (
-                <CardTimetable
+                <CardMyTimetable
                   key={e.id}
                   title={e.memo}
                   a_time={{ hour: e.arrive_station.hour, minute: e.arrive_station.minute }}
