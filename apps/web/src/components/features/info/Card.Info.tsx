@@ -10,7 +10,7 @@ type propsType = {
 
 export const InfoCardComponent = ({ title, subTitle="", icon, href }: propsType) => {
   return (
-    <Link className="flex items-center w-11/12 h-25 rounded-2xl border-2 border-gray-200 bg-gray-50" href={href}>
+    <Link className="flex items-center w-11/12 h-25 rounded-2xl border border-gray-200 bg-white" href={href}>
       <div className="w-15 h-15 mx-2 flex items-center justify-center bg-gray-300 rounded-full">
         {icon}
       </div>

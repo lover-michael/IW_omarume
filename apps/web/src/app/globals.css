@@ -1,3 +1,16 @@
 /* instead of @import "tailwindcss" */
 @import "tailwindcss/theme.css"; /* without layer(theme) */
 @import "tailwindcss/utilities.css"; /* without layer(utilities) */
+
+:root {
+    --background: #E2E8F0;
+    --foreground: #020618;
+}
+
+@theme inline {
+}
+
+body {
+    background: var(--background);
+    color: var(--foreground);
+}

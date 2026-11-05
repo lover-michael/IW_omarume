@@ -45,9 +45,9 @@ export default async function RootLayout({
           >
             <SessionProvider>
               <Header />
-              <Box flex="1" overflowY="auto" alignSelf={'center'} w={'full'} >
+              <div className="bg-gray-100 h-full w-full overflow-auto">
                 {children}
-              </Box>
+              </div>
               <Footer />
             </SessionProvider>
           </Container>

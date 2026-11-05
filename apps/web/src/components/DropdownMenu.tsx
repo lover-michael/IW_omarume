@@ -37,8 +37,16 @@ export const DropdownMenu = ({
       value={value}
       onValueChange={(e) => { onValueChange(e.value) }}>
       <Select.HiddenSelect />
-      <Select.Control>
-        <Select.Trigger>
+      <Select.Control
+        h={"full"}
+      >
+        <Select.Trigger
+          h={"full"}
+          bg={'white'}
+          rounded={'2xl'}
+          boxShadow={'sm'}
+          fontSize={'md'}
+        >
           <Select.ValueText placeholder={placeholder} />
         </Select.Trigger>
         <Select.IndicatorGroup>
@@ -47,9 +55,17 @@ export const DropdownMenu = ({
       </Select.Control>
       <Portal>
         <Select.Positioner>
-          <Select.Content>
+          <Select.Content
+            rounded={'xl'}
+            p={'2'}
+          >
             {collection.items.map((e) => (
-              <Select.Item item={e} key={e.value}>
+              <Select.Item
+                item={e}
+                key={e.value}
+                rounded={'xl'}
+                py={'2'}
+              >
                 {e.label}
                 <Select.ItemIndicator />
               </Select.Item>

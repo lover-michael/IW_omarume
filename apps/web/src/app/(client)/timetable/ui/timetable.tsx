@@ -28,7 +28,7 @@ export default function TimeTable({ stations }: TimeTableProps) {
 
   return (
     <Stack h="full" w="full" gap={2} p={"2"}>
-      <Flex gap={2} height={'1/20'}>
+      <Flex gap={2} height={'1/15'}>
         <DropdownMenu
           items={[
             { label: "マイ時刻表", value: "mytimetable" },
@@ -39,8 +39,7 @@ export default function TimeTable({ stations }: TimeTableProps) {
           placeholder="表示したい項目を選んでください"
         />
         <ButtonLink href="/timetable/register">
-          <FaArrowUpRightFromSquare className="text-xl"/>
-          <div className="text-sm">新規登録</div>
+          <div className="text-base px-1 font-semibold">追加</div>
         </ButtonLink>
       </Flex>
       <div>
